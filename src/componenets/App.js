@@ -11,7 +11,7 @@ function App() {
             <li className="active"><a href="home.html"><i className="lni lni-home"></i>Home</a></li>
             <li><a href="message.html"><i className="lni lni-life-ring"></i>Support</a></li>
             <li><a href="cart.html"><i className="lni lni-shopping-basket"></i>Cart</a></li>
-            <li><a href="pages.html"><i className="lni lni-heart"></i>Pages</a></li>
+            <li><a href="pages.html"><i className="lni lni-heart"></i>page</a></li>
             <li><a href="settings.html"><i className="lni lni-cog"></i>Settings</a></li>
           </ul>
         </div>

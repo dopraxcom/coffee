@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+// import { Provider } from 'react-redux';
+// import { createStore } from 'redux';
 
 
 
@@ -15,7 +15,7 @@ import './assets/css/style.css';
 import App from './componenets/App';
 
 ReactDOM.render(
-<Provider><App /></Provider>,
+<App />,
   document.getElementById('root')
 );
 

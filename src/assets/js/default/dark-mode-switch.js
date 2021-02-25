@@ -1,4 +1,4 @@
-(function () {
+export function DMS () {
   'use strict';
 
   // Dark Mode JS
@@ -28,4 +28,4 @@
     toggleSwitch.addEventListener('change', switchTheme, false);
   }
   
-})();
+};

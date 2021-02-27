@@ -43,11 +43,11 @@ function App() {
           <div className="container h-100 px-0">
             <div className="suha-footer-nav h-100">
               <ul className="h-100 d-flex align-items-center justify-content-between ps-0">
-                <li className="active"><Link to="/"><i className="lni lni-home"></i>Home</Link></li>
-                <li><Link to="/menu"><i className="lni lni-life-ring"></i>Support</Link></li>
-                <li><Link to="/cart"><i className="lni lni-shopping-basket"></i>Cart</Link></li>
-                <li><Link to="/aboutUS"><i className="lni lni-heart"></i>page</Link></li>
-                <li><Link to="/settings"><i className="lni lni-cog"></i>Settings</Link></li>
+                <li className="active"><Link to="/"><i className="lni lni-home"></i>خانه</Link></li>
+                <li><Link to="/menu"><i className="lni lni-life-ring"></i>منو</Link></li>
+                <li><Link to="/cart"><i className="lni lni-shopping-basket"></i>سبد خرید</Link></li>
+                <li><Link to="/aboutUS"><i className="lni lni-heart"></i>درباره ما</Link></li>
+                <li><Link to="/settings"><i className="lni lni-cog"></i>تنظیمات</Link></li>
               </ul>
             </div>
           </div>

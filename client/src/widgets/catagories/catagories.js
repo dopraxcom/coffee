@@ -6,7 +6,6 @@ function Catagories (){
         <div className="product-catagories-wrapper py-3">
         <div className="container">
           <div className="section-heading">
-            <h6></h6>
           </div>
           <div className="product-catagory-wrap">
             <div className="row g-3">

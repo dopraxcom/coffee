@@ -1,5 +1,222 @@
 {
     "store" : [
-        
+        {
+            "cat" : "hotDrink",
+            "title": "اسپرسو",
+            "description": "دبل اسپرسو",
+            "price": 10000,
+            "numer": 10,
+            "status": true 
+        },
+        {
+            "id": 1,
+            "cat" : "hotDrink",
+            "title": "کاپوچینو",
+            "description": "کاپوچینو مخصوص",
+            "price": 20000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 2,
+            "cat" : "hotDrink",
+            "title": "اسپرسو",
+            "description": "سینگل اسپرسو",
+            "price": 70000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 3,
+            "cat" : "hotDrink",
+            "title": "موکا",
+            "description": "موکا با شیر و خامه بیس اسپرسو",
+            "price": 20000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 4,
+            "cat" : "hotDrink",
+            "title": "امریکانو",
+            "description": "اسپرسو به همراه آب جوش",
+            "price": 20000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 5,
+            "cat" : "hotDrink",
+            "title": "قهوه ترک",
+            "description": "یک فنجان قهوه ترک",
+            "price": 20000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 6,
+            "cat" : "hotDrink",
+            "title": "فرنچ",
+            "description": "قهوه فرانسوی",
+            "price": 20000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 7,
+            "cat" : "coldDrink",
+            "title": "اب معدنی",
+            "description": "آب معدنی متوسط",
+            "price": 20000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 8,
+            "cat" : "coldDrink",
+            "title": "آب پرتقال",
+            "description": "آب پرتقال طبیعی",
+            "price": 20000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 8,
+            "cat" : "coldDrink",
+            "title": "اب میوه",
+            "description": "آب میوه طبیعی فصل",
+            "price": 20000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 9,
+            "cat" : "food",
+            "title": "همبرگر",
+            "description": "همبرگر رست بیف",
+            "price": 30000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 10,
+            "cat" : "food",
+            "title": "استیک",
+            "description": "استیک سینه مرغ",
+            "price": 30000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 11,
+            "cat" : "food",
+            "title": "پیتزا",
+            "description": "یک عدد پیتزا متوسط",
+            "price": 40000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 12,
+            "cat" : "food",
+            "title": "سیب زمینی",
+            "description": "پک سیب زمینی به همراه سس",
+            "price": 10000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 13,
+            "cat" : "food",
+            "title": "قارچ",
+            "description": "پک قارچ سخاری به همراه سس",
+            "price": 10000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 14,
+            "cat" : "food",
+            "title": "سوپ",
+            "description": "سوپ شیر به همراه قارچ",
+            "price": 20000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 15,
+            "cat" : "jelly",
+            "title": "کیک",
+            "description": "یک اسلایس کیک شکلاتی",
+            "price": 10000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 16,
+            "cat" : "jelly",
+            "title": "بستنی",
+            "description": "بستنی شکلاتی 3 اسکوپ",
+            "price": 15000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 17,
+            "cat" : "coldDrink",
+            "title": "نوشابه",
+            "description": "نوشابه کوکا کولا قوطی",
+            "price": 5000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 18,
+            "cat" : "coldDrink",
+            "title": "نوشابه",
+            "description": "نوشابه فانتا قوطی",
+            "price": 5000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 19,
+            "cat" : "coldDrink",
+            "title": "نوشابه",
+            "description": "نوشابه اسپرایت قوطی",
+            "price": 5000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        },
+        {
+            "id": 20,
+            "cat" : "coldDrink",
+            "title": "دوغ",
+            "description": " دوغ قوطی",
+            "price": 5000,
+            "img" : "",
+            "numer": 10,
+            "status": true
+        }
     ]
 }

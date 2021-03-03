@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux';
-// import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 
 
@@ -10,12 +11,16 @@ import './assets/css/bootstrap.min.css';
 import './assets/css/default/lineicons.min.css';
 import './assets/css/style.css';
 
+import reducers from './reducers';
+
 
 //================ Components
 import App from './componenets/App';
 
+const store = createStore(reducers, applyMiddleware(thunk));
+
 ReactDOM.render(
-<App />,
+  <Provider store={store}><App /></Provider>,
   document.getElementById('root')
 );
 

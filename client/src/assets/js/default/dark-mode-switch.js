@@ -1,5 +1,5 @@
 export function DMS () {
-  'use strict';
+  // 'use strict';
 
   // Dark Mode JS
   var toggleSwitch = document.getElementById('darkSwitch');

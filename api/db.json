@@ -5,6 +5,7 @@
             "title": "اسپرسو",
             "description": "دبل اسپرسو",
             "price": 10000,
+            "name" : "espressoo",
             "img": "coffee/espressoo.jpg",
             "numer": 10,
             "status": true 
@@ -15,6 +16,7 @@
             "title": "کاپوچینو",
             "description": "کاپوچینو مخصوص",
             "price": 20000,
+            "name" : "cappuccino",
             "img" : "coffee/cappuccino.jpg",
             "numer": 10,
             "status": true
@@ -25,6 +27,7 @@
             "title": "اسپرسو",
             "description": "سینگل اسپرسو",
             "price": 70000,
+            "name" : "espressoo",
             "img" : "coffee/espressoo.jpg",
             "numer": 10,
             "status": true
@@ -35,6 +38,7 @@
             "title": "موکا",
             "description": "موکا با شیر و خامه بیس اسپرسو",
             "price": 20000,
+            "name" : "beaten coffee",
             "img" : "coffee/beaten coffee.jpg",
             "numer": 10,
             "status": true
@@ -45,6 +49,7 @@
             "title": "امریکانو",
             "description": "اسپرسو به همراه آب جوش",
             "price": 20000,
+            "name" : "Americano",
             "img" : "coffee/Americano-Coffee.jpg",
             "numer": 10,
             "status": true
@@ -55,6 +60,7 @@
             "title": "قهوه ترک",
             "description": "یک فنجان قهوه ترک",
             "price": 20000,
+            "name" : "turkish",
             "img" : "coffee/turkish-coffee.jpg",
             "numer": 10,
             "status": true
@@ -65,6 +71,7 @@
             "title": "فرنچ",
             "description": "قهوه فرانسوی",
             "price": 20000,
+            "name" : "french",
             "img" : "coffee/Americano-Coffee.jpg",
             "numer": 10,
             "status": true
@@ -75,6 +82,7 @@
             "title": "اب معدنی",
             "description": "آب معدنی متوسط",
             "price": 20000,
+            "name" : "water",
             "img" : "coldDrink/water.jpg",
             "numer": 10,
             "status": true
@@ -85,6 +93,7 @@
             "title": "آب پرتقال",
             "description": "آب پرتقال طبیعی",
             "price": 20000,
+            "name" : "juice",
             "img" : "coldDrink/juice.jpg",
             "numer": 10,
             "status": true
@@ -95,6 +104,7 @@
             "title": "اب میوه",
             "description": "آب میوه طبیعی فصل",
             "price": 20000,
+            "name" : "juice",
             "img" : "coldDrink/juice.jpg",
             "numer": 10,
             "status": true
@@ -105,6 +115,7 @@
             "title": "همبرگر",
             "description": "همبرگر رست بیف",
             "price": 30000,
+            "name" : "burger",
             "img" : "food/burger.jpg",
             "numer": 10,
             "status": true
@@ -115,6 +126,7 @@
             "title": "استیک",
             "description": "استیک سینه مرغ",
             "price": 30000,
+            "name" : "chicken",
             "img" : "food/chicken.jpg",
             "numer": 10,
             "status": true
@@ -125,7 +137,8 @@
             "title": "پیتزا",
             "description": "یک عدد پیتزا متوسط",
             "price": 40000,
-            "img" : "food/pizza.png",
+            "name" :"pizza",
+            "img" : "food/.png",
             "numer": 10,
             "status": true
         },
@@ -135,6 +148,7 @@
             "title": "سیب زمینی",
             "description": "پک سیب زمینی به همراه سس",
             "price": 10000,
+            "name" :"potato",
             "img" : "food/potato.jpg",
             "numer": 10,
             "status": true
@@ -145,6 +159,7 @@
             "title": "قارچ",
             "description": "پک قارچ سخاری به همراه سس",
             "price": 10000,
+            "name" :"mushroom",
             "img" : "food/mushroom.jpg",
             "numer": 10,
             "status": true
@@ -155,6 +170,7 @@
             "title": "سوپ",
             "description": "سوپ شیر به همراه قارچ",
             "price": 20000,
+            "name" : "soup",
             "img" : "food/soup.jpg",
             "numer": 10,
             "status": true
@@ -165,6 +181,7 @@
             "title": "کیک",
             "description": "یک اسلایس کیک شکلاتی",
             "price": 10000,
+            "name" : "Chocolaty-Cake",
             "img" : "other/Chocolaty-Cake.jpg",
             "numer": 10,
             "status": true
@@ -175,6 +192,7 @@
             "title": "بستنی",
             "description": "بستنی شکلاتی 3 اسکوپ",
             "price": 15000,
+            "name" : "chocolaty-icecream",
             "img" : "other/chocolaty-icecream.jpg",
             "numer": 10,
             "status": true
@@ -185,6 +203,7 @@
             "title": "نوشابه",
             "description": "نوشابه کوکا کولا قوطی",
             "price": 5000,
+            "name" : "coca cola",
             "img" : "other/coca cola.jpg",
             "numer": 10,
             "status": true
@@ -195,6 +214,7 @@
             "title": "نوشابه",
             "description": "نوشابه فانتا قوطی",
             "price": 5000,
+            "name": "fanta",
             "img" : "other/fanta.jpg",
             "numer": 10,
             "status": true
@@ -205,6 +225,7 @@
             "title": "نوشابه",
             "description": "نوشابه اسپرایت قوطی",
             "price": 5000,
+            "name" : "sprite",
             "img" : "other/sprite.jpg",
             "numer": 10,
             "status": true
@@ -215,6 +236,7 @@
             "title": "دوغ",
             "description": " دوغ قوطی",
             "price": 5000,
+            "name" : "yogurt",
             "img" : "other/yogurt.jpg",
             "numer": 10,
             "status": true
@@ -225,6 +247,7 @@
             "title": "چای",
             "description": "یک فنجان چای ایرانی با دارچین",
             "price": 20000,
+            "name" : "tea",
             "img" : "coffee/tea.png",
             "numer": 10,
             "status": true

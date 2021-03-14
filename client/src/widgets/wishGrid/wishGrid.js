@@ -5,14 +5,19 @@ import { connect } from "react-redux";
 import { fetchData } from "../../actions";
 
 
-class WishGrid extends Component {
 
+class WishGrid extends Component {
+  state = {
+  }
 
   componentDidMount() {
     this.props.fetchData();
+    console.log('images: ',this.props.images);
+
   }
 
   renderList() {
+
     return this.props.store.map((item, key) => {
       return (
         <div className="col-6 col-md-4 col-lg-3" key={key}>
@@ -25,7 +30,7 @@ class WishGrid extends Component {
               <span className="product-thumbnail d-block">
                 <img
                   className="mb-2"
-                  src={`../../assets/img/${item.img}`}
+                  src={`/img/${item.img}`}
                   alt={item.title}
                 />
               </span>

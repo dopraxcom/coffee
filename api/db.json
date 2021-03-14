@@ -1,6 +1,7 @@
 {
     "store" : [
         {
+            "id": 0,
             "cat" : "hotDrink",
             "title": "اسپرسو",
             "description": "دبل اسپرسو",
@@ -138,7 +139,7 @@
             "description": "یک عدد پیتزا متوسط",
             "price": 40000,
             "name" :"pizza",
-            "img" : "food/.png",
+            "img" : "food/pizza.png",
             "numer": 10,
             "status": true
         },
@@ -182,7 +183,7 @@
             "description": "یک اسلایس کیک شکلاتی",
             "price": 10000,
             "name" : "Chocolaty-Cake",
-            "img" : "other/Chocolaty-Cake.jpg",
+            "img" : "other/Chocolate-Cake.jpg",
             "numer": 10,
             "status": true
         },

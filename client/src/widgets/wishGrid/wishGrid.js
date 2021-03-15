@@ -12,43 +12,50 @@ class WishGrid extends Component {
 
   componentDidMount() {
     this.props.fetchData();
-    console.log('images: ',this.props.images);
-
   }
 
   renderList() {
+let items = new Set([]);
+    for (let i = 11; i < this.props.store.length; i++) {
+      items.add(this.props.store[Math.floor(Math.random() * this.props.store.length)])
+    }
 
-    return this.props.store.map((item, key) => {
-      return (
-        <div className="col-6 col-md-4 col-lg-3" key={key}>
-          <div className="card top-product-card">
-            <div className="card-body">
-              <span className="badge badge-success">Sale</span>
-              <span className="wishlist-btn">
-                <i className="lni lni-heart"></i>
-              </span>
-              <span className="product-thumbnail d-block">
-                <img
-                  className="mb-2"
-                  src={`/img/${item.img}`}
-                  alt={item.title}
-                />
-              </span>
-              <span className="product-title d-block" href="single-product.html">
-                {item.title}
-              </span>
-              <p className="sale-price">
-                {item.price}
-                <span>$42</span>
-              </p>
-              <span className="btn btn-success btn-sm">
-                <i className="lni lni-plus"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-      );
-    });
+    let rndStore = [];
+    
+    items.forEach(item => console.log(item))
+
+    console.log(rndStore)
+    // return rndStore.map((item, key) => {
+    //   return (
+    //     <div className="col-6 col-md-4 col-lg-3" >
+    //       <div className="card top-product-card">
+    //         <div className="card-body">
+    //           <span className="badge badge-success">Sale</span>
+    //           <span className="wishlist-btn">
+    //             <i className="lni lni-heart"></i>
+    //           </span>
+    //           <span className="product-thumbnail d-block">
+    //             <img
+    //               className="mb-2"
+    //               src={`/img/${item.img}`}
+    //               alt={item.title}
+    //             />
+    //           </span>
+    //           <span className="product-title d-block" href="single-product.html">
+    //             {item.title}
+    //           </span>
+    //           <p className="sale-price">
+    //             {item.price}
+    //             <span>$42</span>
+    //           </p>
+    //           <span className="btn btn-success btn-sm">
+    //             <i className="lni lni-plus"></i>
+    //           </span>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   );
+    // });
   }
 
   render() {

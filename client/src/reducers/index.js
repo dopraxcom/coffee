@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 
-export const addToCart =  (id =  null , action) => {
+export const addToCart =  (obj=[] , action) => {
     if(action.type === 'ADD_TO_CART'){
-        return action.payload;
+        return [...obj , action.payload];
     };
-    return id;
+    return obj;
 };
 
 export const fetchDataReducer = (store = [],action) => {

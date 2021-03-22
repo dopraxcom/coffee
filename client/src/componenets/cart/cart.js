@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { add } from 'lodash'
 
 import { addToCart } from "../../actions";
 
@@ -33,6 +34,19 @@ class Cart extends Component {
         });
   };
 
+finalPrice() {
+    let sum = [];
+    return this.props.basket.map((item , key) => {
+      if (!(item.id === undefined)) {
+       sum = [...sum , item.price]
+      } 
+      return _.add(sum)
+     });
+     
+};
+
+
+
   render() {
     return (
       <div className="container">
@@ -49,9 +63,9 @@ class Cart extends Component {
           <div className="card cart-amount-area">
             <div className="card-body d-flex align-items-center justify-content-between">
               <h5 className="total-price mb-0">
-                $<span className="counter">38.84</span>
+                $<span className="counter">{this.finalPrice()}</span>
               </h5>
-              <span className="btn btn-warning">Checkout Now</span>
+              <span className="btn btn-warning">پرداخت</span>
             </div>
           </div>
         </div>

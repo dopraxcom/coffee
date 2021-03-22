@@ -6,7 +6,7 @@ export const fetchData = () =>  async dispatch => {
 };
 
 
-export const addToCart = (store = []) =>  {
+export const addToCart = (store = {}) =>  {
     return {
         type: 'ADD_TO_CART',
         payload: {...store }

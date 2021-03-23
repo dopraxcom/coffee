@@ -14,9 +14,10 @@ import Settings from './settings/settings';
 
 
 function App( props ) {
-  useEffect(() => { console.log('App props: ',props.qty) });
+  useEffect(() => { setQty(props.qty) });
 
   const [qty, setQty] = useState(0)
+
   let routes = (
     <div className="page-content-wrapper" dir="rtl">
     <div className="container">
@@ -41,6 +42,20 @@ function App( props ) {
     </div>
   );
 
+  function renderQty(){
+    let count = 0;
+props.qty.map((item) => {
+  if(! (item.id === undefined)){
+    count++;
+    console.log(count);
+    return document.getElementById('qty').innerText= count;
+  } else {
+    return document.getElementById('qty').innerText= count;;
+  }
+});
+
+  }
+
   return (
     <HashRouter>
       <>
@@ -50,7 +65,7 @@ function App( props ) {
               <ul className="h-100 d-flex align-items-center justify-content-between ps-0">
                 <li className="active"><Link to="/"><i className="lni lni-home"></i>خانه</Link></li>
                 <li><Link to="/menu"><i className="lni lni-life-ring"></i>منو</Link></li>
-                <li><Link to="/cart"><span className="badge badge-pill badge-warning priceBadge">{props.qty -1}</span><i className="lni lni-shopping-basket"></i>سبد خرید</Link></li>
+                <li><Link to="/cart"><span className="badge badge-pill badge-warning priceBadge" id="qty">{renderQty()}</span><i className="lni lni-shopping-basket"></i>سبد خرید</Link></li>
                 <li><Link to="/aboutUS"><i className="lni lni-heart"></i>درباره ما</Link></li>
                 <li><Link to="/settings"><i className="lni lni-cog"></i>تنظیمات</Link></li>
               </ul>
@@ -68,7 +83,7 @@ function App( props ) {
 }
 
 const mapStateToProps = (state) => {
- return ({qty: state.addToCart.length})
+ return ({qty: state.addToCart})
 }
 
 export default connect(mapStateToProps)(App);

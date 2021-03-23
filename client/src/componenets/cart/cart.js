@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { add } from 'lodash'
 
 import { addToCart } from "../../actions";
 
@@ -35,16 +34,15 @@ class Cart extends Component {
   };
 
 finalPrice() {
+  var pr = 0;
     let sum = [];
     return this.props.basket.map((item , key) => {
       if (!(item.id === undefined)) {
        sum = [...sum , item.price]
       } 
-      return _.add(sum)
+      console.log(sum)
      });
-     
 };
-
 
 
   render() {

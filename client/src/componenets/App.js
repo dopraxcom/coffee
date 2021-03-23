@@ -1,5 +1,8 @@
 import React from 'react';
 import { HashRouter , Link , Switch,  Route } from 'react-router-dom';
+import {connect} from 'react-redux';
+import { useState , useEffect } from 'react';
+import './style.css';
 
 
 
@@ -10,8 +13,10 @@ import AboutUS from './aboutUs/aboutUs';
 import Settings from './settings/settings';
 
 
-function App() {
+function App( props ) {
+  useEffect(() => { console.log('App props: ',props.qty) });
 
+  const [qty, setQty] = useState(0)
   let routes = (
     <div className="page-content-wrapper" dir="rtl">
     <div className="container">
@@ -22,7 +27,7 @@ function App() {
       <Route path="/menu">
         <Menu />
       </Route>
-      <Route path="/cart">
+      <Route path="/cart"> 
         <Cart />
       </Route>
       <Route path="/aboutUS">
@@ -45,7 +50,7 @@ function App() {
               <ul className="h-100 d-flex align-items-center justify-content-between ps-0">
                 <li className="active"><Link to="/"><i className="lni lni-home"></i>خانه</Link></li>
                 <li><Link to="/menu"><i className="lni lni-life-ring"></i>منو</Link></li>
-                <li><Link to="/cart"><i className="lni lni-shopping-basket"></i>سبد خرید</Link></li>
+                <li><Link to="/cart"><span className="badge badge-pill badge-warning priceBadge">{props.qty -1}</span><i className="lni lni-shopping-basket"></i>سبد خرید</Link></li>
                 <li><Link to="/aboutUS"><i className="lni lni-heart"></i>درباره ما</Link></li>
                 <li><Link to="/settings"><i className="lni lni-cog"></i>تنظیمات</Link></li>
               </ul>
@@ -62,4 +67,8 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+ return ({qty: state.addToCart.length})
+}
+
+export default connect(mapStateToProps)(App);

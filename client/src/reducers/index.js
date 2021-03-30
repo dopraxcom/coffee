@@ -14,9 +14,24 @@ export const fetchDataReducer = (store = [],action) => {
     return store;
 };
 
+export const fetchRandomReducer = (store = [],action) => {
+    if(action.type === 'FETCH_RANDOM'){
+        let rndData = new Set([]);
+        rndData = action.payload;
+        let rnd = [];
+        for (let index = 0; index < 10; index++) {
+            rnd.push(rndData[Math.floor(Math.random() * rndData.length)]); 
+        }
+        return rnd;
+
+    };
+    return store;
+};
+
 
 export default combineReducers({    
     addToCart,
-    fetchData : fetchDataReducer
+    fetchData : fetchDataReducer,
+    fetchRandom: fetchRandomReducer
 });
 

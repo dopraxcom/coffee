@@ -12,3 +12,8 @@ export const addToCart = (store = {}) =>  {
         payload: {...store }
     };
 };
+
+export const fetchRandom = () =>  async dispatch => {
+    const response = await store.get('/store');
+    dispatch({type: 'FETCH_RANDOM', payload: response.data});
+};

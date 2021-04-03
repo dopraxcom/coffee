@@ -1390,9 +1390,10 @@ li.suha-dropdown-menu {
     text-align: center;
   }
   .top-product-card .sale-price {
-    margin-bottom: 0.25rem;
-    color: #100DD1;
-    font-weight: 700;
+    /* margin-bottom: 0.25rem; */
+    margin-bottom: -3px;
+    /* color: #100DD1; */
+    /* font-weight: 700; */
     font-size: 1.125rem;
   text-align: left; }
     .top-product-card .sale-price span {

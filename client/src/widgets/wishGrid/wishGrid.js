@@ -50,8 +50,8 @@ let items = new Set([]);
                 {item.price}
                 {/* <span>$42</span> */}
               </p>
-              <span className="btn btn-success btn-sm" onClick={() => this.props.addToCart(item)}>
-                <i className="lni lni-plus"></i>
+              <span className="btn btn-warning btn-sm" onClick={() => this.props.addToCart(item)}>
+                <i className="lni lni-shopping-basket"></i>
               </span>
             </div>
           </div>

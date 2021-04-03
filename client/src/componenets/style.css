@@ -1,3 +1,34 @@
 .priceBadge {
     position: absolute;
 }
+
+.shopCartIconDiv {
+    background: rgb(255, 175, 0) none repeat scroll 0% 0%;
+    border-radius: 3rem;
+    font-size: 20px;
+    position: fixed;
+    bottom: 0px;
+    margin-bottom: 10px;
+    z-index: 2;
+    width: 80px;
+}
+
+.shopCartSpan1 {
+    font-size: 20px;
+    border-radius: 3rem;
+    float: left;
+}
+
+.shopCartSpan2 {
+    float: right;
+    background-color: #fff;
+    color: #000;
+    border-radius: 3rem;
+    font-size: 20px;
+    margin-right: 5px;
+    margin-top: 5px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+}

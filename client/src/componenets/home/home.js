@@ -8,11 +8,17 @@ import WishGrid from '../../widgets/wishGrid/wishGrid';
 
 function Main () {
     return (
-        <div>
+        <div >
             <Catagories />
             <WishGrid/>
             <Banner/>
             <WishList/>
+            <div className="shopCartIconDiv">
+                <span className="btn btn-warning btn-sm shopCartSpan1">
+                    <i class="lni lni-shopping-basket"></i>
+                </span>
+                <span className="shopCartSpan2">0</span>
+            </div>
         </div>
     );
 }

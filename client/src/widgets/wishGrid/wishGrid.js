@@ -14,6 +14,7 @@ class WishGrid extends Component {
   componentDidMount() {
     this.props.fetchData();
     this.props.addToCart();
+    console.log('Props:' , this.props.store);
   }
 
   renderList() {
@@ -47,7 +48,7 @@ let items = new Set([]);
               </span>
               <p className="sale-price">
                 {item.price}
-                <span>$42</span>
+                {/* <span>$42</span> */}
               </p>
               <span className="btn btn-success btn-sm" onClick={() => this.props.addToCart(item)}>
                 <i className="lni lni-plus"></i>
@@ -60,6 +61,7 @@ let items = new Set([]);
   };
 
   render() {
+    
     return (
       <div className="top-products-area clearfix py-3">
         <div className="container">

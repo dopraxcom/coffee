@@ -57,7 +57,7 @@ function App(props) {
   return (
     <HashRouter>
       <>
-        <div className="footer-nav-area" id="footerNav" dir="rtl">
+        <div className="footer-nav-area" id="footerNav" dir="rtl" style={{display: 'none'}}>
           <div className="container h-100 px-0">
             <div className="suha-footer-nav h-100">
               <ul className="h-100 d-flex align-items-center justify-content-between ps-0">

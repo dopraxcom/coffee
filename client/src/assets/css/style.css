@@ -40,13 +40,25 @@ Created: 15 Dec 2019
 'Roboto', sans-serif;
 ----------------------------------------- */
 /* Reboot CSS */
+
+@font-face {
+  font-family: 'Vazir';
+  src: local('Vazir'), url(../fonts/Vazir-Bold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'Sans';
+  src: local('Iranian Sans'), url(../fonts/Iranian\ Sans.ttf) format('ttf');
+}
+
+
 * {
   margin: 0;
   padding: 0; }
 
 body,
 html {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Vazir';
   color: #747794;
   overflow-x: hidden;
   background-color: #e1f0ff; }
@@ -1374,12 +1386,15 @@ li.suha-dropdown-menu {
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 0.25rem;
-    color: #020310; }
+    color: #020310;
+    text-align: center;
+  }
   .top-product-card .sale-price {
     margin-bottom: 0.25rem;
     color: #100DD1;
     font-weight: 700;
-    font-size: 1.125rem; }
+    font-size: 1.125rem;
+  text-align: left; }
     .top-product-card .sale-price span {
       color: #747794;
       margin-left: 5px;

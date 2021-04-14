@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { $CombinedState } from 'redux';
 
 class Basket extends Component {
 
     qty() {
-        return (this.props.qty.length-1);
+        // return (this.props.qty.length-1);
+        let count = 0;
+        this.props.qty.map((item) => {
+          if (!(item.id === undefined)) {
+            count++;
+            console.log(count);
+            document.getElementsByClassName('shopCartSpan2')[0].innerHTML = count.toString();
+          } else {
+            document.getElementsByClassName('shopCartSpan2')[0].innerHTML = count.toString();
+          }
+        });
     }
     
     render() {
-        console.log(this.props.qty.length)
+        {this.qty()}
         return (
         <Link to="/cart">
             <div className="shopCartIconDiv">
                 <span className="btn btn-warning btn-sm shopCartSpan1">
                     <i class="lni lni-shopping-basket"></i>
                 </span>
-                <span className="shopCartSpan2">{this.qty()}</span>
+                <span className="shopCartSpan2"></span>
             </div>
         </Link>
         )

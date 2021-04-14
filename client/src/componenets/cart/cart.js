@@ -29,18 +29,20 @@ class Cart extends Component {
                 </td>
             </tr>
             );
-         } 
+         } else {
+          return false;
+         }
         });
   };
 
 finalPrice() {
-  var pr = 0;
     let sum = [];
     return this.props.basket.map((item , key) => {
       if (!(item.id === undefined)) {
-       sum = [...sum , item.price]
-      } 
-      console.log(sum)
+        return sum = [...sum , item.price];
+      } else {
+        return sum;
+      }
      });
 };
 

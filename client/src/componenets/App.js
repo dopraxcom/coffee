@@ -41,18 +41,18 @@ function App(props) {
     </div>
   );
 
-  function renderQty() {
-    let count = 0;
-    props.qty.map((item) => {
-      if (!(item.id === undefined)) {
-        count++;
-        console.log(count);
-        return (document.getElementById("qty").innerText = count);
-      } else {
-        return (document.getElementById("qty").innerText = count);
-      }
-    });
-  }
+  // function renderQty() {
+  //   let count = 0;
+  //   props.qty.map((item) => {
+  //     if (!(item.id === undefined)) {
+  //       count++;
+  //       console.log(count);
+  //       return (document.getElementById("qty").innerText = count);
+  //     } else {
+  //       return (document.getElementById("qty").innerText = count);
+  //     }
+  //   });
+  // }
 
   return (
     <HashRouter>
@@ -77,7 +77,7 @@ function App(props) {
                       className="badge badge-pill badge-warning priceBadge"
                       id="qty"
                     >
-                      {renderQty()}
+                      {/* {renderQty()} */}
                     </span>
                     <i className="lni lni-shopping-basket"></i>سبد خرید
                   </Link>

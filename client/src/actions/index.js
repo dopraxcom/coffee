@@ -17,3 +17,10 @@ export const fetchRandom = () =>  async dispatch => {
     const response = await store.get('/store');
     dispatch({type: 'FETCH_RANDOM', payload: response.data});
 };
+
+export const finalPrice = (store={}) => {
+    return {
+        type: 'PRICE',
+        payload: {...store}
+    };
+};

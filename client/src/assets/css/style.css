@@ -61,7 +61,8 @@ html {
   font-family: 'Vazir';
   color: #747794;
   overflow-x: hidden;
-  background-color: #e1f0ff; }
+  /* background-color: #e1f0ff; */
+ }
 
 h1,
 h2,
@@ -329,7 +330,12 @@ textarea:invalid {
   -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
           box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
   .card .card-body {
-    padding: 1rem; }
+    padding: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+    background: transparent;
+  }
 
 .card-img-top {
   border-top-left-radius: calc(.75rem - 1px);
@@ -923,7 +929,7 @@ textarea:invalid {
 .page-content-wrapper {
   position: relative;
   z-index: 1;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   margin-bottom: 58px; }
 
 .suha-sidenav-wrapper {

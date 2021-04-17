@@ -28,10 +28,18 @@ export const fetchRandomReducer = (store = [],action) => {
     return store;
 };
 
+export const finalPriceReducer = (store = [] , action) => {
+    if(action.type === 'PRICE'){
+        return [store ,action.paylaod]
+    };
+    return store;
+};
+
 
 export default combineReducers({    
     addToCart,
     fetchData : fetchDataReducer,
-    fetchRandom: fetchRandomReducer
+    fetchRandom: fetchRandomReducer,
+    finalPrice :finalPriceReducer,
 });
 

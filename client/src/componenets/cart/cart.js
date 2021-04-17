@@ -1,20 +1,33 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { addToCart } from "../../actions";
+import { addToCart , finalPrice } from "../../actions";
 
 class Cart extends Component {
   componentDidMount() {
       console.log(this.props.basket)
+      console.log('Price: ',this.props.price)
+  }
+
+  onPlus = e => {
+    document.getElementsByTagName(e.target.getAttribute('name')).value = 2;
+  };
+
+  onMinus = e => {
+    console.log(e.target.getAttribute('name'));
+  };
+
+  removeRow = e => {
+    document.getElementById(e.currentTarget.name).style.display = 'none';
   }
 
   renderList() {
        return this.props.basket.map((item , key) => {
          if (!(item.id === undefined)) {
           return(
-            <tr>
-                <th scope="row" key= {key}>
-                <i className="lni lni-close"></i>
+            <tr key={key} id={key}>
+                <th scope="row" >
+                <span class="remove-product"  name={key} onClick={this.removeRow}><i class="lni lni-close"></i></span>
                 </th>
                 <td>
                 <img src={`/img/${item.img}`} alt={item.title} />
@@ -23,8 +36,16 @@ class Cart extends Component {
                 {item.title}<span>{item.price} × 1</span>
                 </td>
                 <td>
-                <div className="quantity">
-                    <input className="qty-text" type="text" value="1" />
+                <div className="cart-form-wrapper bg-white mb-3 py-3">
+                  <div className="container">
+                    <form className="cart-form">
+                      <div className="order-plus-minus d-flex align-items-center">
+                        <div className="quantity-button-handler" name={'input'+key} onClick={this.onMinus}>-</div>
+                        <input className="form-control cart-quantity-input" id={'input'+key} type="text" step="1" onChange={e => this.onTodoChange(e.target.value)} value="1"/>
+                        <div className="quantity-button-handler" name={'input'+key} onClick={this.onPlus}>+</div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
                 </td>
             </tr>
@@ -36,10 +57,10 @@ class Cart extends Component {
   };
 
 finalPrice() {
-    let sum = [];
+    let sum = 0;
     return this.props.basket.map((item , key) => {
       if (!(item.id === undefined)) {
-        return sum = [...sum , item.price];
+        return item.price;
       } else {
         return sum;
       }
@@ -48,6 +69,7 @@ finalPrice() {
 
 
   render() {
+    console.log('Price: ',this.props.price)
     return (
       <div className="container">
         <div className="cart-wrapper-area py-3">
@@ -76,8 +98,9 @@ finalPrice() {
 
 const mapStateToProps = (state) => {
   return ({
-      basket : state.addToCart
+      basket : state.addToCart,
+      price : state.finalPrice
   })
 };
 
-export default connect(mapStateToProps, addToCart)(Cart);
+export default connect(mapStateToProps, {addToCart , finalPrice})(Cart);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { fetchData , addToCart } from "../../actions";
+import { fetchData , addToCart , finalPrice } from "../../actions";
 
 
 
@@ -50,7 +50,7 @@ let items = new Set([]);
                 {item.price}
                 {/* <span>$42</span> */}
               </p>
-              <span className="btn btn-warning btn-sm" onClick={() => this.props.addToCart(item)}>
+              <span className="btn btn-warning btn-sm" onClick={() => this.props.addToCart(item) }>
                 <i className="lni lni-shopping-basket"></i>
               </span>
             </div>
@@ -83,4 +83,4 @@ const mapStateToProps = (state) => {
   return { store: state.fetchData , basket : state.addToCart };
 };
 
-export default connect(mapStateToProps, { fetchData ,addToCart })(WishGrid);
+export default connect(mapStateToProps, { fetchData ,addToCart ,finalPrice })(WishGrid);

@@ -97,6 +97,7 @@ finalPrice() {
 }
 
 const mapStateToProps = (state) => {
+  console.log('state: ' , state)
   return ({
       basket : state.addToCart,
       price : state.finalPrice

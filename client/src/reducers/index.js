@@ -28,11 +28,11 @@ export const fetchRandomReducer = (store = [],action) => {
     return store;
 };
 
-export const finalPriceReducer = (store = [] , action) => {
+export const finalPriceReducer = (price = [] , action) => {
     if(action.type === 'PRICE'){
-        return [store ,action.paylaod]
+        return [...price ,action.paylaod]
     };
-    return store;
+    return price;
 };
 
 

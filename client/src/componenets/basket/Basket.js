@@ -24,7 +24,7 @@ class Basket extends Component {
         <Link to="/cart">
             <div className="shopCartIconDiv">
                 <span className="btn btn-warning btn-sm shopCartSpan1">
-                    <i class="lni lni-shopping-basket"></i>
+                    <i className="lni lni-shopping-basket"></i>
                 </span>
                 <span className="shopCartSpan2"></span>
             </div>

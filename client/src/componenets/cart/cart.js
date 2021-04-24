@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import { addToCart , finalPrice } from "../../actions";
 
 class Cart extends Component {
+
+  state = {
+    sum : 0,
+  }
   componentDidMount() {
       console.log(this.props.basket)
       console.log('Price: ',this.props.price)
@@ -27,7 +31,7 @@ class Cart extends Component {
           return(
             <tr key={key} id={key}>
                 <th scope="row" >
-                <span class="remove-product"  name={key} onClick={this.removeRow}><i class="lni lni-close"></i></span>
+                <span className="remove-product"  name={key} onClick={this.removeRow}><i className="lni lni-close"></i></span>
                 </th>
                 <td>
                 <img src={`/img/${item.img}`} alt={item.title} />
@@ -57,19 +61,19 @@ class Cart extends Component {
   };
 
 finalPrice() {
-    let sum = 0;
     return this.props.basket.map((item , key) => {
       if (!(item.id === undefined)) {
-        return item.price;
+        this.state.sum = this.state.sum + item.price;
+        return this.state.sum.length;
       } else {
-        return sum;
+        return this.state.sum;
       }
      });
 };
 
 
   render() {
-    console.log('Price: ',this.props.price)
+    this.finalPrice();
     return (
       <div className="container">
         <div className="cart-wrapper-area py-3">
@@ -85,7 +89,7 @@ finalPrice() {
           <div className="card cart-amount-area">
             <div className="card-body d-flex align-items-center justify-content-between">
               <h5 className="total-price mb-0">
-                $<span className="counter">{this.finalPrice()}</span>
+                <span className="counter" id="finalPrice">{this.finalPrice()}تومان</span>
               </h5>
               <span className="btn btn-warning">پرداخت</span>
             </div>

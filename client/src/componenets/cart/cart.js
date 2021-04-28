@@ -1,28 +1,32 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { addToCart , finalPrice } from "../../actions";
+import { addToCart , finalPrice , deleteItem } from "../../actions";
 
 class Cart extends Component {
 
   state = {
     sum : 0,
+    count: 1,
   }
+
   componentDidMount() {
       console.log(this.props.basket)
       console.log('Price: ',this.props.price)
   }
 
   onPlus = e => {
-    document.getElementsByTagName(e.target.getAttribute('name')).value = 2;
+    console.log(document.getElementsByTagName(e.target.getAttribute('name')));
   };
 
   onMinus = e => {
-    console.log(e.target.getAttribute('name'));
+    // console.log(e.target.getAttribute('name'));
+    console.log(e)
   };
 
   removeRow = e => {
-    document.getElementById(e.currentTarget.name).style.display = 'none';
+    // document.getElementById(e.currentTarget.name).style.display = 'none';
+    console.log(e);
   }
 
   renderList() {
@@ -31,7 +35,7 @@ class Cart extends Component {
           return(
             <tr key={key} id={key}>
                 <th scope="row" >
-                <span className="remove-product"  name={key} onClick={this.removeRow}><i className="lni lni-close"></i></span>
+                <span className="remove-product" name={key} onClick={ (key) => this.removeRow(key)}><i className="lni lni-close"></i></span>
                 </th>
                 <td>
                 <img src={`/img/${item.img}`} alt={item.title} />
@@ -44,9 +48,9 @@ class Cart extends Component {
                   <div className="container">
                     <form className="cart-form">
                       <div className="order-plus-minus d-flex align-items-center">
-                        <div className="quantity-button-handler" name={'input'+key} onClick={this.onMinus}>-</div>
-                        <input className="form-control cart-quantity-input" id={'input'+key} type="text" step="1" onChange={e => this.onTodoChange(e.target.value)} value="1"/>
-                        <div className="quantity-button-handler" name={'input'+key} onClick={this.onPlus}>+</div>
+                        <div className="quantity-button-handler" name={'input'+key} onClick={(key) => this.onMinus(key)}>-</div>
+                        <input className="form-control cart-quantity-input" id={'input'+key} type="text" step="1" onChange={e => this.onTodoChange(e.target.value)} value={this.state.count}/>
+                        <div className="quantity-button-handler" name={'input'+key} onClick={this.onPlus  }>+</div>
                       </div>
                     </form>
                   </div>
@@ -89,7 +93,7 @@ finalPrice() {
           <div className="card cart-amount-area">
             <div className="card-body d-flex align-items-center justify-content-between">
               <h5 className="total-price mb-0">
-                <span className="counter" id="finalPrice">{this.finalPrice()}تومان</span>
+                <span className="counter" id="finalPrice">{this.finalPrice()}&nbsp;هزار تومان </span>
               </h5>
               <span className="btn btn-warning">پرداخت</span>
             </div>
@@ -104,8 +108,9 @@ const mapStateToProps = (state) => {
   console.log('state: ' , state)
   return ({
       basket : state.addToCart,
-      price : state.finalPrice
-  })
+      price : state.finalPrice,
+      delet : state.deleteItem,
+  });
 };
 
-export default connect(mapStateToProps, {addToCart , finalPrice})(Cart);
+export default connect(mapStateToProps, {addToCart , finalPrice, deleteItem})(Cart);

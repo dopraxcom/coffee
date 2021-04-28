@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-export const addToCart =  (obj=[] , action) => {
+export const addToCartReducer =  (obj=[] , action) => {
     if(action.type === 'ADD_TO_CART'){
         return [...obj , action.payload];
     };
@@ -36,10 +36,17 @@ export const finalPriceReducer = (price = [] , action) => {
 };
 
 
+export const deleteItemReducer = (row = 0, store = [], action) => {
+    if(action.type === 'DELETE'){
+        return [row , store]
+    };
+};
+
 export default combineReducers({    
-    addToCart,
-    fetchData : fetchDataReducer,
-    fetchRandom: fetchRandomReducer,
-    finalPrice :finalPriceReducer,
+    addToCart   : addToCartReducer,
+    fetchData   : fetchDataReducer,
+    fetchRandom : fetchRandomReducer,
+    finalPrice  : finalPriceReducer,
+    deletItem   : deleteItemReducer
 });
 

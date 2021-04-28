@@ -24,3 +24,10 @@ export const finalPrice = (price=0) => {
         payload: price
     };
 };
+
+export const deleteItem = ( row = 0 , store=[]) => {
+    return {
+        type: 'DELETE',
+        payload:row
+    };
+};

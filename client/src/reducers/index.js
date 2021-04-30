@@ -36,10 +36,11 @@ export const finalPriceReducer = (price = [] , action) => {
 };
 
 
-export const deleteItemReducer = (row = 0, store = [], action) => {
+export const deleteItemReducer = (data = [], action) => {
     if(action.type === 'DELETE'){
-        return [row , store]
+        return [...data]
     };
+    return data;
 };
 
 export default combineReducers({    

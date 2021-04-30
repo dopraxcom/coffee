@@ -8,11 +8,13 @@ class Cart extends Component {
   state = {
     sum : 0,
     count: 1,
+    row: 0,
+    store: {}
   }
 
   componentDidMount() {
-      console.log(this.props.basket)
-      console.log('Price: ',this.props.price)
+      // console.log(this.props.basket)
+      // console.log('Price:', this.props.price)
   }
 
   onPlus = e => {
@@ -108,8 +110,8 @@ const mapStateToProps = (state) => {
   console.log('state: ' , state)
   return ({
       basket : state.addToCart,
-      price : state.finalPrice,
-      delet : state.deleteItem,
+      price  : state.finalPrice,
+      delet  : state.deleteItem,
   });
 };
 

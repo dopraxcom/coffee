@@ -25,9 +25,10 @@ export const finalPrice = (price=0) => {
     };
 };
 
-export const deleteItem = ( row = 0 , store=[]) => {
+export const deleteItem = (row = 0 , store={} ) => {
+    const data = [row , {...store}];
     return {
-        type: 'DELETE',
-        payload:row
+        type    : 'DELETE',
+        payload : data
     };
 };

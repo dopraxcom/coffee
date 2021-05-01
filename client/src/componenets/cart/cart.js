@@ -13,8 +13,7 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-      // console.log(this.props.basket)
-      // console.log('Price:', this.props.price)
+    console.log(this.props.delet)
   }
 
   onPlus = e => {
@@ -28,7 +27,8 @@ class Cart extends Component {
 
   removeRow = e => {
     // document.getElementById(e.currentTarget.name).style.display = 'none';
-    console.log(e);
+    this.props.deleteItem(e, this.props.basket);
+    // console.log(this.props.delete)
   }
 
   renderList() {
@@ -37,7 +37,7 @@ class Cart extends Component {
           return(
             <tr key={key} id={key}>
                 <th scope="row" >
-                <span className="remove-product" name={key} onClick={ (key) => this.removeRow(key)}><i className="lni lni-close"></i></span>
+                <span className="remove-product" id={item.id} onClick={ (e) => this.removeRow(e.currentTarget.id)}><i className="lni lni-close"></i></span>
                 </th>
                 <td>
                 <img src={`/img/${item.img}`} alt={item.title} />

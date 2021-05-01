@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import _ from 'lodash';
 
 export const addToCartReducer =  (obj=[] , action) => {
     if(action.type === 'ADD_TO_CART'){
@@ -37,8 +38,18 @@ export const finalPriceReducer = (price = [] , action) => {
 
 
 export const deleteItemReducer = (data = [], action) => {
+    var keyObj = 0;
     if(action.type === 'DELETE'){
-        return [...data]
+        // _.omit(action.payload[1][1].id )
+        _.forEach(action.payload[1], function ( obj, key ){
+            if(obj.id === _.parseInt(action.payload[0])){
+                // _.remove(action.payload[1], obj);
+                keyObj = key;
+            };
+            // return action.paylaod[1];
+        });
+        return action.payload[1].splice(index,keyObj);
+       
     };
     return data;
 };

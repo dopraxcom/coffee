@@ -26,7 +26,8 @@ export const finalPrice = (price=0) => {
 };
 
 export const deleteItem = (row = 0 , store=[] ) => {
-    const data = [row , [...store]];
+    const data = [row , [...store]];  
+    console.log('Action data: ',data);
     return {
         type    : 'DELETE',
         payload : data

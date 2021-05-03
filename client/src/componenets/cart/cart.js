@@ -13,7 +13,6 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.delet)
   }
 
   onPlus = e => {
@@ -27,6 +26,7 @@ class Cart extends Component {
 
   removeRow = e => {
     // document.getElementById(e.currentTarget.name).style.display = 'none';
+    // console.log(this.props.basket);
     this.props.deleteItem(e, this.props.basket);
     // console.log(this.props.delete)
   }
@@ -109,9 +109,9 @@ finalPrice() {
 const mapStateToProps = (state) => {
   console.log('state: ' , state)
   return ({
-      basket : state.addToCart,
-      price  : state.finalPrice,
-      delet  : state.deleteItem,
+      basket  : state.addToCart,
+      price   : state.finalPrice,
+      delete  : state.deleteItem,
   });
 };
 

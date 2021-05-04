@@ -37,10 +37,10 @@ export const finalPriceReducer = (price = [] , action) => {
 };
 
 
-export const deleteItemReducer = (data = [], action) => {
+export const deleteItemReducer = (data = 0, action) => {
     // data = [true , action.paylaod];
     if(action.payload === 'DELETE'){
-        return [...data, action.paylaod];
+        return action.paylaod;
     };
     return data;
 };

@@ -41,19 +41,6 @@ function App(props) {
     </div>
   );
 
-  // function renderQty() {
-  //   let count = 0;
-  //   props.qty.map((item) => {
-  //     if (!(item.id === undefined)) {
-  //       count++;
-  //       console.log(count);
-  //       return (document.getElementById("qty").innerText = count);
-  //     } else {
-  //       return (document.getElementById("qty").innerText = count);
-  //     }
-  //   });
-  // }
-
   return (
     <HashRouter>
       <>

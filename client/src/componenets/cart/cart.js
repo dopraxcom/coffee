@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 
 import { addToCart , finalPrice , deleteItem } from "../../actions";
 
@@ -101,6 +102,9 @@ finalPrice() {
             </div>
           </div>
         </div>
+        <Link to="/">
+          <i className="lni lni-home"></i>خانه
+        </Link>
       </div>
     );
   }

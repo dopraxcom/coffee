@@ -4,22 +4,27 @@ import { connect } from 'react-redux';
 
 class Basket extends Component {
 
+    state = {
+        counter : 0
+    }
+
     qty() {
         let count = 0;
         this.props.qty.map((item) => {
           if (!(item.id === undefined)) {
             count++;
-            console.log(count.toString());
+            this.state.counter = count;
+            console.log(this.state.count);
           } else {
             // document.getElementsByClassName('shopCartSpan2')[0].innerHTML = count.toString();
-            return count.toString();
+            return 0;
           }
         });
     }
     
     render() {
         {this.qty()}
-        console.log(this.qty());
+        console.log('Basket count: ', this.qty());
         return (
         <Link to="/cart">
             <div className="shopCartIconDiv">

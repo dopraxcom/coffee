@@ -33,3 +33,10 @@ export const deleteItem = (row = 0 , store=[] ) => {
         payload : data
     };
 };
+
+export const cleanCart = (addToCart = []) => {
+    return {
+        type    : 'CLEAN_CART',
+        payload : addToCart
+    };
+};

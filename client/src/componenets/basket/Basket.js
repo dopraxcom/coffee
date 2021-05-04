@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { cleanCart } from '../../actions';
 
 class Basket extends Component {
 
@@ -39,7 +40,9 @@ class Basket extends Component {
 }
 
 const mapStateToProps = state => {
-    return { qty: state.addToCart };
+    return { qty: state.addToCart,
+             cleanCart : state.cleanCart
+            };
 }
 
-export default connect(mapStateToProps)(Basket);
+export default connect(mapStateToProps , { cleanCart })(Basket);

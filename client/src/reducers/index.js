@@ -45,11 +45,19 @@ export const deleteItemReducer = (data = 0, action) => {
     return data;
 };
 
+export const cleanCartReducer = ( addToCart = [] , action) => {
+    if( action.type === 'CLEAN_CART'){
+        return [...addToCart];
+    };
+    return addToCart;
+}
+
 export default combineReducers({    
     addToCart   : addToCartReducer,
     fetchData   : fetchDataReducer,
     fetchRandom : fetchRandomReducer,
     finalPrice  : finalPriceReducer,
-    deleteItem   : deleteItemReducer
+    deleteItem  : deleteItemReducer,
+    cleanCart   : cleanCartReducer, 
 });
 

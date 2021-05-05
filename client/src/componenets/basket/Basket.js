@@ -25,6 +25,7 @@ class Basket extends Component {
     
     render() {
         {this.qty()}
+        this.props.cleanCart(this.props.addToCart);
         console.log('Basket count: ', this.qty());
         return (
         <Link to="/cart">

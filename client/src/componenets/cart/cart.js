@@ -1,83 +1,105 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { addToCart , finalPrice , deleteItem } from "../../actions";
+import { addToCart, finalPrice, deleteItem } from "../../actions";
 
 class Cart extends Component {
-
   state = {
-    sum : 0,
+    sum: 0,
     count: 1,
     row: 0,
-    store: {}
-  }
-
-  componentDidMount() {
-  }
-
-  onPlus = e => {
-    console.log(document.getElementsByTagName(e.target.getAttribute('name')));
+    store: {},
   };
 
-  onMinus = e => {
+  componentDidMount() {}
+
+  onPlus = (e) => {
+    console.log(document.getElementsByTagName(e.target.getAttribute("name")));
+  };
+
+  onMinus = (e) => {
     // console.log(e.target.getAttribute('name'));
-    console.log(e)
+    console.log(e);
   };
 
-  removeRow = e => {
+  removeRow = (e) => {
     // document.getElementById(e.currentTarget.name).style.display = 'none';
     // console.log(this.props.basket);
     this.props.deleteItem(e, this.props.basket);
     // console.log(this.props.delete)
-  }
-
-  renderList() {
-       return this.props.basket.map((item , key) => {
-         if (!(item.id === undefined)) {
-          return(
-            <tr key={key} id={key}>
-                <th scope="row" >
-                <span className="remove-product" id={item.id} onClick={ (e) => this.removeRow(e.currentTarget.id)}><i className="lni lni-close"></i></span>
-                </th>
-                <td>
-                <img src={`/img/${item.img}`} alt={item.title} />
-                </td>
-                <td>
-                {item.title}<span>{item.price} × 1</span>
-                </td>
-                <td>
-                <div className="cart-form-wrapper bg-white mb-3 py-3">
-                  <div className="container">
-                    <form className="cart-form">
-                      <div className="order-plus-minus d-flex align-items-center">
-                        <div className="quantity-button-handler" name={'input'+key} onClick={(key) => this.onMinus(key)}>-</div>
-                        <input className="form-control cart-quantity-input" id={'input'+key} type="text" step="1" onChange={e => this.onTodoChange(e.target.value)} value={this.state.count}/>
-                        <div className="quantity-button-handler" name={'input'+key} onClick={this.onPlus  }>+</div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                </td>
-            </tr>
-            );
-         } else {
-          return false;
-         }
-        });
   };
 
-finalPrice() {
-    return this.props.basket.map((item , key) => {
+  renderList() {
+    return this.props.basket.map((item, key) => {
       if (!(item.id === undefined)) {
-        this.state.sum = this.state.sum + item.price;
-        return this.state.sum.length;
+        return (
+          <tr key={key} id={key}>
+            <th scope="row">
+              <span
+                className="remove-product"
+                id={item.id}
+                onClick={(e) => this.removeRow(e.currentTarget.id)}
+              >
+                <i className="lni lni-close"></i>
+              </span>
+            </th>
+            <td>
+              <img src={`/img/${item.img}`} alt={item.title} />
+            </td>
+            <td>
+              {item.title}
+              <span>{item.price} × 1</span>
+            </td>
+            <td>
+              <div className="cart-form-wrapper bg-white mb-3 py-3">
+                <div className="container">
+                  <form className="cart-form">
+                    <div className="order-plus-minus d-flex align-items-center">
+                      <div
+                        className="quantity-button-handler"
+                        name={"input" + key}
+                        onClick={(key) => this.onMinus(key)}
+                      >
+                        -
+                      </div>
+                      <input
+                        className="form-control cart-quantity-input"
+                        id={"input" + key}
+                        type="text"
+                        step="1"
+                        onChange={(e) => this.onTodoChange(e.target.value)}
+                        value={this.state.count}
+                      />
+                      <div
+                        className="quantity-button-handler"
+                        name={"input" + key}
+                        onClick={this.onPlus}
+                      >
+                        +
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </td>
+          </tr>
+        );
       } else {
-        return this.state.sum;
-      }
-     });
-};
+        return false;
+      };
+    });
+  };
 
+  finalPrice() {
+    let sum = 0;
+    this.props.basket.map((item) => {
+      if (item.id !== undefined) {
+        sum += item.price;
+        this.state.sum = sum;
+      };
+    });
+  };
 
   render() {
     this.finalPrice();
@@ -87,16 +109,16 @@ finalPrice() {
           <div className="cart-table card mb-3">
             <div className="table-responsive card-body">
               <table className="table mb-0">
-                <tbody>
-                    {this.renderList()}
-                </tbody>
+                <tbody>{this.renderList()}</tbody>
               </table>
             </div>
           </div>
           <div className="card cart-amount-area">
             <div className="card-body d-flex align-items-center justify-content-between">
               <h5 className="total-price mb-0">
-                <span className="counter" id="finalPrice">{this.finalPrice()}&nbsp;هزار تومان </span>
+                <span className="counter" id="finalPrice">
+                  {this.state.sum}&nbsp;هزار تومان{" "}
+                </span>
               </h5>
               <span className="btn btn-warning">پرداخت</span>
             </div>
@@ -111,12 +133,12 @@ finalPrice() {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state: ' , state)
-  return ({
-      basket  : state.addToCart,
-      price   : state.finalPrice,
-      delete  : state.deleteItem,
-  });
+  console.log("state: ", state);
+  return {
+    basket: state.addToCart,
+    price: state.finalPrice,
+    delete: state.deleteItem,
+  };
 };
 
-export default connect(mapStateToProps, {addToCart , finalPrice, deleteItem})(Cart);
+export default connect(mapStateToProps, { addToCart, finalPrice, deleteItem })(Cart);

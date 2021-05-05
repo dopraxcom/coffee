@@ -1,7 +1,6 @@
 import React from "react";
 import { HashRouter, Link, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { useState, useEffect } from "react";
 import "./style.css";
 
 import Home from "./home/home";
@@ -11,11 +10,6 @@ import AboutUS from "./aboutUs/aboutUs";
 import Settings from "./settings/settings";
 
 function App(props) {
-  useEffect(() => {
-    setQty(props.qty);
-  });
-
-  const [qty, setQty] = useState(0);
 
   let routes = (
     <div className="page-content-wrapper" dir="rtl">
@@ -64,7 +58,6 @@ function App(props) {
                       className="badge badge-pill badge-warning priceBadge"
                       id="qty"
                     >
-                      {/* {renderQty()} */}
                     </span>
                     <i className="lni lni-shopping-basket"></i>سبد خرید
                   </Link>

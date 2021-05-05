@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import _ from 'lodash';
+// import _ from 'lodash';
 
 export const addToCartReducer =  (obj=[] , action) => {
     if(action.type === 'ADD_TO_CART'){

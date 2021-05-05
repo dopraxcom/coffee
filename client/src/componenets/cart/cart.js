@@ -7,26 +7,21 @@ import { addToCart, finalPrice, deleteItem } from "../../actions";
 class Cart extends Component {
   state = {
     sum: 0,
-    count: 1,
-    row: 0,
-    store: {},
   };
-
-  componentDidMount() {}
 
   onPlus = (e) => {
     console.log(document.getElementsByTagName(e.target.getAttribute("name")));
   };
 
   onMinus = (e) => {
-    // console.log(e.target.getAttribute('name'));
     console.log(e);
   };
 
   removeRow = (e) => {
     // document.getElementById(e.currentTarget.name).style.display = 'none';
     // console.log(this.props.basket);
-    this.props.deleteItem(e, this.props.basket);
+    console.log(this.props.basket);
+    // this.props.deleteItem(e, this.props.basket);
     // console.log(this.props.delete)
   };
 

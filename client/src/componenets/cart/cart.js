@@ -18,11 +18,18 @@ class Cart extends Component {
   };
 
   removeRow = (e) => {
-    // document.getElementById(e.currentTarget.name).style.display = 'none';
-    // console.log(this.props.basket);
-    console.log(this.props.basket);
-    // this.props.deleteItem(e, this.props.basket);
-    // console.log(this.props.delete)
+    let counter = 0;
+    let index = 0;
+    e  = parseInt(e);
+    this.props.basket.map((item) => {
+      counter++;
+      if(e === item.id){
+        index = counter;
+      }
+    });
+    // console.log(this.props.basket.splice(index-1,1));
+    this.props.addToCart(this.props.basket.splice(index-1,1));
+    finalPrice();
   };
 
   renderList() {
@@ -44,7 +51,7 @@ class Cart extends Component {
             </td>
             <td>
               {item.title}
-              <span>{item.price} × 1</span>
+              <span>{item.price}</span>
             </td>
             <td>
               <div className="cart-form-wrapper bg-white mb-3 py-3">
@@ -92,7 +99,9 @@ class Cart extends Component {
       if (item.id !== undefined) {
         sum += item.price;
         this.state.sum = sum;
-      };
+      }else {
+        return sum;
+      }
     });
   };
 

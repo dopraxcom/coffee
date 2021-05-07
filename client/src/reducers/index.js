@@ -36,28 +36,10 @@ export const finalPriceReducer = (price = [] , action) => {
     return price;
 };
 
-
-export const deleteItemReducer = (data = 0, action) => {
-    // data = [true , action.paylaod];
-    if(action.payload === 'DELETE'){
-        return action.paylaod;
-    };
-    return data;
-};
-
-export const cleanCartReducer = ( addToCart = [] , action) => {
-    if( action.type === 'CLEAN_CART'){
-        return [...addToCart];
-    };
-    return addToCart;
-}
-
 export default combineReducers({    
     addToCart   : addToCartReducer,
     fetchData   : fetchDataReducer,
     fetchRandom : fetchRandomReducer,
     finalPrice  : finalPriceReducer,
-    deleteItem  : deleteItemReducer,
-    cleanCart   : cleanCartReducer, 
 });
 

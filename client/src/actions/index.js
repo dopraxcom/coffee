@@ -24,19 +24,3 @@ export const finalPrice = (price=0) => {
         payload: price
     };
 };
-
-export const deleteItem = (row = 0 , store=[] ) => {
-    const data = [row , [...store]];  
-    console.log('Action data: ',data);
-    return {
-        type    : 'DELETE',
-        payload : data
-    };
-};
-
-export const cleanCart = (addToCart = []) => {
-    return {
-        type    : 'CLEAN_CART',
-        payload : addToCart
-    };
-};

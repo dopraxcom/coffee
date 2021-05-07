@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { addToCart, finalPrice, deleteItem } from "../../actions";
+import { addToCart, finalPrice } from "../../actions";
 
 class Cart extends Component {
   state = {
@@ -26,10 +26,9 @@ class Cart extends Component {
       if(e === item.id){
         index = counter;
       }
+      return false;
     });
-    // console.log(this.props.basket.splice(index-1,1));
     this.props.addToCart(this.props.basket.splice(index-1,1));
-    finalPrice();
   };
 
   renderList() {
@@ -102,6 +101,7 @@ class Cart extends Component {
       }else {
         return sum;
       }
+      return false;
     });
   };
 
@@ -141,8 +141,7 @@ const mapStateToProps = (state) => {
   return {
     basket: state.addToCart,
     price: state.finalPrice,
-    delete: state.deleteItem,
   };
 };
 
-export default connect(mapStateToProps, { addToCart, finalPrice, deleteItem })(Cart);
+export default connect(mapStateToProps, { addToCart, finalPrice })(Cart);

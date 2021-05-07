@@ -7,8 +7,10 @@ class Basket extends Component {
     let set = new Set();
     cart.map((item) => {
       if (!(item.id === undefined)) {
-        set.add(item);
+        set.add(item)
+        return set;
       };
+      return 0;
     });
     return set.size;
   };

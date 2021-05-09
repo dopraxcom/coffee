@@ -7,6 +7,7 @@ import { addToCart, finalPrice } from "../../actions";
 class Cart extends Component {
   state = {
     sum: 0,
+    number: 1,
   };
 
   onPlus = (e) => {
@@ -14,7 +15,7 @@ class Cart extends Component {
   };
 
   onMinus = (e) => {
-    console.log(e);
+    console.log(e.target.attributes.name);
   };
 
   removeRow = (e) => {
@@ -42,7 +43,12 @@ class Cart extends Component {
                 id={item.id}
                 onClick={(e) => this.removeRow(e.currentTarget.id)}
               >
-                <i className="lni lni-close"></i>
+                <i className="lni lni-close" style={{
+                  padding: '5px',
+                  background: 'red',
+                  color: '#fff',
+                  borderRadius: '50%',
+                }}></i>
               </span>
             </th>
             <td>
@@ -50,7 +56,7 @@ class Cart extends Component {
             </td>
             <td>
               {item.title}
-              <span>{item.price}</span>
+              <span>&nbsp;{item.price}&nbsp;تومان</span>
             </td>
             <td>
               <div className="cart-form-wrapper bg-white mb-3 py-3">
@@ -59,19 +65,22 @@ class Cart extends Component {
                     <div className="order-plus-minus d-flex align-items-center">
                       <div
                         className="quantity-button-handler"
-                        name={"input" + key}
+                        name={"input" + item.id}
                         onClick={(key) => this.onMinus(key)}
                       >
                         -
-                      </div>
-                      <input
+                      </div >
+                      {/* <input
                         className="form-control cart-quantity-input"
                         id={"input" + key}
                         type="text"
                         step="1"
                         onChange={(e) => this.onTodoChange(e.target.value)}
                         value={this.state.count}
-                      />
+                      /> */}
+                      <div className="quantity-button-handler">
+                      {this.state.number}
+                      </div>
                       <div
                         className="quantity-button-handler"
                         name={"input" + key}
@@ -129,7 +138,10 @@ class Cart extends Component {
           </div>
         </div>
         <Link to="/">
-          <i className="lni lni-home"></i>خانه
+          <i className="lni lni-home bg-warning p-2" style={{
+            borderRadius: '50%',
+            fontSize: '20px'
+          }}></i>
         </Link>
       </div>
     );

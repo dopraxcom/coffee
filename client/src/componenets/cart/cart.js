@@ -11,11 +11,19 @@ class Cart extends Component {
   };
 
   onPlus = (e) => {
-    console.log(document.getElementsByTagName(e.target.getAttribute("name")));
+    let name = e.target.attributes.name;
+    name = name.value.split('input');
+    let id = name[1];
+    this.setState({
+      number : 2
+    })
   };
 
   onMinus = (e) => {
-    console.log(e.target.attributes.name);
+    let name = e.target.attributes.name;
+    name = name.value.split('input');
+    let id = name[1];
+    console.log(id)
   };
 
   removeRow = (e) => {
@@ -83,7 +91,7 @@ class Cart extends Component {
                       </div>
                       <div
                         className="quantity-button-handler"
-                        name={"input" + key}
+                        name={"input" + item.id}
                         onClick={this.onPlus}
                       >
                         +

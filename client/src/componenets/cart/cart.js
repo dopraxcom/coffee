@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { addToCart, finalPrice } from "../../actions";
+import { finalPrice } from "../../actions";
 
 class Cart extends Component {
   state = {
@@ -14,9 +14,6 @@ class Cart extends Component {
     let name = e.target.attributes.name;
     name = name.value.split('input');
     let id = name[1];
-    this.setState({
-      number : 2
-    })
   };
 
   onMinus = (e) => {
@@ -30,18 +27,18 @@ class Cart extends Component {
     let counter = 0;
     let index = 0;
     e  = parseInt(e);
-    this.props.basket.map((item) => {
+    this.props.cart.map((item) => {
       counter++;
       if(e === item.id){
         index = counter;
       }
       return false;
     });
-    this.props.addToCart(this.props.basket.splice(index-1,1));
+    this.props.addToCart(this.props.cart.splice(index-1,1));
   };
 
   renderList() {
-    return this.props.basket.map((item, key) => {
+    return this.props.cart.map((item, key) => {
       if (!(item.id === undefined)) {
         return (
           <tr key={key} id={key}>
@@ -78,14 +75,6 @@ class Cart extends Component {
                       >
                         -
                       </div >
-                      {/* <input
-                        className="form-control cart-quantity-input"
-                        id={"input" + key}
-                        type="text"
-                        step="1"
-                        onChange={(e) => this.onTodoChange(e.target.value)}
-                        value={this.state.count}
-                      /> */}
                       <div className="quantity-button-handler">
                       {this.state.number}
                       </div>
@@ -109,21 +98,7 @@ class Cart extends Component {
     });
   };
 
-  finalPrice() {
-    let sum = 0;
-    this.props.basket.map((item) => {
-      if (item.id !== undefined) {
-        sum += item.price;
-        this.state.sum = sum;
-      }else {
-        return sum;
-      }
-      return false;
-    });
-  };
-
   render() {
-    this.finalPrice();
     return (
       <div className="container">
         <div className="cart-wrapper-area py-3">
@@ -138,7 +113,7 @@ class Cart extends Component {
             <div className="card-body d-flex align-items-center justify-content-between">
               <h5 className="total-price mb-0">
                 <span className="counter" id="finalPrice">
-                  {this.state.sum}&nbsp;هزار تومان{" "}
+                  {/* {this.state.sum}&nbsp;هزار تومان{" "} */}
                 </span>
               </h5>
               <span className="btn btn-warning">پرداخت</span>
@@ -159,9 +134,8 @@ class Cart extends Component {
 const mapStateToProps = (state) => {
   console.log("state: ", state);
   return {
-    basket: state.addToCart,
-    price: state.finalPrice,
+    cart: state.finalPrice,
   };
 };
 
-export default connect(mapStateToProps, { addToCart, finalPrice })(Cart);
+export default connect(mapStateToProps, { finalPrice })(Cart);

@@ -29,9 +29,10 @@ export const fetchRandomReducer = (store = [],action) => {
     return store;
 };
 
-export const finalPriceReducer = (price = [] , action) => {
+export const finalPriceReducer = (price = {} , action) => {
+    console.log('This reducer: ',price);
     if(action.type === 'PRICE'){
-        return [...price ,action.paylaod]
+        return action.payload;
     };
     return price;
 };

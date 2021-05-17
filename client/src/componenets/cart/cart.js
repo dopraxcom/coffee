@@ -12,29 +12,44 @@ class Cart extends Component {
 
   onPlus = (e) => {
     let name = e.target.attributes.name;
-    name = name.value.split('input');
+    name = name.value.split("input");
     let id = name[1];
+    id = parseInt(id);
+    this.props.price.map(item => {
+      if(item.id === id){
+        item.Qty = item.Qty + 1;
+        item.cartPrice = (item.Qty * item.price);
+      }
+    });
+    this.props.finalPrice(this.props.price);
   };
 
   onMinus = (e) => {
     let name = e.target.attributes.name;
-    name = name.value.split('input');
+    name = name.value.split("input");
     let id = name[1];
-    console.log(id)
+    id = parseInt(id);
+    this.props.price.map(item => {
+      if(item.id === id && item.Qty !== 1){
+        item.Qty = item.Qty - 1;
+        item.cartPrice = (item.Qty * item.price);
+      }
+    })
+    this.props.finalPrice(this.props.price);
   };
 
   removeRow = (e) => {
     let counter = 0;
     let index = 0;
-    e  = parseInt(e);
-    this.props.basket.map((item) => {
+    e = parseInt(e);
+    this.props.price.map((item) => {
       counter++;
-      if(e === item.id){
-        index = counter;
-      }
+      // if (e === item.id) {
+      //   index = counter;
+      // }
       return false;
     });
-    this.props.addToCart(this.props.basket.splice(index-1,1));
+    this.props.addToCart(this.props.basket.splice(index - 1, 1));
   };
 
   renderList() {
@@ -48,12 +63,15 @@ class Cart extends Component {
                 id={item.id}
                 onClick={(e) => this.removeRow(e.currentTarget.id)}
               >
-                <i className="lni lni-close" style={{
-                  padding: '5px',
-                  background: 'red',
-                  color: '#fff',
-                  borderRadius: '50%',
-                }}></i>
+                <i
+                  className="lni lni-close"
+                  style={{
+                    padding: "5px",
+                    background: "red",
+                    color: "#fff",
+                    borderRadius: "50%",
+                  }}
+                ></i>
               </span>
             </th>
             <td>
@@ -61,7 +79,7 @@ class Cart extends Component {
             </td>
             <td>
               {item.title}
-              <span>&nbsp;{item.price}&nbsp;تومان</span>
+              <span>&nbsp;{item.cartPrice}&nbsp;تومان</span>
             </td>
             <td>
               <div className="cart-form-wrapper bg-white mb-3 py-3">
@@ -74,10 +92,8 @@ class Cart extends Component {
                         onClick={(key) => this.onMinus(key)}
                       >
                         -
-                      </div >
-                      <div className="quantity-button-handler">
-                      {item.Qty}
                       </div>
+                      <div className="quantity-button-handler">{item.Qty}</div>
                       <div
                         className="quantity-button-handler"
                         name={"input" + item.id}
@@ -94,9 +110,9 @@ class Cart extends Component {
         );
       } else {
         return false;
-      };
+      }
     });
-  };
+  }
 
   render() {
     return (
@@ -121,10 +137,13 @@ class Cart extends Component {
           </div>
         </div>
         <Link to="/">
-          <i className="lni lni-home bg-warning p-2" style={{
-            borderRadius: '50%',
-            fontSize: '20px'
-          }}></i>
+          <i
+            className="lni lni-home bg-warning p-2"
+            style={{
+              borderRadius: "50%",
+              fontSize: "20px",
+            }}
+          ></i>
         </Link>
       </div>
     );

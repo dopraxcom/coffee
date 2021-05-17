@@ -21,6 +21,7 @@ class Basket extends Component {
     this.props.cart.map(item => {
       if(item.id !== undefined){
         item.Qty = 1;
+        item.cartPrice = item.price;
         cleanBasket.push(item);
         this.props.finalPrice(cleanBasket);
       };

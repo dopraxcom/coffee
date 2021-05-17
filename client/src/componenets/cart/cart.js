@@ -38,7 +38,7 @@ class Cart extends Component {
   };
 
   renderList() {
-    return this.props.basket.map((item, key) => {
+    return this.props.price.map((item, key) => {
       if (!(item.id === undefined)) {
         return (
           <tr key={key} id={key}>
@@ -76,7 +76,7 @@ class Cart extends Component {
                         -
                       </div >
                       <div className="quantity-button-handler">
-                      {this.state.number}
+                      {item.Qty}
                       </div>
                       <div
                         className="quantity-button-handler"

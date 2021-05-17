@@ -18,9 +18,9 @@ export const fetchRandom = () =>  async dispatch => {
     dispatch({type: 'FETCH_RANDOM', payload: response.data});
 };
 
-export const finalPrice = (basket={}) => {
+export const finalPrice = (basket=[]) => {
     return {
         type: 'PRICE',
-        payload: {...basket}
+        payload: [...basket]
     };
 };

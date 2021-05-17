@@ -60,22 +60,10 @@ let items = new Set([]);
     });
   };
 
-  createCleanBasket(){
-    let cleanBasket = [];
-    console.log(this.props.basket);
-    this.props.basket.map(item => {
-      if(item.id !== undefined){
-        item.Qty = 1;
-        cleanBasket.push(item);
-        this.props.finalPrice(cleanBasket);
-        console.log('put to action');
-      };
-    });
-  };
+
 
   onClickFunc(item){
     this.props.addToCart(item);
-    this.createCleanBasket()
   }
 
   render() {
@@ -95,8 +83,6 @@ let items = new Set([]);
 }
 
 const mapStateToProps = (state) => {
-  // console.log('mapStateToProps: ',state.fetchData);
-  // console.log('addToCart: ',state.addToCart);
   console.log(state)
   return { store: state.fetchData , basket : state.addToCart, cart : state.finalPrice };
 };

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { addToCart , finalPrice } from '../../actions';
 
 class Basket extends Component {
   counter(cart) {
@@ -15,10 +16,21 @@ class Basket extends Component {
     return set.size;
   };
 
+  log(){
+    let cleanBasket = [];
+    this.props.cart.map(item => {
+      if(item.id !== undefined){
+        item.Qty = 1;
+        cleanBasket.push(item);
+        this.props.finalPrice(cleanBasket);
+      };
+    });
+  }
+
   render() {
     return (
       <Link to="/cart">
-        <div className="shopCartIconDiv">
+        <div className="shopCartIconDiv" onClick={() => this.log()}>
           <span className="btn btn-warning btn-sm shopCartSpan1">
             <i className="lni lni-shopping-basket"></i>
           </span>
@@ -33,4 +45,4 @@ const mapStateToProps = (state) => {
   return { cart: state.addToCart };
 };
 
-export default connect(mapStateToProps)(Basket);
+export default connect(mapStateToProps, {addToCart , finalPrice})(Basket);

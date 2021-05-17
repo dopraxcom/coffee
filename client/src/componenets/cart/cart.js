@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { finalPrice } from "../../actions";
+import { addToCart, finalPrice } from "../../actions";
 
 class Cart extends Component {
   state = {
@@ -27,18 +27,18 @@ class Cart extends Component {
     let counter = 0;
     let index = 0;
     e  = parseInt(e);
-    this.props.cart.map((item) => {
+    this.props.basket.map((item) => {
       counter++;
       if(e === item.id){
         index = counter;
       }
       return false;
     });
-    this.props.addToCart(this.props.cart.splice(index-1,1));
+    this.props.addToCart(this.props.basket.splice(index-1,1));
   };
 
   renderList() {
-    return this.props.cart.map((item, key) => {
+    return this.props.basket.map((item, key) => {
       if (!(item.id === undefined)) {
         return (
           <tr key={key} id={key}>
@@ -134,8 +134,9 @@ class Cart extends Component {
 const mapStateToProps = (state) => {
   console.log("state: ", state);
   return {
-    cart: state.finalPrice,
+    basket: state.addToCart,
+    price: state.finalPrice,
   };
 };
 
-export default connect(mapStateToProps, { finalPrice })(Cart);
+export default connect(mapStateToProps, { addToCart, finalPrice })(Cart);

@@ -49,7 +49,6 @@ class WishGrid extends Component {
               </span>
               <p className="sale-price">
                 {item.price}
-                {/* <span>$42</span> */}
               </p>
               <span
                 className="btn btn-warning btn-sm"
@@ -66,7 +65,7 @@ class WishGrid extends Component {
 
   onClickFunc(item) {
     if (this.props.addToCart.length > 0) {
-      this.props.basket.map((key) => {
+      return this.props.basket.forEach((key) => {
         if (item.id !== key.id) {
           item.Qty = 1;
           item.cartPrice = item.price;

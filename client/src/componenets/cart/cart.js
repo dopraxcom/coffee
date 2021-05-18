@@ -15,7 +15,7 @@ class Cart extends Component {
     name = name.value.split("input");
     let id = name[1];
     id = parseInt(id);
-    this.props.basket.map((item) => {
+    this.props.basket.forEach((item) => {
       if (item.id === id) {
         item.Qty = item.Qty + 1;
         item.cartPrice = item.Qty * item.price;
@@ -29,7 +29,7 @@ class Cart extends Component {
     name = name.value.split("input");
     let id = name[1];
     id = parseInt(id);
-    this.props.basket.map((item) => {
+    this.props.basket.forEach((item) => {
       if (item.id === id && item.Qty !== 1) {
         item.Qty = item.Qty - 1;
         item.cartPrice = item.Qty * item.price;
@@ -41,7 +41,7 @@ class Cart extends Component {
   removeRow = (e) => {
     let id = parseInt(e);
     let count = 0;
-    this.props.basket.map((item) => {
+    this.props.basket.forEach((item) => {
       if (id === item.id) {
         this.props.basket.splice(count, 1);
         console.log(count);
@@ -53,7 +53,7 @@ class Cart extends Component {
 
   totalPrice() {
     let sum = 0;
-    this.props.basket.map((item) => {
+    this.props.basket.forEach((item) => {
       if (item.id !== undefined) {
         sum = sum + item.cartPrice;
       }

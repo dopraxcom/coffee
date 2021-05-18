@@ -15,13 +15,13 @@ class Cart extends Component {
     name = name.value.split("input");
     let id = name[1];
     id = parseInt(id);
-    this.props.price.map(item => {
+    this.props.basket.map(item => {
       if(item.id === id){
         item.Qty = item.Qty + 1;
         item.cartPrice = (item.Qty * item.price);
       }
     });
-    this.props.finalPrice(this.props.price);
+    this.props.addToCart();
   };
 
   onMinus = (e) => {
@@ -29,31 +29,30 @@ class Cart extends Component {
     name = name.value.split("input");
     let id = name[1];
     id = parseInt(id);
-    this.props.price.map(item => {
+    this.props.basket.map(item => {
       if(item.id === id && item.Qty !== 1){
         item.Qty = item.Qty - 1;
         item.cartPrice = (item.Qty * item.price);
       }
     })
-    this.props.finalPrice(this.props.price);
+    this.props.addToCart();
   };
 
   removeRow = (e) => {
-    let counter = 0;
-    let index = 0;
-    e = parseInt(e);
-    this.props.price.map((item) => {
-      counter++;
-      // if (e === item.id) {
-      //   index = counter;
-      // }
-      return false;
+    let id = parseInt(e);
+    let count = 0;
+    this.props.basket.map(item => {
+      if(id === item.id){
+        this.props.basket.splice(count, 1);
+        console.log(count);
+      }
+      count++;
     });
-    this.props.addToCart(this.props.basket.splice(index - 1, 1));
+    this.props.addToCart();
   };
 
   renderList() {
-    return this.props.price.map((item, key) => {
+    return this.props.basket.map((item, key) => {
       if (!(item.id === undefined)) {
         return (
           <tr key={key} id={key}>

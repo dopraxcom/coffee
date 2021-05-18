@@ -13,8 +13,6 @@ class WishGrid extends Component {
 
   componentDidMount() {
     this.props.fetchData();
-    this.props.addToCart();
-    console.log('Props:' , this.props.store);
   }
 
   renderList() {
@@ -63,7 +61,19 @@ let items = new Set([]);
 
 
   onClickFunc(item){
-    this.props.addToCart(item);
+    if(this.props.addToCart.length > 0){
+      this.props.basket.map(key => {
+        if( item.id !== key.id){
+          item.Qty = 1;
+          item.cartPrice = item.price;
+          this.props.addToCart(item);
+        }
+      });
+    } else {
+      item.Qty = 1;
+      item.cartPrice = item.price;
+      this.props.addToCart(item);
+    }
   }
 
   render() {

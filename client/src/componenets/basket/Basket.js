@@ -16,22 +16,10 @@ class Basket extends Component {
     return set.size;
   };
 
-  log(){
-    let cleanBasket = [];
-    this.props.cart.map(item => {
-      if(item.id !== undefined){
-        item.Qty = 1;
-        item.cartPrice = item.price;
-        cleanBasket.push(item);
-        this.props.finalPrice(cleanBasket);
-      };
-    });
-  }
-
   render() {
     return (
       <Link to="/cart">
-        <div className="shopCartIconDiv" onClick={() => this.log()}>
+        <div className="shopCartIconDiv">
           <span className="btn btn-warning btn-sm shopCartSpan1">
             <i className="lni lni-shopping-basket"></i>
           </span>

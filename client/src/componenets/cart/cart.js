@@ -51,6 +51,16 @@ class Cart extends Component {
     this.props.addToCart();
   };
 
+  totalPrice() {
+    let sum = 0;
+    this.props.basket.map(item => {
+      if(item.id !== undefined){
+        sum = sum + item.cartPrice;
+      }
+    });
+    this.state.sum = sum;
+  };
+
   renderList() {
     return this.props.basket.map((item, key) => {
       if (!(item.id === undefined)) {
@@ -114,6 +124,7 @@ class Cart extends Component {
   }
 
   render() {
+    this.totalPrice();
     return (
       <div className="container">
         <div className="cart-wrapper-area py-3">
@@ -128,7 +139,7 @@ class Cart extends Component {
             <div className="card-body d-flex align-items-center justify-content-between">
               <h5 className="total-price mb-0">
                 <span className="counter" id="finalPrice">
-                  {/* {this.state.sum}&nbsp;هزار تومان{" "} */}
+                  {this.state.sum}&nbsp;هزار تومان{" "}
                 </span>
               </h5>
               <span className="btn btn-warning">پرداخت</span>

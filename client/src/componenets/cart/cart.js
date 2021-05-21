@@ -44,7 +44,6 @@ class Cart extends Component {
     this.props.basket.forEach((item) => {
       if (id === item.id) {
         this.props.basket.splice(count, 1);
-        console.log(count);
       }
       count++;
     });

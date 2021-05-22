@@ -39,7 +39,7 @@ class WishGrid extends Component {
                 />
               </span>
               <span
-                className="product-title d-block"
+                className="product-title d-block" style={{fontWeight:'300'}}
               >
                 {item.title}
               </span>
@@ -78,12 +78,14 @@ class WishGrid extends Component {
         if (item.id !== key.id) {
           item.Qty = 1;
           item.cartPrice = item.price;
+          item.status = 'addToCart';
           this.props.addToCart(item);
         }
       });
     } else {
       item.Qty = 1;
       item.cartPrice = item.price;
+      item.status = 'addToCart';
       this.props.addToCart(item);
     }
   }

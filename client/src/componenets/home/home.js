@@ -15,7 +15,7 @@ function Main () {
             <WishGrid/>
             <Banner/>
             <WishList/>
-            <ListGrid />
+            {/* <ListGrid /> */}
             <Basket />
         </div>
     );

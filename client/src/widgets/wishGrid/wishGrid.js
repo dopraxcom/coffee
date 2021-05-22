@@ -43,13 +43,20 @@ class WishGrid extends Component {
               >
                 {item.title}
               </span>
-              <p className="sale-price" style={{textAlign:'center',color:'#000', marginRight:'10px'}}>
+              <div style={{textAlign:'center', marginBottom:'-10px'}}>
+                <p style={{display:'inline-block', left:'0', marginLeft:'5px', marginTop:'-20px', cursor: 'pointer',fontSize:'12px'}}>
+                  <i className="lni lni-star" style={{fontSize:'10px', float:'left', marginTop:'3px',color:'#ffca45', marginRight:'4px'}}></i>
+                  {item.ratio}
+                </p>
+                .
+                <span style={{fontSize:'12px', marginRight:'5px'}}>
+                  {item.steamatetime}
+                </span>
+              </div>
+              <p className="sale-price" style={{color:'#000', marginRight:'10px'}}>
                 {item.price}
                 <span style={{marginRight:'5px;', fontSize:'10px',color:'#000',textDecoration:'none', marginRight:'5px'}}>هزار تومان</span>
-                <p style={{display:'inline-block', position:'absolute', left:'0', marginLeft:'5px', marginTop:'8px', cursor: 'pointer',fontSize:'12px'}}>
-                <i className="lni lni-star" style={{fontSize:'10px', float:'left', marginTop:'3px',color:'#ffca45', marginRight:'4px'}}></i>
-                {item.ratio}
-                </p>
+                
               </p>
 
               <span

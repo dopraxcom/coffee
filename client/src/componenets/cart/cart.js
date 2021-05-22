@@ -138,7 +138,7 @@ class Cart extends Component {
             <div className="card-body d-flex align-items-center justify-content-between">
               <h5 className="total-price mb-0">
                 <span className="counter" id="finalPrice">
-                  {this.state.sum}&nbsp;هزار تومان{" "}
+                  {this.state.sum}<span style={{marginRight:'5px', fontSize:'15px', fontWeight:'300'}}>هزار تومان</span>
                 </span>
               </h5>
               <span className="btn btn-warning">پرداخت</span>

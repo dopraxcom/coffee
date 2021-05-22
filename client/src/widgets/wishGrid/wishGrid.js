@@ -31,9 +31,6 @@ class WishGrid extends Component {
           <div className="card top-product-card">
             <div className="card-body">
               {/* <span className="badge badge-success">Sale</span> */}
-              {/* <span className="wishlist-btn">
-                <i className="lni lni-heart"></i>
-              </span> */}
               <span className="product-thumbnail d-block">
                 <img
                   className="mb-2"
@@ -43,13 +40,18 @@ class WishGrid extends Component {
               </span>
               <span
                 className="product-title d-block"
-                href="single-product.html"
               >
                 {item.title}
               </span>
-              <p className="sale-price">
+              <p className="sale-price" style={{textAlign:'center',color:'#000', marginRight:'10px'}}>
                 {item.price}
+                <span style={{marginRight:'5px;', fontSize:'10px',color:'#000',textDecoration:'none', marginRight:'5px'}}>هزار تومان</span>
+                <p style={{display:'inline-block', position:'absolute', left:'0', marginLeft:'5px', marginTop:'8px', cursor: 'pointer',fontSize:'12px'}}>
+                <i className="lni lni-star" style={{fontSize:'10px', float:'left', marginTop:'3px',color:'#ffca45', marginRight:'4px'}}></i>
+                {item.ratio}
+                </p>
               </p>
+
               <span
                 className="btn btn-warning btn-sm"
                 onClick={() => this.onClickFunc(item)}

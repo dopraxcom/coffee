@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { addToCart } from "../../actions";
 
 class Basket extends Component {
   counter(cart) {
     let set = new Set();
     cart.map((item) => {
       if (!(item.id === undefined)) {
-        set.add(item)
+        set.add(item);
         return set;
-      };
+      }
       return 0;
     });
     return set.size;
-  };
+  }
 
   render() {
     return (
@@ -26,11 +27,11 @@ class Basket extends Component {
         </div>
       </Link>
     );
-  };
-};
+  }
+}
 
 const mapStateToProps = (state) => {
   return { cart: state.addToCart };
 };
 
-export default connect(mapStateToProps)(Basket);
+export default connect(mapStateToProps, { addToCart })(Basket);

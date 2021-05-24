@@ -2,40 +2,35 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { fetchData , addToCart , finalPrice } from "../../actions";
-
-
+import { fetchData, addToCart } from "../../actions";
 
 class WishGrid extends Component {
   state = {
-    item : []
-  }
+    item: [],
+  };
 
   componentDidMount() {
     this.props.fetchData();
-    this.props.addToCart();
-    console.log('Props:' , this.props.store);
   }
 
   renderList() {
-let items = new Set([]);
+    let items = new Set([]);
     for (let i = 11; i < this.props.store.length; i++) {
-      items.add(this.props.store[Math.floor(Math.random() * this.props.store.length)])
+      items.add(
+        this.props.store[Math.floor(Math.random() * this.props.store.length)]
+      );
     }
 
     let rndStore = [];
-    
-    items.forEach(item => rndStore.push(item))
+
+    items.forEach((item) => rndStore.push(item));
 
     return rndStore.map((item, key) => {
       return (
-        <div className="col-6 col-md-4 col-lg-3" key={key} >
+        <div className="col-6 col-md-4 col-lg-3" key={key}>
           <div className="card top-product-card">
             <div className="card-body">
               {/* <span className="badge badge-success">Sale</span> */}
-              {/* <span className="wishlist-btn">
-                <i className="lni lni-heart"></i>
-              </span> */}
               <span className="product-thumbnail d-block">
                 <img
                   className="mb-2"
@@ -43,14 +38,31 @@ let items = new Set([]);
                   alt={item.title}
                 />
               </span>
-              <span className="product-title d-block" href="single-product.html">
+              <span
+                className="product-title d-block" style={{fontWeight:'300'}}
+              >
                 {item.title}
               </span>
-              <p className="sale-price">
+              <div style={{textAlign:'center', marginBottom:'-10px'}}>
+                <p style={{display:'inline-block', left:'0', marginLeft:'5px', marginTop:'-20px', cursor: 'pointer',fontSize:'12px'}}>
+                  <i className="lni lni-star" style={{fontSize:'10px', float:'left', marginTop:'3px',color:'#ffca45', marginRight:'4px'}}></i>
+                  {item.ratio}
+                </p>
+                .
+                <span style={{fontSize:'12px', marginRight:'5px'}}>
+                  {item.steamatetime}
+                </span>
+              </div>
+              <p className="sale-price" style={{color:'#000', marginRight:'10px'}}>
                 {item.price}
-                {/* <span>$42</span> */}
+                <span style={{marginRight:'5px;', fontSize:'10px',color:'#000',textDecoration:'none', marginRight:'5px'}}>هزار تومان</span>
+                
               </p>
-              <span className="btn btn-warning btn-sm" onClick={() => this.props.addToCart(item) }>
+
+              <span
+                className="btn btn-warning btn-sm"
+                onClick={() => this.onClickFunc(item)}
+              >
                 <i className="lni lni-shopping-basket"></i>
               </span>
             </div>
@@ -58,10 +70,27 @@ let items = new Set([]);
         </div>
       );
     });
-  };
+  }
+
+  onClickFunc(item) {
+    if (this.props.addToCart.length > 0) {
+      return this.props.basket.forEach((key) => {
+        if (item.id !== key.id) {
+          item.Qty = 1;
+          item.cartPrice = item.price;
+          item.status = 'addToCart';
+          this.props.addToCart(item);
+        }
+      });
+    } else {
+      item.Qty = 1;
+      item.cartPrice = item.price;
+      item.status = 'addToCart';
+      this.props.addToCart(item);
+    }
+  }
 
   render() {
-    
     return (
       <div className="top-products-area clearfix py-3">
         <div className="container">
@@ -77,10 +106,12 @@ let items = new Set([]);
 }
 
 const mapStateToProps = (state) => {
-  // console.log('mapStateToProps: ',state.fetchData);
-  // console.log('addToCart: ',state.addToCart);
-  console.log(state)
-  return { store: state.fetchData , basket : state.addToCart };
+  console.log(state);
+  return {
+    store: state.fetchData,
+    basket: state.addToCart,
+    cart: state.finalPrice,
+  };
 };
 
-export default connect(mapStateToProps, { fetchData ,addToCart ,finalPrice })(WishGrid);
+export default connect(mapStateToProps, { fetchData, addToCart })(WishGrid);

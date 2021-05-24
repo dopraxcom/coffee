@@ -2,34 +2,63 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { addToCart, finalPrice } from "../../actions";
+import { addToCart } from "../../actions";
 
 class Cart extends Component {
   state = {
     sum: 0,
+    number: 1,
   };
 
   onPlus = (e) => {
-    console.log(document.getElementsByTagName(e.target.getAttribute("name")));
+    let name = e.target.attributes.name;
+    name = name.value.split("input");
+    let id = name[1];
+    id = parseInt(id);
+    this.props.basket.forEach((item) => {
+      if (item.id === id) {
+        item.Qty = item.Qty + 1;
+        item.cartPrice = item.Qty * item.price;
+      }
+    });
+    this.props.addToCart();
   };
 
   onMinus = (e) => {
-    console.log(e);
+    let name = e.target.attributes.name;
+    name = name.value.split("input");
+    let id = name[1];
+    id = parseInt(id);
+    this.props.basket.forEach((item) => {
+      if (item.id === id && item.Qty !== 1) {
+        item.Qty = item.Qty - 1;
+        item.cartPrice = item.Qty * item.price;
+      }
+    });
+    this.props.addToCart();
   };
 
   removeRow = (e) => {
-    let counter = 0;
-    let index = 0;
-    e  = parseInt(e);
-    this.props.basket.map((item) => {
-      counter++;
-      if(e === item.id){
-        index = counter;
+    let id = parseInt(e);
+    let count = 0;
+    this.props.basket.forEach((item) => {
+      if (id === item.id) {
+        this.props.basket.splice(count, 1);
       }
-      return false;
+      count++;
     });
-    this.props.addToCart(this.props.basket.splice(index-1,1));
+    this.props.addToCart();
   };
+
+  totalPrice() {
+    let sum = 0;
+    this.props.basket.forEach((item) => {
+      if (item.id !== undefined) {
+        sum = sum + item.cartPrice;
+      }
+    });
+    this.state.sum = sum;
+  }
 
   renderList() {
     return this.props.basket.map((item, key) => {
@@ -42,7 +71,15 @@ class Cart extends Component {
                 id={item.id}
                 onClick={(e) => this.removeRow(e.currentTarget.id)}
               >
-                <i className="lni lni-close"></i>
+                <i
+                  className="lni lni-close"
+                  style={{
+                    padding: "5px",
+                    background: "red",
+                    color: "#fff",
+                    borderRadius: "50%",
+                  }}
+                ></i>
               </span>
             </th>
             <td>
@@ -50,7 +87,7 @@ class Cart extends Component {
             </td>
             <td>
               {item.title}
-              <span>{item.price}</span>
+              <span>&nbsp;{item.cartPrice}&nbsp;تومان</span>
             </td>
             <td>
               <div className="cart-form-wrapper bg-white mb-3 py-3">
@@ -59,22 +96,15 @@ class Cart extends Component {
                     <div className="order-plus-minus d-flex align-items-center">
                       <div
                         className="quantity-button-handler"
-                        name={"input" + key}
+                        name={"input" + item.id}
                         onClick={(key) => this.onMinus(key)}
                       >
                         -
                       </div>
-                      <input
-                        className="form-control cart-quantity-input"
-                        id={"input" + key}
-                        type="text"
-                        step="1"
-                        onChange={(e) => this.onTodoChange(e.target.value)}
-                        value={this.state.count}
-                      />
+                      <div className="quantity-button-handler">{item.Qty}</div>
                       <div
                         className="quantity-button-handler"
-                        name={"input" + key}
+                        name={"input" + item.id}
                         onClick={this.onPlus}
                       >
                         +
@@ -88,25 +118,12 @@ class Cart extends Component {
         );
       } else {
         return false;
-      };
-    });
-  };
-
-  finalPrice() {
-    let sum = 0;
-    this.props.basket.map((item) => {
-      if (item.id !== undefined) {
-        sum += item.price;
-        this.state.sum = sum;
-      }else {
-        return sum;
       }
-      return false;
     });
-  };
+  }
 
   render() {
-    this.finalPrice();
+    this.totalPrice();
     return (
       <div className="container">
         <div className="cart-wrapper-area py-3">
@@ -121,7 +138,7 @@ class Cart extends Component {
             <div className="card-body d-flex align-items-center justify-content-between">
               <h5 className="total-price mb-0">
                 <span className="counter" id="finalPrice">
-                  {this.state.sum}&nbsp;هزار تومان{" "}
+                  {this.state.sum}<span style={{marginRight:'5px', fontSize:'15px', fontWeight:'300'}}>هزار تومان</span>
                 </span>
               </h5>
               <span className="btn btn-warning">پرداخت</span>
@@ -129,7 +146,13 @@ class Cart extends Component {
           </div>
         </div>
         <Link to="/">
-          <i className="lni lni-home"></i>خانه
+          <i
+            className="lni lni-home bg-warning p-2"
+            style={{
+              borderRadius: "50%",
+              fontSize: "20px",
+            }}
+          ></i>
         </Link>
       </div>
     );
@@ -144,4 +167,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addToCart, finalPrice })(Cart);
+export default connect(mapStateToProps, { addToCart })(Cart);

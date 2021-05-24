@@ -1,29 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchData } from '../../actions'
 
+class WishList extends Component {
 
-function WishList(){
-    return(
-        <div className="weekly-best-seller-area py-3" dir="ltr">
-        <div className="container">
-          <div className="section-heading d-flex align-items-center justify-content-between">
-            <h6>Weekly Best Sellers</h6><a className="btn btn-success btn-sm" href="shop-list.html">View All</a>
-          </div>
-          <div className="row g-3">
-            <div className="col-12 col-md-6">
-              <div className="card weekly-product-card">
-                <div className="card-body d-flex align-items-center">
-                  <div className="product-thumbnail-side"><span className="badge badge-success">Sale</span><span className="wishlist-btn"><i className="lni lni-heart"></i></span><span className="product-thumbnail d-block" href="single-product.html"><img src="img/product/10.png" alt=""/></span></div>
-                  <div className="product-description"><span className="product-title d-block">Modern Red Sofa</span>
-                    <p className="sale-price"><i className="lni lni-dollar"></i>$64<span>$89</span></p>
-                    <div className="product-rating"><i className="lni lni-star-filled"></i>4.88 (39)</div><span className="btn btn-danger btn-sm"><i className="me-1 lni lni-cart"></i>Buy Now</span>
+  renderList(){
+    return this.props.data.map( item => {
+      if(item.ratio > 4.5){
+        return(
+          <div className="col-12 col-md-6">
+            <div className="card weekly-product-card">
+              <div className="card-body d-flex align-items-center">
+                <div className="product-thumbnail-side"><span className="badge badge-success">Sale</span><span className="wishlist-btn"><i className="lni lni-heart"></i></span><span className="product-thumbnail d-block"><img src={`/img/${item.img}`}
+                  alt={item.title}/></span></div>
+                <div className="product-description"><span className="product-title d-block">{item.title}</span>
+                  <p className="sale-price"><i className="lni lni-dollar"></i>{item.price}</p>
+                  <div className="product-rating">
+                    <i className="lni lni-star-filled"></i>{item.ratio}
                   </div>
+                    <span className="btn btn-danger btn-sm">
+                      <i className="me-1 lni lni-cart"></i>Buy Now
+                    </span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    );
+        );
+      }
+    });
+  };
+
+  render() {
+    return (
+      <div className="row g-3" dir="ltr">{this.renderList()}</div>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    data :  state.fetchData
+  }
 };
 
-export default WishList;
+
+export default connect(mapStateToProps, { fetchData })(WishList)
+

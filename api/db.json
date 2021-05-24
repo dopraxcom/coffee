@@ -7,9 +7,11 @@
             "description": "دبل اسپرسو",
             "price": 10,
             "name" : "espressoo",
-            "img": "coffee/espressoo.jpg",
+            "img": "coffee/espressoo.png",
             "numer": 10,
-            "status": true 
+            "status": true,
+            "ratio": 4.7,
+            "steamatetime": "5min"
         },
         {
             "id": 1,
@@ -18,9 +20,11 @@
             "description": "کاپوچینو مخصوص",
             "price": 20,
             "name" : "cappuccino",
-            "img" : "coffee/cappuccino.jpg",
+            "img" : "coffee/cappuccino.png",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 3,
+            "steamatetime": "5min"
         },
         {
             "id": 2,
@@ -29,9 +33,11 @@
             "description": "سینگل اسپرسو",
             "price": 70,
             "name" : "espressoo",
-            "img" : "coffee/espressoo.jpg",
+            "img" : "coffee/Double-Espresso.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 4.8,
+            "steamatetime": "10min"
         },
         {
             "id": 3,
@@ -42,7 +48,9 @@
             "name" : "beaten coffee",
             "img" : "coffee/beaten coffee.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 2,
+            "steamatetime": "10min"
         },
         {
             "id": 4,
@@ -53,7 +61,9 @@
             "name" : "Americano",
             "img" : "coffee/Americano-Coffee.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 3.4,
+            "steamatetime": "10min"
         },
         {
             "id": 5,
@@ -64,7 +74,9 @@
             "name" : "turkish",
             "img" : "coffee/turkish-coffee.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 1.5,
+            "steamatetime": "15min"
         },
         {
             "id": 6,
@@ -73,9 +85,11 @@
             "description": "قهوه فرانسوی",
             "price": 20,
             "name" : "french",
-            "img" : "coffee/Americano-Coffee.jpg",
+            "img" : "coffee/french.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 4.7,
+            "steamatetime": "11min"
         },
         {
             "id": 7,
@@ -86,7 +100,9 @@
             "name" : "water",
             "img" : "coldDrink/water.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 4.2,
+            "steamatetime": "1min"
         },
         {
             "id": 8,
@@ -95,9 +111,11 @@
             "description": "آب پرتقال طبیعی",
             "price": 20,
             "name" : "juice",
-            "img" : "coldDrink/juice.jpg",
+            "img" : "coldDrink/orangeJuice.png",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 1.4,
+            "steamatetime": "16min"
         },
         {
             "id": 9,
@@ -106,9 +124,11 @@
             "description": "آب میوه طبیعی فصل",
             "price": 20,
             "name" : "juice",
-            "img" : "coldDrink/juice.jpg",
+            "img" : "coldDrink/juices.png",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 3.1,
+            "steamatetime": "12min"
         },
         {
             "id": 10,
@@ -117,9 +137,11 @@
             "description": "همبرگر رست بیف",
             "price": 30,
             "name" : "burger",
-            "img" : "food/burger.jpg",
+            "img" : "food/burger.png",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 2.6,
+            "steamatetime": "20min"
         },
         {
             "id": 11,
@@ -128,9 +150,11 @@
             "description": "استیک سینه مرغ",
             "price": 30,
             "name" : "chicken",
-            "img" : "food/chicken.jpg",
+            "img" : "food/steak.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 4.2,
+            "steamatetime": "30min"
         },
         {
             "id": 12,
@@ -141,7 +165,9 @@
             "name" :"pizza",
             "img" : "food/pizza.png",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 2.4,
+            "steamatetime": "30min"
         },
         {
             "id": 13,
@@ -152,7 +178,9 @@
             "name" :"potato",
             "img" : "food/potato.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 4.7,
+            "steamatetime": "15min"
         },
         {
             "id": 14,
@@ -163,7 +191,9 @@
             "name" :"mushroom",
             "img" : "food/mushroom.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 4.2,
+            "steamatetime": "10min"
         },
         {
             "id": 15,
@@ -174,7 +204,9 @@
             "name" : "soup",
             "img" : "food/soup.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 2.3,
+            "steamatetime": "20min"
         },
         {
             "id": 16,
@@ -185,7 +217,9 @@
             "name" : "Chocolaty-Cake",
             "img" : "other/Chocolate-Cake.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 3.7,
+            "steamatetime": "5min"
         },
         {
             "id": 17,
@@ -196,7 +230,9 @@
             "name" : "chocolaty-icecream",
             "img" : "other/chocolaty-icecream.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 1.7,
+            "steamatetime": "5min"
         },
         {
             "id": 18,
@@ -207,7 +243,9 @@
             "name" : "coca cola",
             "img" : "other/coca cola.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 4.7,
+            "steamatetime": "1min"
         },
         {
             "id": 19,
@@ -218,7 +256,9 @@
             "name": "fanta",
             "img" : "other/fanta.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 3.7,
+            "steamatetime": "1min"
         },
         {
             "id": 20,
@@ -229,7 +269,9 @@
             "name" : "sprite",
             "img" : "other/sprite.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 2.4,
+            "steamatetime": "1min"
         },
         {
             "id": 21,
@@ -240,7 +282,9 @@
             "name" : "yogurt",
             "img" : "other/yogurt.jpg",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 4.1,
+            "steamatetime": "1min"
         },
         {
             "id": 22,
@@ -251,7 +295,35 @@
             "name" : "tea",
             "img" : "coffee/tea.png",
             "numer": 10,
-            "status": true
+            "status": true,
+            "ratio": 4.8,
+            "steamatetime": "15min"
+        },
+        {
+            "id": 23,
+            "cat" : "food",
+            "title": "مرغ سوخاری",
+            "description": "مرغ درسته سوخاری",
+            "price": 60,
+            "name" : "chicken",
+            "img" : "food/bigChiken.png",
+            "numer": 10,
+            "status": true,
+            "ratio": 4.8,
+            "steamatetime": "40min"
+        },
+        {
+            "id": 24,
+            "cat" : "jelly",
+            "title": "دونات",
+            "description": "دونات معمولی با روکش شکلات",
+            "price": 10,
+            "name" : "donut",
+            "img" : "other/donut.png",
+            "numer": 10,
+            "status": true,
+            "ratio": 4.6,
+            "steamatetime": "2min"
         }
     ]
 }

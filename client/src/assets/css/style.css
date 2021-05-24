@@ -40,7 +40,6 @@ Created: 15 Dec 2019
 'Roboto', sans-serif;
 ----------------------------------------- */
 /* Reboot CSS */
-
 @font-face {
   font-family: 'Vazir';
   src: local('Vazir'), url(../fonts/Vazir-Bold.ttf) format('ttf');
@@ -62,6 +61,7 @@ html {
   color: #747794;
   overflow-x: hidden;
   /* background-color: #e1f0ff; */
+  background-color: #fcfaf9;
  }
 
 h1,
@@ -248,8 +248,8 @@ textarea:invalid {
 
 .btn-warning {
   color: #020310;
-  background-color: #ffaf00;
-  border-color: #ffaf00; }
+  background-color: #ffc532;
+  border-color: #ffc532; }
   .btn-warning:hover, .btn-warning:focus {
     color: #ffffff;
     background-color: #020310;
@@ -295,7 +295,7 @@ textarea:invalid {
 
 .bg-warning,
 .badge-warning {
-  background-color: #ffaf00 !important;
+  background-color: #ffc532 !important;
   color: #020310; }
 
 .bg-info,
@@ -332,8 +332,8 @@ textarea:invalid {
   .card .card-body {
     padding: 1rem;
     padding: 1rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.18);
-    border-radius: 10px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.18); */
+    border-radius: 8px;
     background: transparent;
   }
 

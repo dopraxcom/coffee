@@ -55,7 +55,7 @@ class WishGrid extends Component {
               </div>
               <p className="sale-price" style={{color:'#000', marginRight:'10px'}}>
                 {item.price}
-                <span style={{marginRight:'5px;', fontSize:'10px',color:'#000',textDecoration:'none', marginRight:'5px'}}>هزار تومان</span>
+                <span style={{marginRight:'5px;', fontSize:'10px',color:'#000',textDecoration:'none'}}>هزار تومان</span>
                 
               </p>
 

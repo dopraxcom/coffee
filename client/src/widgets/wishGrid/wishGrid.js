@@ -15,7 +15,7 @@ class WishGrid extends Component {
 
   renderList() {
     let items = new Set([]);
-    for (let i = 11; i < this.props.store.length; i++) {
+    for (let i = 20; i < this.props.store.length; i++) {
       items.add(
         this.props.store[Math.floor(Math.random() * this.props.store.length)]
       );

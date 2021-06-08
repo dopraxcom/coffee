@@ -1,20 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+	"github.com/khorasany/coffee/api/backend/routers"
 )
 
-func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Home page endpoint hit")
-}
-
-func handleRequests() {
-	http.HandleFunc("/", homePage)
-	log.Fatal(http.ListenAndServe(":10034", nil))
-}
-
 func main() {
-	handleRequests()
+	routers.HandleRequests()
 }

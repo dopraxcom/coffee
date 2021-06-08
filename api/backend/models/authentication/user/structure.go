@@ -14,6 +14,8 @@ type Admin struct {
 	Status    int64     `json:"status"`
 }
 
+type Admins []Admin
+
 type Meta struct {
 	ID        int64  `json:"id"`
 	UserID    int64  `json:"user_id"`
@@ -21,6 +23,8 @@ type Meta struct {
 	MetaKey   string `json:"meta_key"`
 	MetaValue string `json:"meta_value"`
 }
+
+type Metas []Meta
 
 type Customer struct {
 	ID        int64     `json:"id"`
@@ -32,3 +36,5 @@ type Customer struct {
 	CreatedAt time.Time `json:"created_at"`
 	Status    int64     `json:"status"`
 }
+
+type Customers []Customer

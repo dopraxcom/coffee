@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 import { connect } from "react-redux";
 
@@ -32,11 +33,18 @@ class WishGrid extends Component {
             <div className="card-body">
               {/* <span className="badge badge-success">Sale</span> */}
               <span className="product-thumbnail d-block">
+                <Link to={{
+                  pathname: "/singleProduct",
+                  id: item.id,
+                  addToCart: true
+                }}>
                 <img
                   className="mb-2"
                   src={`/img/${item.img}`}
                   alt={item.title}
+                  onClick={() => this.gotoSingleProduct(item.id)}
                 />
+                </Link>
               </span>
               <span className="product-title d-block" style={{fontWeight:'300'}}>
                 {item.title}
@@ -86,6 +94,10 @@ class WishGrid extends Component {
       item.status = 'addToCart';
       this.props.addToCart(item);
     }
+  }
+
+  gotoSingleProduct(id){
+    console.log(id);
   }
 
   render() {

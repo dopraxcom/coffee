@@ -1,14 +1,25 @@
-import { read } from 'fs';
-import React from 'react';
-import {Link, useLocation} from "react-router-dom";
+import React , { useEffect } from 'react';
+import { useLocation } from "react-router-dom";
+import { connect } from 'react-redux';
+import { fetchData } from '../../actions';
 
-function SingleProduct(props) {
+const SingleProduct = (props) => {
 let location = useLocation();
-console.log(location);
+console.log('Product id : ', location.id);
+
+useEffect(() => {        
+    // props.fetchData()  
+});
+
+function render() {
+    console.log('Your fetch function:',props)
+}
+
     return (
         <div className="page-content-wrapper" dir="ltr">
+            {render()}
             <div className="product-slides owl-carousel">
-                <div className="single-product-slide" style={{backgroundImage: ""}}></div>
+                <div className="single-product-slide" style={{backgroundImage: `url(/img/food/burger.png)`}}></div>
             </div>
             <div className="product-description pb-3">
                 <div className="product-title-meta-data bg-white mb-3 py-3">
@@ -33,10 +44,10 @@ console.log(location);
                     <div className="sales-end">
                         <p className="mb-1 font-weight-bold"><i className="lni lni-bolt"></i> Flash sale end in</p>
                         <ul className="sales-end-timer ps-0 d-flex align-items-center" data-countdown="2022/01/01 14:21:37">
-                        <li><span className="days">0</span>d</li>
-                        <li><span className="hours">0</span>h</li>
-                        <li><span className="minutes">0</span>m</li>
-                        <li><span className="seconds">0</span>s</li>
+                            <li><span className="days">0</span>d</li>
+                            <li><span className="hours">0</span>h</li>
+                            <li><span className="minutes">0</span>m</li>
+                            <li><span className="seconds">0</span>s</li>
                         </ul>
                     </div>
                     <div className="sales-volume text-end">
@@ -134,10 +145,11 @@ console.log(location);
     );
 };
 
-export default SingleProduct;
 
+const mapStateToProps = state => {
+    return {
+        fetchData : state.fetchData
+    };
+}
 
-
-<div className="product-slides owl-carousel">
-
-</div>
+export default connect(mapStateToProps, {fetchData})(SingleProduct);

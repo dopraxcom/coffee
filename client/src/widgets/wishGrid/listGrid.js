@@ -38,7 +38,10 @@ class ListGrid extends Component {
                             alt={item.title}
                         />
                     </div>
-                    <div className="product-description" style={{textAlign: 'center'}}><a className="product-title d-block" href="single-product.html">{item.title}</a>
+                    <div className="product-description" style={{textAlign: 'center'}}>
+                    <span className="product-title d-block" style={{fontWeight:'300'}}>
+                        {item.title}
+                    </span>
                     <p className="sale-price" style={{color:'#000', marginRight:'10px', display:'block'}}>
                         {item.price}
                         <span style={{marginRight:'5px;', fontSize:'10px',color:'#000',textDecoration:'none'}}>هزار تومان</span>

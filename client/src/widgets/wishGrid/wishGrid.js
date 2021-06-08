@@ -38,9 +38,7 @@ class WishGrid extends Component {
                   alt={item.title}
                 />
               </span>
-              <span
-                className="product-title d-block" style={{fontWeight:'300'}}
-              >
+              <span className="product-title d-block" style={{fontWeight:'300'}}>
                 {item.title}
               </span>
               <div style={{textAlign:'center', marginBottom:'-10px'}}>

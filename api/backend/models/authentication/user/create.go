@@ -4,6 +4,6 @@ func registerCustomer() {
 
 }
 
-func registerAdmin() {
-
+func RegisterAdmin(params map[string]string) (Admin, error) {
+	return Admin{}, nil
 }

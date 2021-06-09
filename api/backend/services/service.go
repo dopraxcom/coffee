@@ -1,10 +1,23 @@
 package services
 
 import (
-	"fmt"
+	"github.com/khorasany/coffee/api/backend/helpers/jwtToken"
+	jwtTokenModel "github.com/khorasany/coffee/api/backend/models/authentication/permissions"
 	"net/http"
 )
 
-func HomePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Home page endpoint hit")
+func SetCookie(w http.ResponseWriter, claims jwtToken.Claims) {
+	token, err := jwtToken.CreateJwtToken(claims)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+	}
+
+	jwtTokenModel.InsertToken(token)
+	http.SetCookie(w, &http.Cookie{
+		Name:    "AuthenticationToken",
+		Value:   token,
+		Expires: jwtToken.ExpirationTime,
+	})
 }

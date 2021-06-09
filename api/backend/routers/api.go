@@ -7,8 +7,16 @@ import (
 	"net/http"
 )
 
-func HandleRequests() {
-	http.HandleFunc("/", services.HomePage)
-	http.HandleFunc("/users", users.GetAllAdminUsers)
-	log.Fatal(http.ListenAndServe(":10034", nil))
+//func HandleRequests() {
+//	http.HandleFunc("/", services.HomePage)
+//	http.HandleFunc("/users", users.GetAllAdminUsers)
+//	log.Fatal(http.ListenAndServe(":10034", nil))
+//}
+
+func Router() {
+	r := services.RunnerICoffeeService()
+
+	r.HandleFunc("/users", users.GetAllAdminUsers).Methods("GET")
+
+	log.Fatal(http.ListenAndServe(":9006", r))
 }

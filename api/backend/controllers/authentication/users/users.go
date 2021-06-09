@@ -2,31 +2,51 @@ package users
 
 import (
 	"encoding/json"
-	"fmt"
+	"github.com/gorilla/mux"
 	"github.com/khorasany/coffee/api/backend/models/authentication/user"
 	"net/http"
-	"time"
 )
 
 func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
-	// TODO: request must be use for authenticate for valid user and permission
-	//_ := r
+	// TODO: if first user with super admin permission registered then this section will be enabled
+	params := mux.Vars(r)
+	//_,_,_,err := jwtToken.AuthenticationJwtToken(params["token"])
+	//if err != nil {
+	//	w.Header().Set("Content-Type","application/json")
+	//	w.WriteHeader(http.StatusUnauthorized)
+	//	w.Write([]byte(err.Error()))
+	//}
 
-	// TODO: this section must be complete with database
-	users := user.Admins{
-		user.Admin{
-			1,
-			"alireza",
-			"saffar",
-			"0921584210",
-			"adygcy8b",
-			"a.khorasany@gmail.com",
-			1,
-			time.Now(),
-			0,
-		},
+	users, err := user.GetAllAdminUsers(params)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
 	}
 
-	fmt.Println("Endpoint hit: get all admin users")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(users)
+}
+
+func CreateAdminUser(w http.ResponseWriter, request *http.Request) {
+	// TODO: if first user with super admin permission registered then this section will be enabled
+	params := mux.Vars(request)
+	//_,_,_,err := jwtToken.AuthenticationJwtToken(params["token"])
+	//if err != nil {
+	//	w.Header().Set("Content-Type","application/json")
+	//	w.WriteHeader(http.StatusUnauthorized)
+	//	w.Write([]byte(err.Error()))
+	//}
+
+	admin, err := user.RegisterAdmin(params)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(admin)
 }

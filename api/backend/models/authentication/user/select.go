@@ -16,12 +16,12 @@ func login(username string, password string) {
 
 }
 
-func loginAdmin(username string, password string) {
-
+func LoginAdmin(params map[string]string) (bool, Admin) {
+	return false, Admin{}
 }
 
-func getAllAdminUsers() {
-
+func GetAllAdminUsers(params map[string]string) (Admins, error) {
+	return nil, nil
 }
 
 func getUserMeta(userID string) {

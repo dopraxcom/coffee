@@ -12,19 +12,16 @@ type Admin struct {
 	RoleID    int64     `json:"role_id"`
 	CreatedAt time.Time `json:"created_at"`
 	Status    int64     `json:"status"`
+	Meta      Meta
 }
-
-type Admins []Admin
 
 type Meta struct {
-	ID        int64  `json:"id"`
-	UserID    int64  `json:"user_id"`
-	UserType  int64  `json:"user_type"`
-	MetaKey   string `json:"meta_key"`
-	MetaValue string `json:"meta_value"`
+	BirthDate string `json:"birthdate"`
+	Address   string `json:"address"`
+	Phone     string `json:"phone"`
+	Mobile    string `json:"mobile"`
+	Avatar    string `json:"avatar"`
 }
-
-type Metas []Meta
 
 type Customer struct {
 	ID        int64     `json:"id"`
@@ -36,5 +33,9 @@ type Customer struct {
 	CreatedAt time.Time `json:"created_at"`
 	Status    int64     `json:"status"`
 }
+
+type Admins []Admin
+
+type Metas []Meta
 
 type Customers []Customer

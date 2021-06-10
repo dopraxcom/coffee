@@ -74,8 +74,8 @@ function renderList(){
                         <ul className="mb-3 ps-3">
                         <li><i className="lni lni-checkmark-circle"> </i> 100% Good Reviews</li>
                         <li><i className="lni lni-checkmark-circle"> </i> 7 Days Returns</li>
-                        <li> <i className="lni lni-checkmark-circle"> </i> Warranty not Aplicable</li>
-                        <li> <i className="lni lni-checkmark-circle"> </i> 100% Brand New Product</li>
+                        <li><i className="lni lni-checkmark-circle"> </i> Warranty not Aplicable</li>
+                        <li><i className="lni lni-checkmark-circle"> </i> 100% Brand New Product</li>
                         </ul>
                         <p className="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, eum? Id, culpa? At officia quisquam laudantium nisi mollitia nesciunt, qui porro asperiores cum voluptates placeat similique recusandae in facere quos vitae?</p>
                     </div>
@@ -111,7 +111,6 @@ function renderList(){
                         </div>
                     </div>
                 </div>
-    
                 <div className="ratings-submit-form bg-white py-3">
                     <div className="container">
                         <h6>Submit A Review</h6>
@@ -136,6 +135,7 @@ function renderList(){
             </div>
             );
         }
+        return true;
     });
 };
       return (

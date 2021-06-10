@@ -27,7 +27,7 @@ class ListGrid extends Component {
 
     return rndStore.map((item, key) => {
     return (
-        <div className="col-12 col-md-6" dir="ltr">
+        <div className="col-12 col-md-6" dir="ltr" key= {key}>
             <div className="card weekly-product-card">
                 <div className="card-body d-flex align-items-center">
                     <div className="product-thumbnail-side">
@@ -44,7 +44,7 @@ class ListGrid extends Component {
                     </span>
                     <p className="sale-price" style={{color:'#000', marginRight:'10px', display:'block'}}>
                         {item.price}
-                        <span style={{marginRight:'5px;', fontSize:'10px',color:'#000',textDecoration:'none'}}>هزار تومان</span>
+                        <span style={{marginRight:'5px', fontSize:'10px',color:'#000',textDecoration:'none'}}>هزار تومان</span>
                         
                     </p>
                     <div style={{ marginBottom:'-10px'}}>

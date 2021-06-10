@@ -12,6 +12,6 @@ func deleteAdminMeta() {
 
 }
 
-func deleteAdmin() {
-
+func DeleteAdmin(userID string) error {
+	return nil
 }

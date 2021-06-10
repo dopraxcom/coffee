@@ -8,11 +8,11 @@ func getUser(userID string) {
 
 }
 
-func getAdmin(adminID string) {
-
+func GetAdminInfo(adminID string) (Admin, error) {
+	return Admin{}, nil
 }
 
-func login(username string, password string) {
+func login(params map[string]string) {
 
 }
 

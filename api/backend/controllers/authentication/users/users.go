@@ -10,18 +10,30 @@ import (
 func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
 	// TODO: if first user with super admin permission registered then this section will be enabled
 	params := mux.Vars(r)
-	//_,_,_,err := jwtToken.AuthenticationJwtToken(params["token"])
+	token, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	//_,_,_,err := jwtToken.AuthenticationJwtToken(token.Value)
 	//if err != nil {
 	//	w.Header().Set("Content-Type","application/json")
 	//	w.WriteHeader(http.StatusUnauthorized)
 	//	w.Write([]byte(err.Error()))
+	//return
 	//}
 
 	users, err := user.GetAllAdminUsers(params)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte(err.Error()))
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -29,24 +41,67 @@ func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(users)
 }
 
-func CreateAdminUser(w http.ResponseWriter, request *http.Request) {
-	// TODO: if first user with super admin permission registered then this section will be enabled
-	params := mux.Vars(request)
-	//_,_,_,err := jwtToken.AuthenticationJwtToken(params["token"])
+func GetAdminInfo(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+
+	token, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	//_,_,_,err := jwtToken.AuthenticationJwtToken(token.Value)
 	//if err != nil {
 	//	w.Header().Set("Content-Type","application/json")
 	//	w.WriteHeader(http.StatusUnauthorized)
 	//	w.Write([]byte(err.Error()))
 	//}
 
-	admin, err := user.RegisterAdmin(params)
+	admin, err := user.GetAdminInfo(params["id"])
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte(err.Error()))
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
+	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(admin)
+}
+
+func DeleteAdmin(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+
+	token, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	//_,_,_,err := jwtToken.AuthenticationJwtToken(token.Value)
+	//if err != nil {
+	//	w.Header().Set("Content-Type","application/json")
+	//	w.WriteHeader(http.StatusUnauthorized)
+	//	w.Write([]byte(err.Error()))
+	//}
+
+	err = user.DeleteAdmin(params["id"])
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }

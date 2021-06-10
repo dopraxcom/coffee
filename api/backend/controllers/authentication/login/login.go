@@ -17,4 +17,6 @@ func LoginAdmin(w http.ResponseWriter, r *http.Request) {
 	claims := mapToMapAdminToJwtToken(admin)
 	services.SetCookie(w, claims)
 
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusAccepted)
 }

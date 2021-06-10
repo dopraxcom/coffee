@@ -1,6 +1,6 @@
 package user
 
-func registerCustomer() {
+func RegisterCustomer() {
 
 }
 

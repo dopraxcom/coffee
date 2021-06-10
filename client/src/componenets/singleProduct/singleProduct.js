@@ -1,43 +1,32 @@
-import React , { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { fetchData } from '../../actions';
+import {  useLocation } from "react-router-dom";
 
-class SingleProduct extends Component {
+const SingleProduct = (props) =>{ 
 
-    componentDidMount() {
-        this.props.fetchData();
-      }
+let location = useLocation();
 
-      
- 
-      renderList(){
-          this.props.store.map((item , key) => {
-              return(
-                  item
-              );
-          })
-      }
-
-
-    render(){
-        this.renderList();
-        return (
-            <div className="page-content-wrapper" dir="ltr">
+function renderList(){
+    return props.store.map((item, key) => {
+        if(item.id === location.id){
+            return (
+                <div className="page-content-wrapper" dir="ltr" key={key}>
                 <div className="product-slides owl-carousel">
-                    <div className="single-product-slide" style={{backgroundImage: `url(/img/food/burger.png)`}}></div>
+                    <div className="single-product-slide" style={{backgroundImage: `url("/img/${item.img}"`, backgroundSize: 'auto', backgroundRepeat: 'no-repeat'}}></div>
                 </div>
                 <div className="product-description pb-3">
                     <div className="product-title-meta-data bg-white mb-3 py-3">
                         <div className="container d-flex justify-content-between">
                             <div className="p-title-price">
-                            <h6 className="mb-1">Flower Ceramic Pots</h6>
+                            <h6 className="mb-1">{item.title}</h6>
                             <p className="sale-price mb-0">$38<span>$41</span></p>
                             </div>
                             <div className="p-wishlist-share"><a href="wishlist-grid.html"><i className="lni lni-heart"></i></a></div>
                         </div>
                         <div className="product-ratings">
                             <div className="container d-flex align-items-center justify-content-between">
-                            <div className="ratings"><i className="lni lni-star-filled"></i><i className="lni lni-star-filled"></i><i className="lni lni-star-filled"></i><i className="lni lni-star-filled"></i><i className="lni lni-star-filled"></i><span className="ps-1">3 ratings</span></div>
+                            <div className="ratings"><i className="lni lni-star-filled"></i><i className="lni lni-star-filled"></i><i className="lni lni-star-filled"></i><i className="lni lni-star-filled"></i><i className="lni lni-star-filled"></i><span className="ps-1">{item.ratio} ratings</span></div>
                             <div className="total-result-of-ratings"><span>5.0</span><span>Very Good                                </span></div>
                             </div>
                         </div>
@@ -144,18 +133,22 @@ class SingleProduct extends Component {
                         </form>
                     </div>
                 </div>
-    
-    
-            </div> 
-        );
-    }
+            </div>
+            );
+        }
+    });
+};
+      return (
+        <>
+            {renderList()}
+        </>
+    );
   
 };
 
 
-const mapStateToProps = (state , ownProps) => {
+const mapStateToProps = (state) => {
     console.log(state);
-    console.log('ownProps: ',ownProps.id)
     return {
         store: state.fetchData
     };

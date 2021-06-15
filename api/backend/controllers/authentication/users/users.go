@@ -10,15 +10,15 @@ import (
 func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
 	// TODO: if first user with super admin permission registered then this section will be enabled
 	params := mux.Vars(r)
-	token, err := r.Cookie("token")
-	if err != nil {
-		if err == http.ErrNoCookie {
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
+	//token, err := r.Cookie("token")
+	//if err != nil {
+	//	if err == http.ErrNoCookie {
+	//		w.WriteHeader(http.StatusUnauthorized)
+	//		return
+	//	}
+	//	w.WriteHeader(http.StatusBadRequest)
+	//	return
+	//}
 
 	//_,_,_,err := jwtToken.AuthenticationJwtToken(token.Value)
 	//if err != nil {
@@ -44,15 +44,15 @@ func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
 func GetAdminInfo(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
-	token, err := r.Cookie("token")
-	if err != nil {
-		if err == http.ErrNoCookie {
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
+	//token, err := r.Cookie("token")
+	//if err != nil {
+	//	if err == http.ErrNoCookie {
+	//		w.WriteHeader(http.StatusUnauthorized)
+	//		return
+	//	}
+	//	w.WriteHeader(http.StatusBadRequest)
+	//	return
+	//}
 
 	//_,_,_,err := jwtToken.AuthenticationJwtToken(token.Value)
 	//if err != nil {
@@ -60,8 +60,7 @@ func GetAdminInfo(w http.ResponseWriter, r *http.Request) {
 	//	w.WriteHeader(http.StatusUnauthorized)
 	//	w.Write([]byte(err.Error()))
 	//}
-
-	admin, err := user.GetAdminInfo(params["id"])
+	admin, err := user.GetAdminInfo(adminModel)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -77,15 +76,15 @@ func GetAdminInfo(w http.ResponseWriter, r *http.Request) {
 func DeleteAdmin(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
-	token, err := r.Cookie("token")
-	if err != nil {
-		if err == http.ErrNoCookie {
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
+	//token, err := r.Cookie("token")
+	//if err != nil {
+	//	if err == http.ErrNoCookie {
+	//		w.WriteHeader(http.StatusUnauthorized)
+	//		return
+	//	}
+	//	w.WriteHeader(http.StatusBadRequest)
+	//	return
+	//}
 
 	//_,_,_,err := jwtToken.AuthenticationJwtToken(token.Value)
 	//if err != nil {
@@ -94,7 +93,7 @@ func DeleteAdmin(w http.ResponseWriter, r *http.Request) {
 	//	w.Write([]byte(err.Error()))
 	//}
 
-	err = user.DeleteAdmin(params["id"])
+	err := user.DeleteAdmin(params["id"])
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)

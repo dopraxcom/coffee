@@ -35,3 +35,15 @@ func UserAdminParamToModel(param map[string]string) user.Admin {
 		},
 	}
 }
+
+func UsersAdminParamToModel(param map[string]string) []*user.Admin {
+	admins := []*user.Admin{}
+	for _, item := range param {
+		admin := user.Admin{}
+		id, _ := strconv.Atoi(item)
+		admin.ID = int64(id)
+		admins = append(admins, &admin)
+	}
+
+	return admins
+}

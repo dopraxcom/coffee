@@ -3,32 +3,32 @@ package users
 import (
 	"encoding/json"
 	"github.com/gorilla/mux"
+	"github.com/khorasany/coffee/api/backend/helpers/jwtToken"
+	"github.com/khorasany/coffee/api/backend/helpers/mapToMap"
 	"github.com/khorasany/coffee/api/backend/models/authentication/user"
 	"net/http"
 )
 
 func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
-	// TODO: if first user with super admin permission registered then this section will be enabled
-	params := mux.Vars(r)
-	//token, err := r.Cookie("token")
-	//if err != nil {
-	//	if err == http.ErrNoCookie {
-	//		w.WriteHeader(http.StatusUnauthorized)
-	//		return
-	//	}
-	//	w.WriteHeader(http.StatusBadRequest)
-	//	return
-	//}
+	token, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 
-	//_,_,_,err := jwtToken.AuthenticationJwtToken(token.Value)
-	//if err != nil {
-	//	w.Header().Set("Content-Type","application/json")
-	//	w.WriteHeader(http.StatusUnauthorized)
-	//	w.Write([]byte(err.Error()))
-	//return
-	//}
+	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte(err.Error()))
+		return
+	}
 
-	users, err := user.GetAllAdminUsers(params)
+	admins, err := user.GetAllAdminUsers()
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -38,29 +38,30 @@ func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(users)
+	json.NewEncoder(w).Encode(admins)
 }
 
 func GetAdminInfo(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
+	token, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 
-	//token, err := r.Cookie("token")
-	//if err != nil {
-	//	if err == http.ErrNoCookie {
-	//		w.WriteHeader(http.StatusUnauthorized)
-	//		return
-	//	}
-	//	w.WriteHeader(http.StatusBadRequest)
-	//	return
-	//}
+	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte(err.Error()))
+	}
 
-	//_,_,_,err := jwtToken.AuthenticationJwtToken(token.Value)
-	//if err != nil {
-	//	w.Header().Set("Content-Type","application/json")
-	//	w.WriteHeader(http.StatusUnauthorized)
-	//	w.Write([]byte(err.Error()))
-	//}
-	admin, err := user.GetAdminInfo(adminModel)
+	adminMap := mapToMap.UserAdminParamToModel(params)
+	admin, err := user.GetAdminInfo(adminMap.ID)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -75,25 +76,25 @@ func GetAdminInfo(w http.ResponseWriter, r *http.Request) {
 
 func DeleteAdmin(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
+	token, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 
-	//token, err := r.Cookie("token")
-	//if err != nil {
-	//	if err == http.ErrNoCookie {
-	//		w.WriteHeader(http.StatusUnauthorized)
-	//		return
-	//	}
-	//	w.WriteHeader(http.StatusBadRequest)
-	//	return
-	//}
+	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte(err.Error()))
+	}
 
-	//_,_,_,err := jwtToken.AuthenticationJwtToken(token.Value)
-	//if err != nil {
-	//	w.Header().Set("Content-Type","application/json")
-	//	w.WriteHeader(http.StatusUnauthorized)
-	//	w.Write([]byte(err.Error()))
-	//}
-
-	err := user.DeleteAdmin(params["id"])
+	adminModel := mapToMap.UserAdminParamToModel(params)
+	err = user.DeleteAdmin(adminModel.ID)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)

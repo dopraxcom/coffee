@@ -16,8 +16,14 @@ type JwtToken struct {
 	Token string `json:"jwt_token"`
 }
 
-func InsertToken(jwtToken string) {
-	// TODO: Insert jwtToken into whatever databases
+func InsertToken(jwtToken string) error {
+	db := database.CreateCon()
+	_, err := db.Exec("insert into ico_jwt_token (token) value ('" + jwtToken + "');")
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func SetRole(role user.Admin) (int64, error) {

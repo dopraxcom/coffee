@@ -14,7 +14,13 @@ func SetCookie(w http.ResponseWriter, claims jwtToken.Claims) {
 		w.Write([]byte(err.Error()))
 	}
 
-	jwtTokenModel.InsertToken(token)
+	err = jwtTokenModel.InsertToken(token)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+	}
+
 	http.SetCookie(w, &http.Cookie{
 		Name:    "AuthenticationToken",
 		Value:   token,

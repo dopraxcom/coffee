@@ -42,7 +42,6 @@ class WishGrid extends Component {
                   className="mb-2"
                   src={`/img/${item.img}`}
                   alt={item.title}
-                  onClick={() => this.gotoSingleProduct(item.id)}
                 />
                 </Link>
               </span>
@@ -94,10 +93,6 @@ class WishGrid extends Component {
       item.status = 'addToCart';
       this.props.addToCart(item);
     }
-  }
-
-  gotoSingleProduct(id){
-    console.log(id);
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 
 import { fetchData, addToCart } from "../../actions";
 
@@ -32,11 +33,17 @@ class ListGrid extends Component {
                 <div className="card-body d-flex align-items-center">
                     <div className="product-thumbnail-side">
                         {/* <span className="badge badge-success">Sale</span> */}
+                        <Link to={{
+                          pathname: "/singleProduct",
+                          id: item.id,
+                          addToCart: true
+                        }}>
                         <img 
                             className="mb-2"
                             src={`/img/${item.img}`}
                             alt={item.title}
                         />
+                        </Link>
                     </div>
                     <div className="product-description" style={{textAlign: 'center'}}>
                     <span className="product-title d-block" style={{fontWeight:'300'}}>

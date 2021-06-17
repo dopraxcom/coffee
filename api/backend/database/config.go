@@ -4,8 +4,6 @@ import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/khorasany/coffee/api/backend/globals"
-	"github.com/khorasany/coffee/api/backend/models/authentication/user"
-	"strconv"
 )
 
 func CreateCon() *sql.DB {
@@ -19,33 +17,33 @@ func CreateCon() *sql.DB {
 	return db
 }
 
-func chooseDatabase() *sql.DB {
-	db := CreateCon()
-	_, err := db.Exec("CREATE DATABASE IF NOT EXISTS `" + globals.MYSQL_DATABASE_NAME + "`;")
-	if err != nil {
-		panic(err.Error())
-	}
+//func chooseDatabase() *sql.DB {
+//	db := CreateCon()
+//	_, err := db.Exec("CREATE DATABASE IF NOT EXISTS `" + globals.MYSQL_DATABASE_NAME + "`;")
+//	if err != nil {
+//		panic(err.Error())
+//	}
+//
+//	_, err = db.Exec("USE " + globals.MYSQL_DATABASE_NAME + ";")
+//	if err != nil {
+//		panic(err.Error())
+//	}
+//
+//	return db
+//}
 
-	_, err = db.Exec("USE " + globals.MYSQL_DATABASE_NAME + ";")
-	if err != nil {
-		panic(err.Error())
-	}
-
-	return db
-}
-
-func createTable(tableName string, statement string) {
-	db := chooseDatabase()
-
-	_, checkTable := db.Query("SELECT * FROM information_schema.tables WHERE table_schema = " + globals.MYSQL_DATABASE_NAME + " AND table_name = " + tableName + " LIMIT 1;")
-	if checkTable != nil {
-		table, err := db.Prepare(statement)
-		if err != nil {
-			panic(err.Error())
-		}
-		table.Exec()
-	}
-}
+//func createTable(tableName string, statement string) {
+//	db := chooseDatabase()
+//
+//	_, checkTable := db.Query("SELECT * FROM information_schema.tables WHERE table_schema = " + globals.MYSQL_DATABASE_NAME + " AND table_name = " + tableName + " LIMIT 1;")
+//	if checkTable != nil {
+//		table, err := db.Prepare(statement)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		table.Exec()
+//	}
+//}
 
 //func CreateTables() {
 //	createTable("ico_users",
@@ -64,42 +62,42 @@ func createTable(tableName string, statement string) {
 //		"meta_key varchar(255),meta_value longtext,PRIMARY KEY (id));")
 //}
 
-func CheckRecordExists(recordID string, tableName string) bool {
-	db := CreateCon()
-	recordExist := db.QueryRow("select * from " + tableName + " where id=" + recordID + ";")
-	if recordExist != nil {
-		return true
-	}
-
-	return false
-}
-
-func metaDataExists(metaType string, typeID int64, metaKey string) (int64, error) {
-	db := CreateCon()
-	var scanStatement *sql.Row
-	var tbName string
-
-	stringID := strconv.Itoa(int(typeID))
-	err := db.QueryRow("select * from " + tbName + " where meta_key=" + metaKey + " and " + metaType + "_id=" + stringID + ";")
-	if err != nil {
-		return 0, err.Err()
-	}
-
-	if metaType == "admin" {
-		var adminMeta user.AdminMeta
-		_ = scanStatement.Scan(&adminMeta.ID, &adminMeta.AdminID, &adminMeta.MetaKey, &adminMeta.MetaValue)
-		tbName = "ico_admin_meta"
-
-		return adminMeta.ID, nil
-	}
-
-	if metaType == "user" {
-		var userMeta user.UserMeta
-		_ = scanStatement.Scan(&userMeta.ID, &userMeta.UserID, &userMeta.MetaKey, &userMeta.MetaValue)
-		tbName = "ico_usermeta"
-
-		return userMeta.ID, nil
-	}
-
-	return 0, nil
-}
+//func CheckRecordExists(recordID string, tableName string) bool {
+//	db := CreateCon()
+//	recordExist := db.QueryRow("select * from " + tableName + " where id=" + recordID + ";")
+//	if recordExist != nil {
+//		return true
+//	}
+//
+//	return false
+//}
+//
+//func metaDataExists(metaType string, typeID int64, metaKey string) (int64, error) {
+//	db := CreateCon()
+//	var scanStatement *sql.Row
+//	var tbName string
+//
+//	stringID := strconv.Itoa(int(typeID))
+//	err := db.QueryRow("select * from " + tbName + " where meta_key=" + metaKey + " and " + metaType + "_id=" + stringID + ";")
+//	if err != nil {
+//		return 0, err.Err()
+//	}
+//
+//	if metaType == "admin" {
+//		var adminMeta user.AdminMeta
+//		_ = scanStatement.Scan(&adminMeta.ID, &adminMeta.AdminID, &adminMeta.MetaKey, &adminMeta.MetaValue)
+//		tbName = "ico_admin_meta"
+//
+//		return adminMeta.ID, nil
+//	}
+//
+//	if metaType == "user" {
+//		var userMeta user.UserMeta
+//		_ = scanStatement.Scan(&userMeta.ID, &userMeta.UserID, &userMeta.MetaKey, &userMeta.MetaValue)
+//		tbName = "ico_usermeta"
+//
+//		return userMeta.ID, nil
+//	}
+//
+//	return 0, nil
+//}

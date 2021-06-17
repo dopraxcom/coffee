@@ -1,17 +1,15 @@
-package register
+package permissions
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/users"
-	"github.com/khorasany/coffee/api/backend/models/authentication/user"
-	"io/ioutil"
+	"github.com/khorasany/coffee/api/backend/models/authentication/permissions"
 	"net/http"
 )
 
-func CreateAdminUser(w http.ResponseWriter, request *http.Request) {
-	result, err := ioutil.ReadAll(request.Body)
-	r := make(map[string]string)
-	_ = json.Unmarshal(result, &r)
+func SetRole(w http.ResponseWriter, r *http.Request) {
+	request := mux.Vars(r)
 	//token, err := request.Cookie("token")
 	//if err != nil {
 	//	if err == http.ErrNoCookie {
@@ -29,17 +27,16 @@ func CreateAdminUser(w http.ResponseWriter, request *http.Request) {
 	//	w.Write([]byte(err.Error()))
 	//}
 
-	adminModel := users.UserAdminParamToModel(r)
-	admin, err := user.RegisterAdmin(adminModel)
+	roleModel := users.RoleParamToModel(request)
+	err := permissions.RegisterRole(roleModel)
 	if err != nil {
-		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(admin)
-	return
+	w.Header().Set("Content-type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(roleModel)
 }

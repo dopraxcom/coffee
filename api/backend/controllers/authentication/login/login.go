@@ -2,7 +2,7 @@ package login
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/khorasany/coffee/api/backend/helpers/mapToMap"
+	"github.com/khorasany/coffee/api/backend/controllers/authentication/users"
 	"github.com/khorasany/coffee/api/backend/models/authentication/user"
 	"github.com/khorasany/coffee/api/backend/services"
 	"net/http"
@@ -11,8 +11,8 @@ import (
 func LoginAdmin(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
-	adminModel := mapToMap.UserAdminParamToModel(params)
-	authenticate, admin := user.LoginAdmin(adminModel)
+	adminModel := users.UserAdminParamToModel(params)
+	authenticate, admin := user.LoginAdmin(*adminModel)
 	if authenticate == false {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)

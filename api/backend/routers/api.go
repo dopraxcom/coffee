@@ -2,6 +2,7 @@ package routers
 
 import (
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/login"
+	"github.com/khorasany/coffee/api/backend/controllers/authentication/permissions"
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/register"
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/users"
 	"github.com/khorasany/coffee/api/backend/services"
@@ -17,6 +18,7 @@ func Router() {
 	r.HandleFunc("/admin/{id}", users.GetAdminInfo).Methods("GET")
 	r.HandleFunc("/admin/register", register.CreateAdminUser).Methods("POST")
 	r.HandleFunc("/admin/login", login.LoginAdmin).Methods("POST")
+	r.HandleFunc("/admin/role", permissions.SetRole).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":9006", r))
 }

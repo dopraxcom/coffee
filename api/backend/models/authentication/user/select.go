@@ -4,6 +4,7 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"github.com/khorasany/coffee/api/backend/database"
+	"github.com/khorasany/coffee/api/backend/models"
 	"strconv"
 )
 
@@ -16,16 +17,16 @@ func getUser(userID int64) {
 
 }
 
-func GetAdminInfo(adminID int64) (Admin, error) {
+func GetAdminInfo(adminID int64) (*models.Admin, error) {
 	db := database.CreateCon()
-	var admin Admin
+	var admin models.Admin
 	err := db.QueryRow("select * from ico_user_admin where id="+strconv.Itoa(int(adminID))+";").
 		Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Password, &admin.Email, &admin.RoleID, &admin.CreatedAt, &admin.Status)
 	if err != nil {
-		return Admin{}, err
+		return &models.Admin{}, err
 	}
 
-	return Admin{
+	return &models.Admin{
 		ID:        admin.ID,
 		FirstName: admin.FirstName,
 		LastName:  admin.LastName,
@@ -42,7 +43,7 @@ func login(params map[string]string) {
 
 }
 
-func LoginAdmin(admin Admin) (bool, Admin) {
+func LoginAdmin(admin models.Admin) (bool, models.Admin) {
 	stringToHash := []byte(admin.Password)
 	hashPassword := sha1.Sum(stringToHash)
 
@@ -51,14 +52,14 @@ func LoginAdmin(admin Admin) (bool, Admin) {
 		admin.UserName+"' and password='"+hex.EncodeToString(hashPassword[:])+"';").
 		Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Email, &admin.RoleID, &admin.CreatedAt, &admin.Status)
 	if err != nil {
-		return false, Admin{}
+		return false, models.Admin{}
 	}
 
 	if admin.Status == 0 {
-		return false, Admin{}
+		return false, models.Admin{}
 	}
 
-	return true, Admin{
+	return true, models.Admin{
 		ID:        admin.ID,
 		FirstName: admin.FirstName,
 		LastName:  admin.LastName,
@@ -70,15 +71,15 @@ func LoginAdmin(admin Admin) (bool, Admin) {
 	}
 }
 
-func GetAllAdminUsers() (Admins, error) {
+func GetAllAdminUsers() (models.Admins, error) {
 	db := database.CreateCon()
 	res, err := db.Query("select * from ico_user_admin;")
 	if err != nil {
 		return nil, err
 	}
 
-	adminModel := Admin{}
-	admins := Admins{}
+	adminModel := models.Admin{}
+	admins := models.Admins{}
 	for res.Next() {
 		_ = res.Scan(&adminModel.ID, &adminModel.FirstName, &adminModel.LastName, &adminModel.UserName, &adminModel.Password, &adminModel.Email, &adminModel.CreatedAt, &adminModel.Status)
 		admins = append(admins, adminModel)

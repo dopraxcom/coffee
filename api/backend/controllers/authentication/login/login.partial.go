@@ -2,10 +2,10 @@ package login
 
 import (
 	"github.com/khorasany/coffee/api/backend/helpers/jwtToken"
-	"github.com/khorasany/coffee/api/backend/models/authentication/user"
+	"github.com/khorasany/coffee/api/backend/models"
 )
 
-func mapToMapAdminToJwtToken(admin user.Admin) jwtToken.Claims {
+func mapToMapAdminToJwtToken(admin models.Admin) jwtToken.Claims {
 	return jwtToken.Claims{
 		ID:        admin.ID,
 		Username:  admin.UserName,

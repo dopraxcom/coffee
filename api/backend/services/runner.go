@@ -3,5 +3,5 @@ package services
 import "github.com/gorilla/mux"
 
 func RunnerICoffeeService() *mux.Router {
-	return mux.NewRouter()
+	return mux.NewRouter().StrictSlash(true)
 }

@@ -28,13 +28,47 @@ func SetRole(role models.Admin) (int64, error) {
 	return roleID, nil
 }
 
-func GetRole(roleName string) string {
+func GetRole(roleName string) (string, error) {
 	db := database.CreateCon()
 	var role models.Role
-	_ = db.QueryRow("select id from ico_roles where role_name='" + roleName + "';").Scan(&role.ID)
+	err := db.QueryRow("select id from ico_roles where role_name='" + roleName + "';").Scan(&role.ID)
+	if err != nil {
+		return "", err
+	}
 	roleID := strconv.Itoa(int(role.ID))
 
-	return roleID
+	return roleID, nil
+}
+
+func GetRoleInfo(roleName string) (*models.Role, error) {
+	db := database.CreateCon()
+	var role models.Role
+	err := db.QueryRow("select * from ico_roles where role_name='"+roleName+"';").Scan(&role.ID, &role.RoleName, &role.Status)
+	if err != nil {
+		return &models.Role{}, err
+	}
+
+	return &models.Role{
+		ID:       role.ID,
+		RoleName: role.RoleName,
+		Status:   role.Status,
+	}, nil
+}
+
+func GetRoles() ([]*models.Role, error) {
+	roles := []*models.Role{}
+	db := database.CreateCon()
+	result, err := db.Query("select * from ico_roles where role_name is not 'super-user';")
+	if err != nil {
+		return nil, err
+	}
+	for result.Next() {
+		role := models.Role{}
+		_ = result.Scan(&role.ID, &role.RoleName, &role.Status)
+		roles = append(roles, &role)
+	}
+
+	return roles, nil
 }
 
 func RegisterRole(role *models.Role) error {

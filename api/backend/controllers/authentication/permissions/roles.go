@@ -44,4 +44,74 @@ func SetRole(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(roleModel)
+	return
+}
+
+func GetRoles(w http.ResponseWriter, r *http.Request) {
+	//token, err := r.Cookie("token")
+	//if err != nil {
+	//	if err == http.ErrNoCookie {
+	//		w.WriteHeader(http.StatusUnauthorized)
+	//		return
+	//	}
+	//	w.WriteHeader(http.StatusBadRequest)
+	//	return
+	//}
+	//
+	//_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	//if err != nil {
+	//	w.Header().Set("Content-Type", "application/json")
+	//	w.WriteHeader(http.StatusUnauthorized)
+	//	w.Write([]byte(err.Error()))
+	//}
+
+	roles, err := permissions.GetRoles()
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(roles)
+
+	return
+}
+
+func GetRole(w http.ResponseWriter, r *http.Request) {
+	param := mux.Vars(r)
+	//token, err := r.Cookie("token")
+	//if err != nil {
+	//	if err == http.ErrNoCookie {
+	//		w.WriteHeader(http.StatusUnauthorized)
+	//		return
+	//	}
+	//	w.WriteHeader(http.StatusBadRequest)
+	//	return
+	//}
+	//
+	//_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	//if err != nil {
+	//	w.Header().Set("Content-Type", "application/json")
+	//	w.WriteHeader(http.StatusUnauthorized)
+	//	w.Write([]byte(err.Error()))
+	//}
+
+	roleModel, err := permissions.GetRole(param["role_name"])
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(roleModel)
+
+	return
 }

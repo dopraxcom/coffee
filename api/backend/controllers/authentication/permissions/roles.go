@@ -26,10 +26,15 @@ func SetRole(w http.ResponseWriter, r *http.Request) {
 	//	w.WriteHeader(http.StatusUnauthorized)
 	//	w.Write([]byte(err.Error()))
 	//}
+	if err := permissions.CheckValidRole(request["role_name"]); err != nil {
+		w.Header().Set("Content-type", "application/json")
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte(err.Error()))
+		return
+	}
 
 	roleModel := users.RoleParamToModel(request)
-	err := permissions.RegisterRole(roleModel)
-	if err != nil {
+	if err := permissions.RegisterRole(roleModel); err != nil {
 		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

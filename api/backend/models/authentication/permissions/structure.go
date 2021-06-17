@@ -47,3 +47,19 @@ func RegisterRole(role *models.Role) error {
 
 	return nil
 }
+
+func CheckValidRole(roleName string) error {
+	var role models.Role
+	var err error
+	if roleName == "super-user" {
+		return err
+	}
+
+	db := database.CreateCon()
+	err = db.QueryRow("select role_name from ico_roles where role_name='" + roleName + "';").Scan(&role.RoleName)
+	if role.RoleName == roleName {
+		return err
+	}
+
+	return nil
+}

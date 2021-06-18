@@ -7,3 +7,8 @@ const (
 	MYSQL_IP_ADDRESS        = "localhost"
 	MYSQL_PORT              = "3307"
 )
+
+const (
+	StatusOrderSuccess = "success"
+	StatusOrderNotPaid = "order-created"
+)

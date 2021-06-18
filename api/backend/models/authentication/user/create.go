@@ -24,7 +24,7 @@ func RegisterAdmin(admin *models.Admin) (*models.Admin, error) {
 	stringToHash := []byte(admin.Password)
 	hashPassword := sha1.Sum(stringToHash)
 	//roleID := strconv.Itoa(int(admin.RoleID))
-	roleID := permissions.GetRole(admin.Role.RoleName)
+	roleID, _ := permissions.GetRole(admin.Role.RoleName)
 	insert, err := db.Exec("insert into ico_user_admin (firstname,lastname,username,password,email,role_id,created_at,status) values ('" + admin.FirstName +
 		"','" + admin.LastName + "','" + admin.UserName + "','" + hex.EncodeToString(hashPassword[:]) + "','" + admin.Email + "'," + roleID + ",'" + time.Now().String() + "',0);")
 	if err != nil {

@@ -1,1 +1,5 @@
 package shop
+
+func GetShopByOwnerID() {
+
+}

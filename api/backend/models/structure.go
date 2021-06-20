@@ -72,6 +72,7 @@ type Shop struct {
 	ID       int64  `json:"id,omitempty"`
 	ShopName string `json:"shop_name,omitempty"`
 	OwnerID  int64  `json:"owner_id,omitempty"`
+	CatID    int64  `json:"cat_id,omitempty"`
 	Status   int64  `json:"status,omitempty"`
 	Meta     ShopMeta
 }

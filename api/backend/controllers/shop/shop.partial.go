@@ -27,3 +27,16 @@ func shopMapToMapParmaToModel(param map[string]string) models.Shop {
 		},
 	}
 }
+
+func productMapToMapParamToModel(param map[string]string) models.Product {
+	productID, _ := strconv.Atoi(param["product_id"])
+	shopID, _ := strconv.Atoi(param["shop_id"])
+	status, _ := strconv.Atoi(param["status"])
+	return models.Product{
+		ID:          int64(productID),
+		ProductName: param["product_name"],
+		ShopID:      int64(shopID),
+		Status:      int64(status),
+		Meta:        models.ProductMeta{},
+	}
+}

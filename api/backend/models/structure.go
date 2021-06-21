@@ -89,6 +89,7 @@ type ShopMeta struct {
 type Product struct {
 	ID          int64  `json:"id,omitempty"`
 	ProductName string `json:"product_name,omitempty"`
+	Slug        string `json:"slug,omitempty"`
 	ShopID      int64  `json:"shop_id,omitempty"`
 	Status      int64  `json:"status,omitempty"`
 	Meta        ProductMeta

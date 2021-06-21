@@ -73,16 +73,17 @@ type Shop struct {
 	ShopName string `json:"shop_name,omitempty"`
 	OwnerID  int64  `json:"owner_id,omitempty"`
 	CatID    int64  `json:"cat_id,omitempty"`
+	Slug     string `json:"slug,omitempty"`
 	Status   int64  `json:"status,omitempty"`
 	Meta     ShopMeta
 }
 
 type ShopMeta struct {
-	TelePhone         []string `json:"tele_phone,omitempty"`
-	Email             string   `json:"email,omitempty"`
-	Address           string   `json:"address,omitempty"`
-	Location          string   `json:"location,omitempty"`
-	NumberOfEmployers int64    `json:"number_of_employers,omitempty"`
+	TelePhone         string `json:"tele_phone,omitempty"`
+	Email             string `json:"email,omitempty"`
+	Address           string `json:"address,omitempty"`
+	Location          string `json:"location,omitempty"`
+	NumberOfEmployers int64  `json:"number_of_employers,omitempty"`
 }
 
 type Product struct {

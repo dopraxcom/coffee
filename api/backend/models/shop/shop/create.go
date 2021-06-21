@@ -7,17 +7,25 @@ import (
 	"strconv"
 )
 
-func registerShop(shop models.Shop, userID string) (models.Shop, error) {
+func RegisterShop(shop models.Shop) (*models.Shop, error) {
 	db := database.CreateCon()
 	ownerID := strconv.Itoa(int(shop.OwnerID))
 	catID := strconv.Itoa(int(shop.CatID))
 	status := strconv.Itoa(int(shop.Status))
-	slug := slug.Make(shop.ShopName)
+	shopSlug := slug.Make(shop.ShopName)
 	shopID, err := db.Exec("insert into ico_shop (owner_id, cat_id, shop_name, slug, status) values (" + ownerID + "," + catID + "," +
-		shop.ShopName + "," + slug + ", " + status + ");")
+		shop.ShopName + "," + shopSlug + ", " + status + ");")
 	if err != nil {
-		return models.Shop{}, err
+		return &models.Shop{}, err
 	}
 
-	return shop
+	shopIDString, _ := shopID.LastInsertId()
+	res := db.QueryRow("select * from ico_shop where id="+strconv.Itoa(int(shopIDString))+";").Scan(
+		&shop.ID, &shop.OwnerID, &shop.CatID, &shop.ShopName, &shop.Slug, &shop.Status)
+	if res != nil {
+
+		return &models.Shop{}, res
+	}
+
+	return &shop, nil
 }

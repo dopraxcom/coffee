@@ -24,7 +24,7 @@ func Router() {
 	r.HandleFunc("/roles", permissions.GetRoles).Methods("POST").PathPrefix("/super-admin")
 
 	r.HandleFunc("/shop/register", shop.RegisterShop).Methods("POST").PathPrefix("/super-admin")
-	r.HandleFunc("/shop", shop.GetShopByOwnerID).Methods("POST").PathPrefix("/super-admin")
+	r.HandleFunc("/shop/{owner_id}", shop.GetShopByOwnerID).Methods("POST").PathPrefix("/super-admin")
 	r.HandleFunc("/shop/{shop_id}", shop.GetShopByShopID).Methods("POST").PathPrefix("/super-admin")
 	r.HandleFunc("/shops", shop.GetShops).Methods("POST").PathPrefix("/super-admin")
 	r.HandleFunc("/shop/{shop_id}", shop.DeleteShop).Methods("DELETE").PathPrefix("/super-admin")

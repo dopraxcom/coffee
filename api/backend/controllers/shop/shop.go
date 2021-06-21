@@ -91,7 +91,7 @@ func GetShopByShopID(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetShopByOwnerID(w http.ResponseWriter, r *http.Request) {
-
+	param := mux.Vars(r)
 	token, err := r.Cookie("token")
 	if err != nil {
 		if err == http.ErrNoCookie {
@@ -104,7 +104,7 @@ func GetShopByOwnerID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, ownerID, _, err := jwtToken.AuthenticationJwtToken(token.Value)
+	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(err.Error()))
@@ -112,7 +112,7 @@ func GetShopByOwnerID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	shopInfo, err := shop.GetShopByOwnerID(ownerID)
+	shopInfo, err := shop.GetShopByOwnerID(param["owner_id"])
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)

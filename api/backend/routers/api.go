@@ -14,6 +14,7 @@ import (
 func Router() {
 	r := services.RunnerICoffeeService()
 
+	// Super user admin section
 	r.HandleFunc("/admins", users.GetAllAdminUsers).Methods("GET")
 	r.HandleFunc("/delete/{id}", users.DeleteAdmin).Methods("DELETE").PathPrefix("/super-admin")
 	r.HandleFunc("/{id}", users.GetAdminInfo).Methods("GET").PathPrefix("/super-admin")
@@ -30,6 +31,7 @@ func Router() {
 	r.HandleFunc("/shop/{shop_id}", shop.DeleteShop).Methods("DELETE").PathPrefix("/super-admin")
 	r.HandleFunc("/shop/update", shop.UpdateShop).Methods("PATCH").PathPrefix("/super-admin")
 
+	// Admin section
 	r.HandleFunc("/login", login.LoginAdmin).Methods("POST").PathPrefix("/admin")
 
 	log.Fatal(http.ListenAndServe(":9006", r))

@@ -32,7 +32,7 @@ func CreateJwtToken(claims Claims) (string, error) {
 func AuthenticationJwtToken(token string) (Token string, ID string, sessionID string, err error) {
 	claims := jwt.MapClaims{}
 	_, err = jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
-		return []byte("iCoffeeProject"), nil
+		return jwtKey, nil
 	})
 
 	for key, val := range claims {

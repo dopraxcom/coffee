@@ -13,6 +13,7 @@ func UpdateShop(shop models.Shop) (*models.Shop, error) {
 	db := database.CreateCon()
 	_, err := db.Exec("update ico_shop set owner_id='" + ownerID + "',cat_id='" + catID + "',shop_name='" + shop.ShopName + "',slug='" + shop.Slug + "',status='" + status + "';")
 	if err != nil {
+
 		return nil, err
 	}
 

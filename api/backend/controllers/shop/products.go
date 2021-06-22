@@ -90,7 +90,7 @@ func GetProductByProductID(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetProductsByOwnerID(w http.ResponseWriter, r *http.Request) {
-
+	param := mux.Vars(r)
 	token, err := r.Cookie("token")
 	if err != nil {
 		if err == http.ErrNoCookie {
@@ -110,8 +110,14 @@ func GetProductsByOwnerID(w http.ResponseWriter, r *http.Request) {
 
 		return
 	}
+
+
 }
 
-func GetOwnerProductsPaginated(w http.ResponseWriter, r *http.Request) {
+func UpdateProduct(w http.ResponseWriter,r *http.Request) {
+
+}
+
+func DeleteProduct(w http.ResponseWriter,r *http.Request) {
 
 }

@@ -3,6 +3,7 @@ package shop
 import (
 	"github.com/khorasany/coffee/api/backend/models"
 	"strconv"
+	"time"
 )
 
 func shopMapToMapParmaToModel(param map[string]string) models.Shop {
@@ -39,4 +40,26 @@ func productMapToMapParamToModel(param map[string]string) models.Product {
 		Status:      int64(status),
 		Meta:        models.ProductMeta{},
 	}
+}
+
+func orderMapToMapParamToModel(param map[string]string) models.Order {
+	orderID, _ := strconv.Atoi(param["order_id"])
+	customerID, _ := strconv.Atoi(param["customer_id"])
+	return models.Order{
+		ID:              int64(orderID),
+		CustomerID:      int64(customerID),
+		Products:        param["products"],
+		RefID:           param["ref_id"],
+		OrderToken:      param["order_token"],
+		Authority:       param["authority"],
+		TransportPrice:  param["transport_price"],
+		TotalPrice:      param["total_price"],
+		DiscountAmount:  param["discount_amount"],
+		DiscountCoupon:  param["discount_coupon"],
+		WalletReduction: param["wallet_reduction"],
+		CreatedAt:       time.Now(),
+		Description:     param["description"],
+		Status:          param["order_status"],
+	}
+
 }

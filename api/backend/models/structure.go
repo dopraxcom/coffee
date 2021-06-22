@@ -98,23 +98,32 @@ type Product struct {
 type ProductMeta struct{}
 
 type Order struct {
-	ID              int64             `json:"id,omitempty"`
-	CustomerID      int64             `json:"customer_id,omitempty"`
-	Products        map[string]string `json:"products,omitempty"`
-	RefID           string            `json:"ref_id,omitempty"`
-	OrderToken      string            `json:"order_token,omitempty"`
-	Authority       string            `json:"authority,omitempty"`
-	TransportPrice  string            `json:"transport_price,omitempty"`
-	TotalPrice      string            `json:"total_price,omitempty"`
-	DiscountAmount  string            `json:"discount_amount,omitempty"`
-	DiscountCoupon  string            `json:"discount_coupon,omitempty"`
-	WalletReduction string            `json:"wallet_reduction,omitempty"`
-	CreatedAt       time.Time         `json:"created_at,omitempty"`
-	DatePaid        time.Time         `json:"date_paid,omitempty"`
-	Description     string            `json:"description,omitempty"`
-	Status          string            `json:"status,omitempty"`
+	ID              int64     `json:"order_id"`
+	CustomerID      int64     `json:"customer_id"`
+	Products        string    `json:"products"`
+	RefID           string    `json:"ref_id"`
+	OrderToken      string    `json:"order_token"`
+	Authority       string    `json:"authority"`
+	TransportPrice  string    `json:"transport_price"`
+	TotalPrice      string    `json:"total_price"`
+	DiscountAmount  string    `json:"discount_amount,omitempty"`
+	DiscountCoupon  string    `json:"discount_coupon,omitempty"`
+	WalletReduction string    `json:"wallet_reduction,omitempty"`
+	CreatedAt       time.Time `json:"created_at"`
+	DatePaid        time.Time `json:"date_paid,omitempty"`
+	Description     string    `json:"description"`
+	Status          string    `json:"order_status"`
 }
 
 type ApiToken struct {
 	ApiKey string `json:"api_key,omitempty"`
+}
+
+type Card struct {
+	ProductID   string `json:"product_id"`
+	ProductName string `json:"product_name"`
+	Price       string `json:"price"`
+	Quantity    string `json:"qty"`
+	Discount    string `json:"discount"`
+	TotalPrice  string `json:"total_price"`
 }

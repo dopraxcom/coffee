@@ -16,7 +16,20 @@ func GetProductByProductID(productID string) (*models.Product, error) {
 	return &product, nil
 }
 
-func GetProductByOwnerID() ([]*models.Product,error) {
+func GetProductByOwnerID(ownerID string) ([]*models.Product, error) {
 	db := database.CreateCon()
-	productsResult,err := db.Query("select * from ico_product as ip join ico_shop as ish where ip.shop_id = ish.id and ish.id in (select * from ico_user_admin where id = ish.owner_id)")
+	productsResult, err := db.Query("select ip.id as id,ip.product_name as product_name,ip.slug as slug,ip.status as status from ico_product as ip join ico_taxonomy_products_shop " +
+		"itps on ip.id = itps.product_id,ico_shop as shop where shop.id = itps.shop_id and shop.owner_id =" + ownerID + ";")
+	if err != nil {
+		return nil, err
+	}
+
+	products := []*models.Product{}
+	for productsResult.Next() {
+		product := models.Product{}
+		productsResult.Scan(&product.ID, &product.ProductName, &product.Slug, &product.Status)
+		products = append(products, &product)
+	}
+
+	return products, nil
 }

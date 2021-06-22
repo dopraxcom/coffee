@@ -31,9 +31,11 @@ func Router() {
 	r.HandleFunc("/shop/{shop_id}", shop.DeleteShop).Methods("DELETE").PathPrefix("/super-admin")
 	r.HandleFunc("/shop/update", shop.UpdateShop).Methods("PATCH").PathPrefix("/super-admin")
 
-	r.HandleFunc("/product/register",shop.RegisterProduct).Methods("POST").PathPrefix("/super-admin")
-	r.HandleFunc("/product/{product_id}",shop.GetProductByProductID).Methods("GET").PathPrefix("/super-admin")
-	r.HandleFunc("/product/products/{owner_id}",shop.GetProductsByOwnerID).Methods("GET").PathPrefix("/super-admin")
+	r.HandleFunc("/product/register", shop.RegisterProduct).Methods("POST").PathPrefix("/super-admin")
+	r.HandleFunc("/product/{product_id}", shop.GetProductByProductID).Methods("GET").PathPrefix("/super-admin")
+	r.HandleFunc("/product/products/{owner_id}", shop.GetProductsByOwnerID).Methods("GET").PathPrefix("/super-admin")
+	r.HandleFunc("/product/update", shop.UpdateProduct).Methods("PATCH").PathPrefix("/super-admin")
+	r.HandleFunc("/product/delete/{product_id}", shop.DeleteProduct).Methods("DELETE").PathPrefix("/super-admin")
 
 	// Admin section
 	r.HandleFunc("/login", login.LoginAdmin).Methods("POST").PathPrefix("/admin")

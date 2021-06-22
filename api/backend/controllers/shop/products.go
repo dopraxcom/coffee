@@ -152,8 +152,56 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	productModel := productMapToMapParamToModel(request)
+	productInfo, err := products.UpdateProduct(productModel)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	_ = json.NewEncoder(w).Encode(productInfo)
+
+	return
 }
 
 func DeleteProduct(w http.ResponseWriter, r *http.Request) {
+	param := mux.Vars(r)
+	token, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
 
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+
+		return
+	}
+
+	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		_, _ = w.Write([]byte(err.Error()))
+
+		return
+	}
+
+	err = products.DeleteProduct(param["product_id"])
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	return
 }

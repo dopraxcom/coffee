@@ -128,3 +128,10 @@ type Card struct {
 	TotalPrice  string `json:"total_price"`
 }
 
+type FullCard struct {
+	CardID     string `json:"card_id"`
+	CustomerID string `json:"customer_id"`
+	Card       string `json:"card"`
+	CreatedAt  string `json:"created_at"`
+	Status     string `json:"status"`
+}

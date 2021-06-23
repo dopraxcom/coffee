@@ -2,10 +2,11 @@ package shop
 
 import (
 	"encoding/json"
-	"github.com/khorasany/coffee/api/backend/helpers/jwtToken"
-	"github.com/khorasany/coffee/api/backend/models/shop/orders"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/khorasany/coffee/api/backend/helpers/jwtToken"
+	"github.com/khorasany/coffee/api/backend/models/shop/orders"
 )
 
 func BuyRequest(w http.ResponseWriter, r *http.Request) {
@@ -76,10 +77,9 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateCart(w http.ResponseWriter, r *http.Request) {
-	result,_ := ioutil.ReadAll(r.Body)
+	result, _ := ioutil.ReadAll(r.Body)
 	request := make(map[string][]map[string]string)
-	_ = json.Unmarshal(result,&request)
-	
+	_ = json.Unmarshal(result, &request)
 
 	token, err := r.Cookie("token")
 	if err != nil {
@@ -107,6 +107,17 @@ func CreateCart(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cartModel := cartMapToMapParamToModel(request)
-	cardsInfo,err := orders.RegisterCard(cartModel)
+	cardsInfo, err := orders.RegisterCard(cartModel, request["customer"][0]["customer_id"])
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	_ = json.NewEncoder(w).Encode(cardsInfo)
 
 }

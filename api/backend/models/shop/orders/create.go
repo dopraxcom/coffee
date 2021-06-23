@@ -1,9 +1,12 @@
 package orders
 
 import (
+	"encoding/json"
+	"strconv"
+	"time"
+
 	"github.com/khorasany/coffee/api/backend/database"
 	"github.com/khorasany/coffee/api/backend/models"
-	"strconv"
 )
 
 func CreateOrder(order models.Order) (*models.Order, error) {
@@ -22,8 +25,23 @@ func CreateOrder(order models.Order) (*models.Order, error) {
 	return &order, nil
 }
 
-func RegisterCard(cards []*models.Card) ([]*models.Card,error) {
+func RegisterCard(cards []*models.Card, customer_id string) (*models.FullCard, error) {
 	db := database.CreateCon()
-	
+	fullCard, _ := json.Marshal(cards)
+	cardResult, err := db.Exec("insert into ico_card (customer_id, card, status) values (" + customer_id + ",'" + string(fullCard) + "',1);")
+	if err != nil {
+		return nil, err
+	}
 
+	cardID, _ := cardResult.LastInsertId()
+	cardIDString := strconv.Itoa(int(cardID))
+	createAt := strconv.Itoa(int(time.Now().Unix()))
+	status := strconv.Itoa(1)
+	return &models.FullCard{
+		CardID:     cardIDString,
+		CustomerID: customer_id,
+		Card:       string(fullCard),
+		CreatedAt:  createAt,
+		Status:     status,
+	}, nil
 }

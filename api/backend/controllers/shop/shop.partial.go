@@ -63,3 +63,19 @@ func orderMapToMapParamToModel(param map[string]string) models.Order {
 	}
 
 }
+
+func cartMapToMapParamToModel(param map[string][]map[string]string) []*models.Card {
+	cards := []*models.Card{}
+	for _,item := range param["card"] {
+		card := models.Card{}
+		card.ProductID = item["product_id"]
+		card.ProductName = item["product_name"]
+		card.Price = item["price"]
+		card.Quantity = item["qty"]
+		card.Discount = item["discount"]
+		card.TotalPrice = item["total_price"]
+		cards = append(cards,&card)
+	}
+
+	return cards
+}

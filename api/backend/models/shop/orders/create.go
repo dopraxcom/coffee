@@ -21,3 +21,9 @@ func CreateOrder(order models.Order) (*models.Order, error) {
 
 	return &order, nil
 }
+
+func RegisterCard(cards []*models.Card) ([]*models.Card,error) {
+	db := database.CreateCon()
+	
+
+}

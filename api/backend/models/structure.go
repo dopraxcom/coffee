@@ -127,3 +127,4 @@ type Card struct {
 	Discount    string `json:"discount"`
 	TotalPrice  string `json:"total_price"`
 }
+

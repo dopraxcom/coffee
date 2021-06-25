@@ -37,6 +37,7 @@ func RegisterCard(cards []*models.Card, customer_id string) (*models.FullCard, e
 	cardIDString := strconv.Itoa(int(cardID))
 	createAt := strconv.Itoa(int(time.Now().Unix()))
 	status := strconv.Itoa(1)
+
 	return &models.FullCard{
 		CardID:     cardIDString,
 		CustomerID: customer_id,

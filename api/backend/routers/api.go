@@ -37,8 +37,22 @@ func Router() {
 	r.HandleFunc("/product/update", shop.UpdateProduct).Methods("PATCH").PathPrefix("/super-admin")
 	r.HandleFunc("/product/delete/{product_id}", shop.DeleteProduct).Methods("DELETE").PathPrefix("/super-admin")
 
+	r.HandleFunc("/{shop_id}", shop.GetAllOrdersOfSpecificShop).Methods("POST").PathPrefix("/super-admin/order")
+	r.HandleFunc("{owner_id}", shop.GetAllOrdersOfOwnerShops).Methods("POST").PathPrefix("/super-admin/order")
+	r.HandleFunc("/orders/{shop_id}", shop.GetOrdersShop).Methods("POST").PathPrefix("/super-admin")
+
 	// Admin section
 	r.HandleFunc("/login", login.LoginAdmin).Methods("POST").PathPrefix("/admin")
+
+	r.HandleFunc("/update", shop.UpdateCard).Methods("PATCH").PathPrefix("/admin/card")
+	r.HandleFunc("/delete/{owner_id}", shop.DeleteCard).Methods("GET").PathPrefix("/admin/card")
+	r.HandleFunc("/create", shop.CreateCard).Methods("POST").PathPrefix("/admin/card")
+
+	r.HandleFunc("/update", shop.UpdateOrder).Methods("PATCH").PathPrefix("/admin/order")
+	r.HandleFunc("/delete/{order_id}", shop.DeleteOrder).Methods("DELETE").PathPrefix("/admin/order")
+	r.HandleFunc("/create", shop.CreateOrder).Methods("POST").PathPrefix("/admin/order")
+	r.HandleFunc("/{order_id}", shop.GetCustomersOrder).Methods("POST").PathPrefix("/admin/order")
+	r.HandleFunc("/{customer_id}", shop.GetCustomersOrders).Methods("POST").PathPrefix("/admin/order")
 
 	log.Fatal(http.ListenAndServe(":9006", r))
 }

@@ -37,6 +37,7 @@ function Home() {
                     <Paper className={classes.paper}>
                         <SimpleCard
                             title="سفارشات جاری"
+                            Qty = "12"
                         />
                     </Paper>
                 </Grid>
@@ -44,6 +45,7 @@ function Home() {
                     <Paper className={classes.paper}>
                         <SimpleCard
                             title="میزان فروش امروز"
+                            Qty = "22"
                         />
                     </Paper>
                 </Grid>

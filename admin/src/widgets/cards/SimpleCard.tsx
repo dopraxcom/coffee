@@ -6,7 +6,10 @@ import {
     CardContent,
     makeStyles,
     Typography,
+    Box,
 } from '@material-ui/core';
+
+import ScoreIcon from '@material-ui/icons/Score';
 
 
 const useStyles = makeStyles({
@@ -22,7 +25,10 @@ function SimpleCard (props: any) {
         <Card>
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom >
-                    {props.title}
+                <ScoreIcon /> {props.title}
+                </Typography>
+                <Typography color="primary">
+                    {props.Qty} عدد
                 </Typography>
             </CardContent>
         </Card>

@@ -1,6 +1,7 @@
 package orders
 
 import (
+	"encoding/json"
 	"github.com/khorasany/coffee/api/backend/database"
 	"github.com/khorasany/coffee/api/backend/models"
 	"strconv"
@@ -28,4 +29,22 @@ func UpdateOrder(order models.Order) (*models.Order, error) {
 	}
 
 	return &order, nil
+}
+
+func UpdateCard(cards []*models.Card, customerID string) (*models.FullCard, error) {
+	fullCard, _ := json.Marshal(cards)
+	db := database.CreateCon()
+	_, err := db.Exec("update ico_card set card='" + string(fullCard) + "',status=1 where customer_id=" + customerID + ";")
+	if err != nil {
+		return nil, err
+	}
+
+	fullCardModel := models.FullCard{}
+	err = db.QueryRow("select * from ico_card where customer_id="+customerID+";").
+		Scan(&fullCardModel.CardID, &fullCardModel.CustomerID, &fullCardModel.Card, &fullCardModel.CreatedAt, &fullCardModel.Status)
+	if err != nil {
+		return nil, err
+	}
+
+	return &fullCardModel, nil
 }

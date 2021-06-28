@@ -16,16 +16,24 @@ const useStyles = makeStyles({
     title: {
         fontSize: 14,
         fontFamily: 'Vazir',
+    },
+    primary: {
+        backgroundColor: '#a6d4fa',
+    },
+    icon: {
+        position: 'absolute',
+        marginInline: '10px',
+        color: '#a6d4fa',
     }
 }); 
 function SimpleCard (props: any) {
     const classes = useStyles();
 
     return(
-        <Card>
+        <Card >
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom >
-                <ScoreIcon /> {props.title}
+                {props.title} <ScoreIcon className={classes.icon} /> 
                 </Typography>
                 <Typography color="primary">
                     {props.Qty} عدد

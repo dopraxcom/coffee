@@ -6,10 +6,12 @@ import {
     CardContent,
     makeStyles,
     Typography,
-    Box,
+    LinearProgress,
+    Button,
 } from '@material-ui/core';
 
 import ScoreIcon from '@material-ui/icons/Score';
+import { FullscreenExitTwoTone } from '@material-ui/icons';
 
 
 const useStyles = makeStyles({
@@ -23,24 +25,64 @@ const useStyles = makeStyles({
     icon: {
         position: 'absolute',
         marginInline: '10px',
-        color: '#a6d4fa',
+        color: '#0000009c',
+    },
+    qty: {
+        textAlign: 'left',
+        direction: 'rtl',
+        fontFamily: 'Vazir',
+        color: '#242423',
+        fontSize:'13px',
+    },
+    btn: {
+        display: 'flex',
+        marginBottom: '-30px',
+        padding: '12px',
+        fontFamily: 'vazir',
+        fontSize: '12px',
     }
 }); 
 function SimpleCard (props: any) {
     const classes = useStyles();
+    if(props.total){
+        return(
+            <Card id={props.color} >
+                <CardContent className={classes.primary}>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom >
+                    {props.title} <ScoreIcon className={classes.icon} /> 
+                    </Typography>
+                    <Typography color="primary" className={classes.qty}>
+                        {props.Qty} عدد
+                    </Typography>
+                    <Typography color="primary" className={classes.qty}>
+                        {props.total} تومان
+                    </Typography>
+                    <LinearProgress variant="buffer" value={props.Qty} valueBuffer={props.total} />
+                    <Button className={classes.btn}>ادامه</Button>
+                </CardContent>
+            </Card>
+        );
+    } else {
+        return(
+            <Card id={props.color} >
+                <CardContent className={classes.primary}>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom >
+                    {props.title} <ScoreIcon className={classes.icon} /> 
+                    </Typography>
+                    <Typography color="primary" className={classes.qty}>
+                        {props.Qty} عدد
+                    </Typography>
+                    <Typography color="primary" className={classes.qty}>
+                        {props.totalQty} عدد
+                    </Typography>
+                    <LinearProgress variant="buffer" value={props.Qty} valueBuffer={props.totalQty} />
+                    <Button className={classes.btn}>ادامه</Button>
+                </CardContent>
+            </Card>
+        );
+    }
+    
 
-    return(
-        <Card >
-            <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom >
-                {props.title} <ScoreIcon className={classes.icon} /> 
-                </Typography>
-                <Typography color="primary">
-                    {props.Qty} عدد
-                </Typography>
-            </CardContent>
-        </Card>
-    );
 };
 
 export default SimpleCard;

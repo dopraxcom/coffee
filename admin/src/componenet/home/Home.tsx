@@ -9,7 +9,6 @@ import {
     makeStyles,
     createStyles,
     Theme,
-    createMuiTheme,
  } from '@material-ui/core';
 
 
@@ -18,7 +17,7 @@ import {
     root: {
       flexGrow: 1,
       height: '500px',
-      backgroundColor: '#f5f5f5'
+      backgroundColor: '#fff'
     },
     paper: {
       padding: theme.spacing(2),
@@ -27,7 +26,6 @@ import {
     },
     backgroundPrimary: {
     },
-
   }),
 );
 
@@ -39,24 +37,30 @@ function Home() {
                 <Grid item xs={4} >
                     <Paper className={classes.paper}>
                         <SimpleCard
+                            color="primary"
                             title="سفارشات جاری"
                             Qty = "12"
+                            totalQty="233"
                         />
                     </Paper>
                 </Grid>
                 <Grid item xs={4}>
                     <Paper className={classes.paper}>
                         <SimpleCard
+                            color="danger"
                             title="میزان فروش امروز"
                             Qty = "22"
+                            total="220000"
                         />
                     </Paper>
                 </Grid>
                 <Grid item xs={4}>
                     <Paper className={classes.paper}>
                         <SimpleCard
-                            title="میزان فروش امروز"
-                            Qty = "22"
+                            color="warning"
+                            title="میزان فروش هفته"
+                            Qty = "122"
+                            total="103000456"
                         />
                     </Paper>
                 </Grid>

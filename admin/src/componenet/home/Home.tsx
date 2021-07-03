@@ -34,7 +34,7 @@ function Home() {
     return(
         <div className={classes.root}>
             <Grid container spacing={2} justify="center"> 
-                <Grid item xs={4} >
+                <Grid item xs={12} lg={4} >
                     <Paper className={classes.paper}>
                         <SimpleCard
                             color="primary"
@@ -44,7 +44,7 @@ function Home() {
                         />
                     </Paper>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} lg={4}>
                     <Paper className={classes.paper}>
                         <SimpleCard
                             color="danger"
@@ -54,7 +54,7 @@ function Home() {
                         />
                     </Paper>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} lg={4}>
                     <Paper className={classes.paper}>
                         <SimpleCard
                             color="warning"

@@ -1,7 +1,9 @@
-import store from '../api/orders'
-import { FETCH_DATA } from '../store/actionTypes'
+import { ActionTypes } from '../actionTypes'
 
-export const fetchData = () => async (dispatch:any) => {
-    const response = await store.get('/orders');
-    dispatch({type:FETCH_DATA, payload:response.data})
+
+interface FetchDataAction {
+    type: ActionTypes.FETCH_DATA
+    payload: []
 }
+
+export type Action = FetchDataAction;

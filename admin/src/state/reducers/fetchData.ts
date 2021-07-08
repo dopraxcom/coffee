@@ -1,11 +1,10 @@
 import { Action } from '../action'
-import { ActionTypes } from '../actionTypes'
+import { ActionTypes } from '../action-types' 
 
 
-const EmptyArray:Array<any> = [];
+const initialState : Array<any> = [];
 
-
-const fetchData = (state:Array<any> = EmptyArray, action:Action) => {
+const fetchData = (state = initialState, action:Action) => {
     if(action.type === ActionTypes.FETCH_DATA){
         return action.payload;
     }

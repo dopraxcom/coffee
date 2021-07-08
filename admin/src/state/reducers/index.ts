@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
-import fetchData  from "./fetchData";
-
+import fetchData from "./fetchData";
 
 const reducers = combineReducers({
-    store: fetchData 
+    orders : fetchData
 })
-
 
 export default reducers;

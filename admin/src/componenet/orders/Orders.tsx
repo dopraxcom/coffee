@@ -7,13 +7,16 @@ import { useEffect } from 'react';
 function Orders () {
 
     const dispatch = useDispatch();
-    const { fetchData } = bindActionCreators(actionCreator, dispatch);
+    const { fetchData }  = bindActionCreators(actionCreator, dispatch);
     const state = useSelector((state: State) => state.orders);
 
 useEffect(() => {
-    // fetchData()
+    console.log(state)
 })
 
+window.onload = () => {
+    fetchData()
+}
     return(
         <div>
             <table>

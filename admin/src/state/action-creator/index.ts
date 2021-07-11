@@ -7,9 +7,9 @@ import { Action } from '../action'
 export const fetchData = () => {
     return async (dispatch: Dispatch<Action>) => {
         const result = await store.get('/orders');
-            dispatch({
+            return dispatch({
                 type: ActionTypes.FETCH_DATA,
                 payload: result.data
-            })
+            })   
     }
 }

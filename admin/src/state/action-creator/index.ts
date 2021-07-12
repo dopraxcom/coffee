@@ -6,10 +6,13 @@ import { Action } from '../action'
 
 export const fetchData = () => {
     return async (dispatch: Dispatch<Action>) => {
-        const result = await store.get('/orders');
+        try{
+            const result = await store.get('/orders');
             return dispatch({
                 type: ActionTypes.FETCH_DATA,
                 payload: result.data
-            })   
+            })  
+        } catch (error) {
+        }
     }
 }

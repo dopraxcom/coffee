@@ -3,12 +3,28 @@ import { useDispatch , useSelector} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreator, State } from '../../state';
 import { useEffect, useState } from 'react';
-import { DataGrid, GridRowModel } from '@material-ui/data-grid';
-import { keys } from '@material-ui/core/styles/createBreakpoints';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import {
+    List,
+    ListItem,
+    ListItemText,
+    Divider
+} from '@material-ui/core';
+
 
 interface ORDER {
     order: string
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: '100%',
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper,
+    },
+  }),
+);
 
 interface OrderItem {
     id: number,
@@ -40,6 +56,7 @@ function Orders () {
     const dispatch = useDispatch();
     const { fetchData }  = bindActionCreators(actionCreator, dispatch);
     const state = useSelector((state: State) => state.orders);
+    const classes = useStyles();
 
 useEffect(() => {
     // if [], run once when row LocalDrinkSharp, and dont run again
@@ -50,30 +67,44 @@ useEffect(() => {
 
     fetched.then ((value => {
         let response = value.payload;
-        return data(response)
+        setOrderID(response)
     }))
 },[])
 
+
 function data(response : Array<any>) {
     response.map((item, key) => {
-        setOrderID(item)
-        console.log(item.id , item.orderID)
+        return(
+            <>
+            {/* <ListItem button>
+                <ListItemText primary="{item.orderID}" />
+            </ListItem>
+            <Divider /> */}<>hi</>
+            </>
+        )
     })
 }
 
-console.log(state)
+function render() : any {
+    return state.map((item) => {
+        return(
+            <>
+                <ListItem button>
+                    <ListItemText primary={item.orderID} />
+                </ListItem>
+                <Divider />
+            </>
+        )
+        // console.log(item.orderID)
+    })
+}
+
+// console.log(state)
     return(
         <div dir="">
-            <div style={{ height: 250, width: '100%' }}>
-                <DataGrid
-                    columns={[{ field: 'name' }]}
-                    rows={
-                    [
-                               
-                    ] as GridRowModel[]
-                    }
-                />
-            </div>
+            <List component="nav" className={classes.root} aria-label="mailbox folders">
+                {render()}
+            </List>
         </div>
     );
 };

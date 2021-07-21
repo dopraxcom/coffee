@@ -10,9 +10,8 @@ import {
     ListItemText,
     Divider,
 } from '@material-ui/core';
-import { Link, Route, BrowserRouter, Switch } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-import SingleOrder from './SingleOrder';
 
 interface ORDER {
     order: string
@@ -27,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
 
 function Orders () {
     const [orderID, setOrderID] = useState<ORDER>()
@@ -52,15 +50,16 @@ useEffect(() => {
 function render() : any {
     return state.map((item) => {
         return(
-            <Link to="/singleOrder">
-                <ListItem button >
+            <>
+                <ListItem button component={Link}  to="/singleOrder" >
                     <ListItemText primary={item.orderID}/>
                 </ListItem>
                 <Divider />
-            </Link>
+            </>
         )
     })
 }
+
     return(
         <div dir="">
             <List component="nav" className={classes.root} aria-label="mailbox folders">

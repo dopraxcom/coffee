@@ -23,6 +23,7 @@ import {
 import Home   from './componenet/home/Home';
 import Store  from './componenet/store/Store';
 import Orders from './componenet/orders/Orders';
+import SingleOrder from './componenet/orders/SingleOrder';
 
 const useStyle = makeStyles((theme: Theme) => 
   createStyles({
@@ -103,6 +104,7 @@ function App() {
       <Switch>
         <Route path="/store"  component = {Store} />
         <Route path="/orders" component = {Orders} />
+        <Route path="/singleOrder" component = {SingleOrder}  />
         <Route path="/"       component = {Home}  />
       </Switch>
     </div>

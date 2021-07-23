@@ -8,4 +8,10 @@ interface deleteOderAction {
     type: ActionTypes.DELETE_ORDER
     payload: Array<object>
 }
-export type Action = fetchDataAction | deleteOderAction;
+
+interface orderDetails {
+    type: ActionTypes.ORDER_DETAILS
+    payload: Array<object>
+}
+
+export type Action = fetchDataAction | deleteOderAction | orderDetails;

@@ -16,3 +16,16 @@ export const fetchData = () => {
         }
     }
 }
+
+export const orderDetails = (data:Array<any> ,id:string) => {
+    var details: object  = {}
+    data.forEach(item => {
+        if(item.orderID === id){
+            details = item.order
+        }
+    })
+    return ({
+        type: ActionTypes.ORDER_DETAILS,
+        payload:details 
+    })
+}

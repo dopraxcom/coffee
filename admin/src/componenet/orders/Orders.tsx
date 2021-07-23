@@ -48,10 +48,10 @@ useEffect(() => {
 },[])
 
 function render() : any {
-    return state.map((item) => {
+    return state.map((item, key) => {
         return(
             <>
-                <ListItem button component={Link}  to="/singleOrder" >
+                <ListItem key={key} button component={Link}  to={`/orders/${item.orderID}`} >
                     <ListItemText primary={item.orderID}/>
                 </ListItem>
                 <Divider />

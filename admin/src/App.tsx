@@ -103,8 +103,8 @@ function App() {
     <div className={classes.main}>
       <Switch>
         <Route path="/store"  component = {Store} />
-        <Route path="/orders" component = {Orders} />
-        <Route path="/singleOrder" component = {SingleOrder}  />
+        <Route path="/orders" exact component = {Orders} />
+        <Route path="/orders/:id" component = {SingleOrder}  />
         <Route path="/"       component = {Home}  />
       </Switch>
     </div>

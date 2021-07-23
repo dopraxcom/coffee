@@ -145,7 +145,7 @@ class Cart extends Component {
             </div>
           </div>
         </div>
-        <Link to="/">
+        <Link to="/" style={{position: 'fixed', bottom:'0', zIndex:'2', marginBottom: '20px', marginRight: '-30px'}}style={{position: 'fixed', bottom:'0', zIndex:'2', marginBottom: '20px'}}>
           <i
             className="lni lni-home bg-warning p-2"
             style={{

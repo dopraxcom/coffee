@@ -1,0 +1,18 @@
+
+    @font-face {
+        font-family: 'Vazir';
+        src: local('Vazir'), url(assets/fonts/Vazir-Light.ttf) format('ttf');
+      }
+      
+      @font-face {
+        font-family: 'Yekan';
+        src: local('Yekan'), url(assets/fonts/Yekan.ttf) format('ttf');
+      }
+body,
+html {
+  font-family: 'Vazir';
+  color: #747794;
+  overflow-x: hidden;
+  /* background-color: #e1f0ff; */
+  background-color: #fff;
+ }

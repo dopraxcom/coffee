@@ -3,11 +3,16 @@ import { HashRouter, Link, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import "./style.css";
 
-import Home from "./home/home";
-import Menu from "./menu/menu";
-import Cart from "./cart/cart";
-import AboutUS from "./aboutUs/aboutUs";
-import Settings from "./settings/settings";
+
+//######### IMPORTING MODULES #########################
+import Home          from "./home/home";
+import Menu          from "./menu/menu";
+import Cart          from "./cart/cart";
+import AboutUS       from "./aboutUs/aboutUs";
+import Settings      from "./settings/settings";
+import SingleProduct from '../componenets/singleProduct/singleProduct';
+//#####################################################
+
 
 function App(props) {
 
@@ -29,6 +34,9 @@ function App(props) {
           </Route>
           <Route path="/settings">
             <Settings />
+          </Route>
+          <Route path="/singleProduct">
+            <SingleProduct />
           </Route>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 import { connect } from "react-redux";
 
@@ -15,7 +16,7 @@ class WishGrid extends Component {
 
   renderList() {
     let items = new Set([]);
-    for (let i = 11; i < this.props.store.length; i++) {
+    for (let i = 20; i < this.props.store.length; i++) {
       items.add(
         this.props.store[Math.floor(Math.random() * this.props.store.length)]
       );
@@ -32,15 +33,19 @@ class WishGrid extends Component {
             <div className="card-body">
               {/* <span className="badge badge-success">Sale</span> */}
               <span className="product-thumbnail d-block">
+                <Link to={{
+                  pathname: "/singleProduct",
+                  id: item.id,
+                  addToCart: true
+                }}>
                 <img
                   className="mb-2"
                   src={`/img/${item.img}`}
                   alt={item.title}
                 />
+                </Link>
               </span>
-              <span
-                className="product-title d-block" style={{fontWeight:'300'}}
-              >
+              <span className="product-title d-block" style={{fontWeight:'300'}}>
                 {item.title}
               </span>
               <div style={{textAlign:'center', marginBottom:'-10px'}}>
@@ -55,7 +60,7 @@ class WishGrid extends Component {
               </div>
               <p className="sale-price" style={{color:'#000', marginRight:'10px'}}>
                 {item.price}
-                <span style={{marginRight:'5px;', fontSize:'10px',color:'#000',textDecoration:'none', marginRight:'5px'}}>هزار تومان</span>
+                <span style={{marginRight:'5px', fontSize:'10px',color:'#000',textDecoration:'none'}}>هزار تومان</span>
                 
               </p>
 

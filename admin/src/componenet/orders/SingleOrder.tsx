@@ -5,27 +5,29 @@ import { actionCreator , State } from '../../state';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { bindActionCreators } from 'redux';
 
+
+type OrdersDetailss =  {
+    Qty: number,
+    cartPrice: number,
+    cat: string,
+    description: string,
+    id: number,
+    img: string 
+    name: string,
+    numer: number,
+    price: number,
+    ratio: number
+    status: string,
+    steamatetime:string,
+    title:string,
+    }
+
 function SingleOrder () {
 
-type OrdersDetailss = [
-    {   Qty: number,
-        cartPrice: number,
-        cat: string,
-        description: string,
-        id: number,
-        img: string 
-        name: string,
-        numer: number,
-        price: number,
-        ratio: number
-        status: string,
-        steamatetime:string,
-        title:string,
-    }
-]
+
 const dispatch = useDispatch();
 const { fetchData , orderDetails } = bindActionCreators(actionCreator, dispatch);
-const [orders , setOrders ] = useState<OrdersDetailss>();
+const [orders , setOrders ] = useState<any>();
 
 type Quiz = {
     id : string
@@ -38,17 +40,25 @@ const { id } = useParams<Quiz>();
         }) 
         fetched.then((value) => {
             const order = orderDetails(value.payload, id);
-            // setOrders(order.payload);
-            console.log(order.payload)
+            let set = order.payload;
+            setOrders(set);
         })
     },[])
 function renderOrder(){
-    console.log()
+    // console.log(orders)
+    if(orders) {
+        return orders.map((item:OrdersDetailss) => {
+            return(
+                <p>{item.description}</p>
+            )
+        })
+    }
 }
     return(
         <>
         <h1>{id}</h1>
         {renderOrder()}
+        <button>Done</button>
         </>
     )
 }

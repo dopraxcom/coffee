@@ -18,7 +18,7 @@ export const fetchData = () => {
 }
 
 export const orderDetails = (data:Array<any> ,id:string) => {
-    var details: object  = {}
+    var details: Array<number | string> = []
     data.forEach(item => {
         if(item.orderID === id){
             details = item.order

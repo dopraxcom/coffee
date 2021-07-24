@@ -5,7 +5,6 @@ import { actionCreator , State } from '../../state';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { bindActionCreators } from 'redux';
 
-
 type OrdersDetailss =  {
     Qty: number,
     cartPrice: number,

@@ -3,10 +3,11 @@ package user
 import (
 	"crypto/sha1"
 	"encoding/hex"
+	"strconv"
+	"time"
+
 	"github.com/khorasany/coffee/api/backend/database"
 	"github.com/khorasany/coffee/api/backend/models"
-	"github.com/khorasany/coffee/api/backend/models/authentication/permissions"
-	"time"
 )
 
 func RegisterCustomer() {
@@ -23,9 +24,9 @@ func RegisterAdmin(admin *models.Admin) (*models.Admin, error) {
 
 	stringToHash := []byte(admin.Password)
 	hashPassword := sha1.Sum(stringToHash)
-	//roleID := strconv.Itoa(int(admin.RoleID))
-	roleID, _ := permissions.GetRole(admin.Role.RoleName)
-	insert, err := db.Exec("insert into ico_user_admin (firstname,lastname,username,password,email,role_id,created_at,status) values ('" + admin.FirstName +
+	roleID := strconv.Itoa(int(admin.RoleID))
+	// roleID, _ := permissions.GetRole(admin.Role.RoleName)
+	insert, err := db.Exec("insert into `ico_user_admin` (firstname,lastname,username,password,email,role_id,created_at,status) values ('" + admin.FirstName +
 		"','" + admin.LastName + "','" + admin.UserName + "','" + hex.EncodeToString(hashPassword[:]) + "','" + admin.Email + "'," + roleID + ",'" + time.Now().String() + "',0);")
 	if err != nil {
 		return &models.Admin{}, err

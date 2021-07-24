@@ -3,6 +3,7 @@ package users
 import (
 	"github.com/khorasany/coffee/api/backend/models"
 	"strconv"
+	"time"
 )
 
 func UserAdminParamToModel(param map[string]string) *models.Admin {
@@ -18,7 +19,7 @@ func UserAdminParamToModel(param map[string]string) *models.Admin {
 		Password:  param["password"],
 		Email:     param["email"],
 		RoleID:    int64(roleID),
-		CreatedAt: param["created_at"],
+		CreatedAt: time.Now().String(),
 		Status:    int64(status),
 		Role: models.Role{
 			ID:       int64(roleID),

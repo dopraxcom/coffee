@@ -71,6 +71,54 @@ func LoginAdmin(admin models.Admin) (bool, models.Admin) {
 	}
 }
 
+func LoginSuperUserAdmin(admin models.Admin) (bool, models.Admin) {
+	stringToHash := []byte(admin.Password)
+	hashPassword := sha1.Sum(stringToHash)
+
+	db := database.CreateCon()
+	err := db.QueryRow("select * from `ico_user_admin` where username='"+admin.UserName+"' and password='"+hex.EncodeToString(hashPassword[:])+"';").
+		Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Password, &admin.Email, &admin.RoleID, &admin.CreatedAt, &admin.Status)
+	adminID := strconv.Itoa(int(admin.ID))
+	rows, _ := db.Query("select meta_key,meta_value from `ico_admin_meta` where admin_id=" + adminID + " and meta_key in ('birth_date','address','phone','mobile','avatar')")
+	if err != nil {
+		return false, models.Admin{}
+	}
+	metas := []*models.MetaInfo{}
+	for rows.Next() {
+		var meta models.MetaInfo
+		_ = rows.Scan(&meta.MetaKey, &meta.MetaValue)
+		metas = append(metas, &meta)
+	}
+
+	superAdmin := models.Admin{}
+	for _, value := range metas {
+		if value.MetaKey == "birth_date" {
+			superAdmin.Meta.BirthDate = value.MetaValue
+		}
+		if value.MetaKey == "address" {
+			superAdmin.Meta.Address = value.MetaValue
+		}
+		if value.MetaKey == "phone" {
+			superAdmin.Meta.Phone = value.MetaValue
+		}
+		if value.MetaKey == "mobile" {
+			superAdmin.Meta.Mobile = value.MetaValue
+		}
+		if value.MetaKey == "avatar" {
+			superAdmin.Meta.Avatar = value.MetaValue
+		}
+	}
+	superAdmin.ID = admin.ID
+	superAdmin.FirstName = admin.FirstName
+	superAdmin.LastName = admin.LastName
+	superAdmin.UserName = admin.UserName
+	superAdmin.Email = admin.Email
+	superAdmin.RoleID = admin.RoleID
+	superAdmin.CreatedAt = admin.CreatedAt
+
+	return true, superAdmin
+}
+
 func GetAllAdminUsers() (models.Admins, error) {
 	db := database.CreateCon()
 	res, err := db.Query("select * from ico_user_admin;")

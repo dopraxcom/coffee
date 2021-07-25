@@ -15,8 +15,15 @@ type Admin struct {
 	CreatedAt string   `json:"created_at,omitempty"`
 	Status    int64    `json:"status,omitempty"`
 	Token     ApiToken `json:"api_token,omitempty"`
-	Role      Role
-	Meta      Meta
+	Role      Role     `json:"role,omitempty"`
+	Meta      Meta     `json:"meta,omitempty"`
+}
+
+type MetaInfo struct {
+	ID        int64  `json:"id,omitempty"`
+	TypeID    int64  `json:"type_id,omitempty"`
+	MetaKey   string `json:"meta_key,omitempty"`
+	MetaValue string `json:"meta_value,omitempty"`
 }
 
 type AdminMeta struct {

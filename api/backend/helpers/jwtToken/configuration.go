@@ -24,8 +24,7 @@ var (
 func CreateJwtToken(claims Claims) (string, error) {
 	claims.ExpiresAt = ExpirationTime.Unix()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString(token)
-
+	tokenString, err := token.SignedString(jwtKey)
 	return tokenString, err
 }
 

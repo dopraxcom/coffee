@@ -27,11 +27,11 @@ func UserAdminParamToModel(param map[string]string) *models.Admin {
 			Status:   int64(roleStatus),
 		},
 		Meta: models.Meta{
-			BirthDate: param["birth_date"],
-			Address:   param["address"],
-			Phone:     param["phone"],
-			Mobile:    param["mobile"],
-			Avatar:    param["avatar"],
+			BirthDate: CheckValue(param["birth_date"]),
+			Address:   CheckValue(param["address"]),
+			Phone:     CheckValue(param["phone"]),
+			Mobile:    CheckValue(param["mobile"]),
+			Avatar:    CheckValue(param["avatar"]),
 		},
 	}
 }
@@ -56,4 +56,12 @@ func RoleParamToModel(param map[string]string) *models.Role {
 		RoleName: param["role_name"],
 		Status:   int64(status),
 	}
+}
+
+func CheckValue(input string) string {
+	if len(input) < 1 {
+		input = ""
+		return input
+	}
+	return input
 }

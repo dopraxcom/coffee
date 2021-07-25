@@ -17,9 +17,10 @@ func Router() {
 
 	// Super user admin section
 	r.HandleFunc("/super-admin/admins", users.GetAllAdminUsers).Methods("GET")
+	r.HandleFunc("/super-admin/login", login.LoginSuperUserAdmin).Methods("POST")
 	r.HandleFunc("/super-admin/delete/{id}", users.DeleteAdmin).Methods("DELETE")
 	r.HandleFunc("/super-admin/{id}", users.GetAdminInfo).Methods("GET")
-	r.HandleFunc("/super-admin/register", register.CreateAdminUser).Methods("POST")
+	r.HandleFunc("/super-admin/register", register.CreateSuperAdminUser).Methods("POST")
 
 	r.HandleFunc("/super-admin/role/register", permissions.SetRole).Methods("POST")
 	r.HandleFunc("/super-admin/role/{role_name}", permissions.GetRole).Methods("POST")
@@ -44,6 +45,7 @@ func Router() {
 
 	// Admin section
 	r.HandleFunc("/admin/login", login.LoginAdmin).Methods("POST")
+	r.HandleFunc("/admin/register", register.CreateAdminUser).Methods("POST")
 	r.HandleFunc("/admin/update", shop.UpdateCard).Methods("PATCH")
 	r.HandleFunc("/admin/delete/{owner_id}", shop.DeleteCard).Methods("GET")
 	r.HandleFunc("/admin/create", shop.CreateCard).Methods("POST")

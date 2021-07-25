@@ -4,6 +4,7 @@ interface fetchDataAction {
     type: ActionTypes.FETCH_DATA
     payload: Array<object>
 }
+
 interface deleteOderAction {
     type: ActionTypes.DELETE_ORDER
     payload: Array<object>

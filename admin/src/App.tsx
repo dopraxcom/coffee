@@ -20,6 +20,7 @@ import {
   SwipeableDrawer, 
   Box } from '@material-ui/core';
 
+import Login from './componenet/login/login';
 import Home   from './componenet/home/Home';
 import Store  from './componenet/store/Store';
 import Orders from './componenet/orders/Orders';
@@ -82,7 +83,7 @@ function App() {
               <Box textAlign="center" p={2}></Box>
               <Divider />
               <List className={classes.list}>
-                <ListItem button component={Link} to="/" onClick={() => setOpen(false)}>
+                <ListItem button component={Link} to="/home" onClick={() => setOpen(false)}>
                   <ListItemText primary={'خانه'} />
                 </ListItem>
                 <ListItem button component={Link} to="/store" onClick={() => setOpen(false)}>
@@ -102,10 +103,11 @@ function App() {
       </AppBar>
     <div className={classes.main}>
       <Switch>
-        <Route path="/store"  component = {Store} />
-        <Route path="/orders" exact component = {Orders} />
-        <Route path="/orders/:id" component = {SingleOrder}  />
-        <Route path="/"       component = {Home}  />
+        <Route path="/store"        component = {Store}       />
+        <Route path="/orders" exact component = {Orders}      />
+        <Route path="/orders/:id"   component = {SingleOrder} />
+        <Route path="/home"         component = {Home}        />
+        <Route path="/"             component = {Login}       />
       </Switch>
     </div>
   </Router>

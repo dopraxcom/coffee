@@ -51,22 +51,22 @@ func CreateSuperAdminUser(w http.ResponseWriter, r *http.Request) {
 	request := make(map[string]string)
 	_ = json.Unmarshal(result, &request)
 
-	token, err := r.Cookie("token")
-	if err != nil {
-		if err == http.ErrNoCookie {
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-
-	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
-	if err != nil {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
-	}
+	//token, err := r.Cookie("token")
+	//if err != nil {
+	//	if err == http.ErrNoCookie {
+	//		w.WriteHeader(http.StatusUnauthorized)
+	//		return
+	//	}
+	//	w.WriteHeader(http.StatusBadRequest)
+	//	return
+	//}
+	//
+	//_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	//if err != nil {
+	//	w.Header().Set("Content-Type", "application/json")
+	//	w.WriteHeader(http.StatusUnauthorized)
+	//	w.Write([]byte(err.Error()))
+	//}
 
 	superAdminModel := users.UserAdminParamToModel(request)
 	superAdmin, err := user.RegisterSuperUser(superAdminModel)

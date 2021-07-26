@@ -119,18 +119,18 @@ func LoginSuperUserAdmin(admin models.Admin) (bool, models.Admin) {
 	return true, superAdmin
 }
 
-func GetAllAdminUsers() (models.Admins, error) {
+func GetAllAdminUsers() ([]*models.Admin, error) {
 	db := database.CreateCon()
-	res, err := db.Query("select * from ico_user_admin;")
+	res, err := db.Query("select * from `ico_user_admin` where role_id != 2;")
 	if err != nil {
 		return nil, err
 	}
 
-	adminModel := models.Admin{}
-	admins := models.Admins{}
+	admins := []*models.Admin{}
 	for res.Next() {
-		_ = res.Scan(&adminModel.ID, &adminModel.FirstName, &adminModel.LastName, &adminModel.UserName, &adminModel.Password, &adminModel.Email, &adminModel.CreatedAt, &adminModel.Status)
-		admins = append(admins, adminModel)
+		var admin models.Admin
+		_ = res.Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Password, &admin.Email, &admin.CreatedAt, &admin.Status)
+		admins = append(admins, &admin)
 	}
 
 	return admins, nil

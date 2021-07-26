@@ -9,7 +9,7 @@ import (
 )
 
 func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -23,7 +23,7 @@ func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -31,13 +31,14 @@ func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(admins)
+	_ = json.NewEncoder(w).Encode(admins)
+	return
 }
 
 func GetAdminInfo(w http.ResponseWriter, r *http.Request) {

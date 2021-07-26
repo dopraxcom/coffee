@@ -30,6 +30,9 @@ func Router() {
 	r.HandleFunc("/super-admin/{owner_id}", shop.GetAllOrdersOfOwnerShops).Methods("POST")
 	r.HandleFunc("/super-admin/orders/{shop_id}", shop.GetOrdersShop).Methods("POST")
 
+	// category
+	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")
+
 	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")
 	r.HandleFunc("/super-admin/shop/{owner_id}", shop.GetShopByOwnerID).Methods("POST")
 	r.HandleFunc("/super-admin/shop/{shop_id}", shop.GetShopByShopID).Methods("POST")

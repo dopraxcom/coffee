@@ -6,12 +6,15 @@ import (
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/users"
 	"github.com/khorasany/coffee/api/backend/helpers/jwtToken"
 	"github.com/khorasany/coffee/api/backend/models/authentication/permissions"
+	"io/ioutil"
 	"net/http"
 )
 
 func SetRole(w http.ResponseWriter, r *http.Request) {
-	request := mux.Vars(r)
-	token, err := r.Cookie("token")
+	result, _ := ioutil.ReadAll(r.Body)
+	request := make(map[string]string)
+	_ = json.Unmarshal(result, &request)
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -25,32 +28,32 @@ func SetRole(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 	}
 
-	if err := permissions.CheckValidRole(request["role_name"]); err != nil {
-		w.Header().Set("Content-type", "application/json")
+	if err := permissions.CheckValidRole(request["role"]); err != nil {
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
 	roleModel := users.RoleParamToModel(request)
 	if err := permissions.RegisterRole(roleModel); err != nil {
-		w.Header().Set("Content-type", "application/json")
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
-	w.Header().Set("Content-type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(roleModel)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	_ = json.NewEncoder(w).Encode(roleModel)
 	return
 }
 
 func GetRoles(w http.ResponseWriter, r *http.Request) {
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -64,28 +67,27 @@ func GetRoles(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
+		return
 	}
 
 	roles, err := permissions.GetRoles()
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(roles)
-
+	_ = json.NewEncoder(w).Encode(roles)
 	return
 }
 
 func GetRole(w http.ResponseWriter, r *http.Request) {
 	param := mux.Vars(r)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -99,21 +101,20 @@ func GetRole(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
+		return
 	}
 
 	roleModel, err := permissions.GetRole(param["role_name"])
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(roleModel)
-
+	_ = json.NewEncoder(w).Encode(roleModel)
 	return
 }

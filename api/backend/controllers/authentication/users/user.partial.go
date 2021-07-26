@@ -49,10 +49,10 @@ func UsersAdminParamToModel(param map[string]string) []*models.Admin {
 
 func RoleParamToModel(param map[string]string) *models.Role {
 	roleID, _ := strconv.Atoi(param["id"])
-	status, _ := strconv.Atoi(param["role_status"])
+	status, _ := strconv.Atoi(param["status"])
 	return &models.Role{
 		ID:       int64(roleID),
-		RoleName: param["role_name"],
+		RoleName: param["role"],
 		Status:   int64(status),
 	}
 }

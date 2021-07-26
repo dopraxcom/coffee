@@ -58,7 +58,7 @@ func GetRoleInfo(roleName string) (*models.Role, error) {
 func GetRoles() ([]*models.Role, error) {
 	roles := []*models.Role{}
 	db := database.CreateCon()
-	result, err := db.Query("select * from ico_roles where role_name is not 'super-user';")
+	result, err := db.Query("select * from ico_roles where role_name not in ('super-admin');")
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func GetRoles() ([]*models.Role, error) {
 func RegisterRole(role *models.Role) error {
 	status := strconv.Itoa(int(role.Status))
 	db := database.CreateCon()
-	_, err := db.Exec("insert into ico_roles (role_name,status) values ('" + role.RoleName + "'" + status + ",);")
+	_, err := db.Exec("insert into ico_roles (role_name,status) values ('" + role.RoleName + "'," + status + ");")
 	if err != nil {
 		return err
 	}
@@ -85,13 +85,13 @@ func RegisterRole(role *models.Role) error {
 func CheckValidRole(roleName string) error {
 	var role models.Role
 	var err error
-	if roleName == "super-user" {
+	if roleName == "super-user" || roleName == "admin" {
 		return err
 	}
 
 	db := database.CreateCon()
 	err = db.QueryRow("select role_name from ico_roles where role_name='" + roleName + "';").Scan(&role.RoleName)
-	if role.RoleName == roleName {
+	if len(role.RoleName) > 1 && role.RoleName == roleName {
 		return err
 	}
 

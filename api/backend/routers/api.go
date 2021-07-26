@@ -22,9 +22,9 @@ func Router() {
 	r.HandleFunc("/super-admin/{id}", users.GetAdminInfo).Methods("GET")                 // checked
 	r.HandleFunc("/super-admin/register", register.CreateSuperAdminUser).Methods("POST") // checked
 
-	r.HandleFunc("/super-admin/role/register", permissions.SetRole).Methods("POST")
-	r.HandleFunc("/super-admin/role/{role_name}", permissions.GetRole).Methods("POST")
-	r.HandleFunc("/super-admin/roles", permissions.GetRoles).Methods("POST")
+	r.HandleFunc("/super-admin/role/register", permissions.SetRole).Methods("POST")   // checked
+	r.HandleFunc("/super-admin/role/{role_name}", permissions.GetRole).Methods("GET") // checked
+	r.HandleFunc("/super-admin/roles", permissions.GetRoles).Methods("POST")          // checked
 
 	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")
 	r.HandleFunc("/super-admin/shop/{owner_id}", shop.GetShopByOwnerID).Methods("POST")

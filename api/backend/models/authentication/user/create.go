@@ -45,7 +45,7 @@ func RegisterSuperUser(admin *models.Admin) (*models.Admin, error) {
 
 	err := db.QueryRow("select id from ico_user_admin where username='" + admin.UserName + "';").Scan(&admin.ID)
 	if admin.ID > 0 {
-		return &models.Admin{}, err
+		return nil, err
 	}
 
 	stringToHash := []byte(admin.Password)
@@ -55,7 +55,7 @@ func RegisterSuperUser(admin *models.Admin) (*models.Admin, error) {
 		"('" + admin.FirstName + "','" + admin.LastName + "','" + admin.UserName + "','" + hex.EncodeToString(hashPassword[:]) + "','" + admin.Email +
 		"'," + roleID + ",'" + admin.CreatedAt + "',1);")
 	if err != nil {
-		return &models.Admin{}, err
+		return nil, err
 	}
 	lastID, err := insert.LastInsertId()
 	adminID := strconv.Itoa(int(lastID))
@@ -66,7 +66,7 @@ func RegisterSuperUser(admin *models.Admin) (*models.Admin, error) {
 	_, _ = db.Exec("insert into `ico_admin_meta` (admin_id, meta_key, meta_value) values (" + adminID + ",'mobile','" + admin.Meta.Mobile + "');")
 	superAdmin, err := GetAdminInfo(lastID)
 	if err != nil {
-		return &models.Admin{}, err
+		return nil, err
 	}
 
 	return superAdmin, nil

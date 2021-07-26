@@ -6,26 +6,20 @@ import (
 	"net/http"
 )
 
-func SetCookie(w http.ResponseWriter, claims jwtToken.Claims) {
+func SetToken(claims jwtToken.Claims) (*http.Cookie, error) {
 	token, err := jwtToken.CreateJwtToken(claims)
 	if err != nil {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-		return
+		return nil, err
 	}
 
 	err = jwtTokenModel.InsertToken(token)
 	if err != nil {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-		return
+		return nil, err
 	}
 
-	http.SetCookie(w, &http.Cookie{
+	return &http.Cookie{
 		Name:    "AuthenticationToken",
 		Value:   token,
 		Expires: jwtToken.ExpirationTime,
-	})
+	}, nil
 }

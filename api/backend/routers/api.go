@@ -32,6 +32,9 @@ func Router() {
 
 	// category
 	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")
+	r.HandleFunc("/super-admin/category/{cat_id}", shop.GetCategoryByID).Methods("POST")
+	r.HandleFunc("/super-admin/category/{cat_name}", shop.GetCategoryByCatName).Methods("POST")
+	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("POST")
 
 	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")
 	r.HandleFunc("/super-admin/shop/{owner_id}", shop.GetShopByOwnerID).Methods("POST")

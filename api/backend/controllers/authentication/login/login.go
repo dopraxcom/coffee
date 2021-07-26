@@ -18,12 +18,21 @@ func LoginAdmin(w http.ResponseWriter, r *http.Request) {
 	if authenticate == false {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
+		return
 	}
 	claims := mapToMapAdminToJwtToken(admin)
-	services.SetCookie(w, claims)
+	cookie, err := services.SetToken(claims)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusAccepted)
+	http.SetCookie(w, cookie)
+	return
 }
 
 func LoginSuperUserAdmin(w http.ResponseWriter, r *http.Request) {
@@ -36,10 +45,19 @@ func LoginSuperUserAdmin(w http.ResponseWriter, r *http.Request) {
 	if authenticate == false {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
+		return
 	}
 	claims := mapToMapAdminToJwtToken(superAdmin)
-	services.SetCookie(w, claims)
+	cookie, err := services.SetToken(claims)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusAccepted)
+	http.SetCookie(w, cookie)
+	return
 }

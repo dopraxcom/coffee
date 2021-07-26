@@ -134,3 +134,12 @@ type FullCard struct {
 	CreatedAt  string `json:"created_at"`
 	Status     string `json:"status"`
 }
+
+type Category struct {
+	CatID   int64  `json:"id,omitempty"`
+	Type    string `json:"type,omitempty"`
+	CatName string `json:"cat_name,omitempty"`
+	Slug    string `json:"slug,omitempty"`
+	Parent  int64  `json:"parent,omitempty"`
+	Status  int64  `json:"status,omitempty"`
+}

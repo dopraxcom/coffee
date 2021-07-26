@@ -64,6 +64,20 @@ func orderMapToMapParamToModel(param map[string]string) models.Order {
 
 }
 
+func categoryMapToMapParamToModel(param map[string]string) models.Category {
+	catID, _ := strconv.Atoi(param["cat_id"])
+	parent, _ := strconv.Atoi(param["parent"])
+	status, _ := strconv.Atoi(param["status"])
+	return models.Category{
+		CatID:   int64(catID),
+		Type:    param["type"],
+		CatName: param["cat_name"],
+		Slug:    param["slug"],
+		Parent:  int64(parent),
+		Status:  int64(status),
+	}
+}
+
 func cardMapToMapParamToModel(param map[string][]map[string]string) []*models.Card {
 	cards := []*models.Card{}
 	for _, item := range param["card"] {

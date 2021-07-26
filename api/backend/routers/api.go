@@ -26,6 +26,10 @@ func Router() {
 	r.HandleFunc("/super-admin/role/{role_name}", permissions.GetRole).Methods("GET") // checked
 	r.HandleFunc("/super-admin/roles", permissions.GetRoles).Methods("POST")          // checked
 
+	r.HandleFunc("/super-admin/{shop_id}", shop.GetAllOrdersOfSpecificShop).Methods("POST")
+	r.HandleFunc("/super-admin/{owner_id}", shop.GetAllOrdersOfOwnerShops).Methods("POST")
+	r.HandleFunc("/super-admin/orders/{shop_id}", shop.GetOrdersShop).Methods("POST")
+
 	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")
 	r.HandleFunc("/super-admin/shop/{owner_id}", shop.GetShopByOwnerID).Methods("POST")
 	r.HandleFunc("/super-admin/shop/{shop_id}", shop.GetShopByShopID).Methods("POST")
@@ -38,10 +42,6 @@ func Router() {
 	r.HandleFunc("/super-admin/product/products/{owner_id}", shop.GetProductsByOwnerID).Methods("GET")
 	r.HandleFunc("/super-admin/product/update", shop.UpdateProduct).Methods("PATCH")
 	r.HandleFunc("/super-admin/product/delete/{product_id}", shop.DeleteProduct).Methods("DELETE")
-
-	r.HandleFunc("/super-admin/{shop_id}", shop.GetAllOrdersOfSpecificShop).Methods("POST")
-	r.HandleFunc("/super-admin/{owner_id}", shop.GetAllOrdersOfOwnerShops).Methods("POST")
-	r.HandleFunc("/super-admin/orders/{shop_id}", shop.GetOrdersShop).Methods("POST")
 
 	// Admin section
 	r.HandleFunc("/admin/login", login.LoginAdmin).Methods("POST")

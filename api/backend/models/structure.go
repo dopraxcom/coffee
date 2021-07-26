@@ -5,18 +5,16 @@ import (
 )
 
 type Admin struct {
-	ID        int64    `json:"id,omitempty"`
-	FirstName string   `json:"first_name,omitempty"`
-	LastName  string   `json:"last_name,omitempty"`
-	UserName  string   `json:"user_name,omitempty"`
-	Password  string   `json:"password,omitempty"`
-	Email     string   `json:"email,omitempty"`
-	RoleID    int64    `json:"role_id,omitempty"`
-	CreatedAt string   `json:"created_at,omitempty"`
-	Status    int64    `json:"status,omitempty"`
-	Token     ApiToken `json:"api_token,omitempty"`
-	Role      Role     `json:"role,omitempty"`
-	Meta      Meta     `json:"meta,omitempty"`
+	ID        int64  `json:"id,omitempty"`
+	FirstName string `json:"first_name,omitempty"`
+	LastName  string `json:"last_name,omitempty"`
+	UserName  string `json:"user_name,omitempty"`
+	Password  string `json:"password,omitempty"`
+	Email     string `json:"email,omitempty"`
+	CreatedAt string `json:"created_at,omitempty"`
+	Status    int64  `json:"status,omitempty"`
+	Role      Role   `json:"role,omitempty"`
+	Meta      Meta   `json:"meta,omitempty"`
 }
 
 type MetaInfo struct {
@@ -58,12 +56,6 @@ type Customer struct {
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	Status    int64     `json:"status,omitempty"`
 }
-
-type Admins []Admin
-
-type Metas []Meta
-
-type Customers []Customer
 
 type Role struct {
 	ID       int64  `json:"id,omitempty"`

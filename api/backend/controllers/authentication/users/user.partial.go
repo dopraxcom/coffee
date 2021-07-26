@@ -18,7 +18,6 @@ func UserAdminParamToModel(param map[string]string) *models.Admin {
 		UserName:  param["username"],
 		Password:  param["password"],
 		Email:     param["email"],
-		RoleID:    int64(roleID),
 		CreatedAt: time.Now().String(),
 		Status:    int64(status),
 		Role: models.Role{

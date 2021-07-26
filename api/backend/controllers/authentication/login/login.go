@@ -32,7 +32,7 @@ func LoginSuperUserAdmin(w http.ResponseWriter, r *http.Request) {
 	_ = json.Unmarshal(result, &request)
 
 	superAdminModel := users.UserAdminParamToModel(request)
-	authenticate, superAdmin := user.LoginSuperUserAdmin(*superAdminModel)
+	authenticate, superAdmin := user.LoginSuperUserAdmin(superAdminModel)
 	if authenticate == false {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)

@@ -16,11 +16,11 @@ func Router() {
 	r := services.RunnerICoffeeService()
 
 	// Super user admin section
-	r.HandleFunc("/super-admin/admins", users.GetAllAdminUsers).Methods("GET")
-	r.HandleFunc("/super-admin/login", login.LoginSuperUserAdmin).Methods("POST")
-	r.HandleFunc("/super-admin/delete/{id}", users.DeleteAdmin).Methods("DELETE")
-	r.HandleFunc("/super-admin/{id}", users.GetAdminInfo).Methods("GET")
-	r.HandleFunc("/super-admin/register", register.CreateSuperAdminUser).Methods("POST")
+	r.HandleFunc("/super-admin/admins", users.GetAllAdminUsers).Methods("GET")           // checked
+	r.HandleFunc("/super-admin/login", login.LoginSuperUserAdmin).Methods("POST")        // checked
+	r.HandleFunc("/super-admin/delete/{id}", users.DeleteAdmin).Methods("DELETE")        // checked
+	r.HandleFunc("/super-admin/{id}", users.GetAdminInfo).Methods("GET")                 // checked
+	r.HandleFunc("/super-admin/register", register.CreateSuperAdminUser).Methods("POST") // checked
 
 	r.HandleFunc("/super-admin/role/register", permissions.SetRole).Methods("POST")
 	r.HandleFunc("/super-admin/role/{role_name}", permissions.GetRole).Methods("POST")

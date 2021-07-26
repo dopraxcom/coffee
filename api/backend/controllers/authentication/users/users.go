@@ -43,7 +43,7 @@ func GetAllAdminUsers(w http.ResponseWriter, r *http.Request) {
 
 func GetAdminInfo(w http.ResponseWriter, r *http.Request) {
 	request := mux.Vars(r)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -57,7 +57,7 @@ func GetAdminInfo(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 	}
 
 	adminMap := UserAdminParamToModel(request)
@@ -65,18 +65,18 @@ func GetAdminInfo(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(admin)
+	_ = json.NewEncoder(w).Encode(admin)
 }
 
 func DeleteAdmin(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -90,18 +90,20 @@ func DeleteAdmin(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
+		return
 	}
 
 	adminModel := UserAdminParamToModel(params)
 	if err := user.DeleteAdmin(adminModel.ID); err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte("user requested has been deleted"))
+	_, _ = w.Write([]byte("user requested has been deleted"))
 	w.WriteHeader(http.StatusOK)
+	return
 }

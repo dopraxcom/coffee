@@ -129,7 +129,7 @@ func GetAllAdminUsers() ([]*models.Admin, error) {
 	admins := []*models.Admin{}
 	for res.Next() {
 		var admin models.Admin
-		_ = res.Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Password, &admin.Email, &admin.CreatedAt, &admin.Status)
+		_ = res.Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Password, &admin.Email, &admin.RoleID, &admin.CreatedAt, &admin.Status)
 		admins = append(admins, &admin)
 	}
 

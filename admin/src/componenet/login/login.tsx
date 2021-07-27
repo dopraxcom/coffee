@@ -85,15 +85,19 @@ const Login = () => {
     const classes = useStyle()
 
     const login = async (username: string | number, password?:string | number) => {
-        const response = await axios.post('http://localhost:9006/', {
-          username : username,
-          password: password
+      const json = JSON.stringify({username: username, password: password})
+      const headers = {
+        crossDomain: true
+      }
+        const response = await axios.post('http://localhost:9006/super-admin/login',
+        json, {
+          headers: headers
         })
         .then ( response => {
           console.log(response)
         })
         .catch(err => {
-          console.log(err)
+          console.log('Error: ',err)
         })
       }
 

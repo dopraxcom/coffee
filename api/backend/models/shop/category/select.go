@@ -18,8 +18,10 @@ func GetCategoryByID(catID int64) (*models.Category, error) {
 	return &category, nil
 }
 
-func GetCategoryByCatName(cat models.Category) (*models.Category, error) {
+func GetCategoryByCatName(catName string) (*models.Category, error) {
 	db := database.CreateCon()
+	var cat models.Category
+	cat.CatName = catName
 	err := db.QueryRow(fmt.Sprintf("select * from ico_category where category_name='%v'", cat.CatName)).Scan(&cat.CatID, &cat.Type, &cat.CatName, &cat.Slug, &cat.Parent, &cat.Status)
 	if err != nil {
 		return nil, err

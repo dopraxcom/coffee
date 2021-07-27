@@ -31,16 +31,16 @@ func Router() {
 	r.HandleFunc("/super-admin/orders/{shop_id}", shop.GetOrdersShop).Methods("POST")
 
 	// category
-	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")
-	r.HandleFunc("/super-admin/category/id/{cat_id}", shop.GetCategoryByID).Methods("POST")
-	r.HandleFunc("/super-admin/category/name/{cat_name}", shop.GetCategoryByCatName).Methods("POST")
-	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("POST")
+	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")            // checked
+	r.HandleFunc("/super-admin/category/id/{cat_id}", shop.GetCategoryByID).Methods("POST")          // checked
+	r.HandleFunc("/super-admin/category/name/{cat_name}", shop.GetCategoryByCatName).Methods("POST") //checked
+	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("POST")       // checked
 
 	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")
-	r.HandleFunc("/super-admin/shop/{owner_id}", shop.GetShopByOwnerID).Methods("POST")
+	r.HandleFunc("/super-admin/shop/owner/{owner_id}", shop.GetShopByOwnerID).Methods("POST")
 	r.HandleFunc("/super-admin/shop/{shop_id}", shop.GetShopByShopID).Methods("POST")
-	r.HandleFunc("/super-admin/shops", shop.GetShops).Methods("POST")
-	r.HandleFunc("/super-admin/shop/{shop_id}", shop.DeleteShop).Methods("DELETE")
+	r.HandleFunc("/super-admin/shops", shop.GetShops).Methods("GET")
+	r.HandleFunc("/super-admin/shop/delete/{shop_id}", shop.DeleteShop).Methods("DELETE")
 	r.HandleFunc("/super-admin/shop/update", shop.UpdateShop).Methods("PATCH")
 
 	r.HandleFunc("/super-admin/product/register", shop.RegisterProduct).Methods("POST")
@@ -52,7 +52,7 @@ func Router() {
 	// Admin section
 	r.HandleFunc("/admin/login", login.LoginAdmin).Methods("POST")
 	r.HandleFunc("/admin/register", register.CreateAdminUser).Methods("POST")
-	r.HandleFunc("/admin/update", shop.UpdateCard).Methods("PATCH")
+	r.HandleFunc("/admin/card/update", shop.UpdateCard).Methods("PATCH") // need to check
 	r.HandleFunc("/admin/delete/{owner_id}", shop.DeleteCard).Methods("GET")
 	r.HandleFunc("/admin/create", shop.CreateCard).Methods("POST")
 

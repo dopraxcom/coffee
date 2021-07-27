@@ -1,6 +1,7 @@
 package products
 
 import (
+	"fmt"
 	"github.com/gosimple/slug"
 	"github.com/khorasany/coffee/api/backend/database"
 	"github.com/khorasany/coffee/api/backend/models"
@@ -12,7 +13,7 @@ func RegisterProduct(product models.Product) (*models.Product, error) {
 	shopID := strconv.Itoa(int(product.ShopID))
 	product.Slug = slug.Make(product.ProductName)
 	db := database.CreateCon()
-	productID, err := db.Exec("insert into ico_product (product_name,slug,shop_id,status) values ('" + product.ProductName + "','" + product.Slug + "'," + shopID + "," + status + ");")
+	productID, err := db.Exec(fmt.Sprintf("insert into ico_product (product_name,slug,shop_id,status) values ('%v','%v',%v,%v);", product.ProductName, product.Slug, shopID, status))
 	if err != nil {
 		return nil, err
 	}

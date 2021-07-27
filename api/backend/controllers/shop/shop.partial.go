@@ -13,12 +13,13 @@ func shopMapToMapParmaToModel(param map[string]string) models.Shop {
 	shopStatus, _ := strconv.Atoi(param["shop_status"])
 	numberOfEmployers, _ := strconv.Atoi(param["shop_number_of_employers"])
 	return models.Shop{
-		ID:       int64(shopID),
-		ShopName: param["shop_name"],
-		OwnerID:  int64(ownerID),
-		CatID:    int64(catID),
-		Slug:     param["shop_slug"],
-		Status:   int64(shopStatus),
+		ID:           int64(shopID),
+		ShopName:     param["shop_name"],
+		OwnerID:      int64(ownerID),
+		CatID:        int64(catID),
+		Slug:         param["shop_slug"],
+		Status:       int64(shopStatus),
+		CategoryName: param["cat_name"],
 		Meta: models.ShopMeta{
 			TelePhone:         param["shop_phone"],
 			Email:             param["shop_email"],

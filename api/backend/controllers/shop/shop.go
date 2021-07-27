@@ -44,7 +44,7 @@ func RegisterShop(w http.ResponseWriter, r *http.Request) {
 
 func GetShopByShopID(w http.ResponseWriter, r *http.Request) {
 	param := mux.Vars(r)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -56,7 +56,7 @@ func GetShopByShopID(w http.ResponseWriter, r *http.Request) {
 	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -64,18 +64,18 @@ func GetShopByShopID(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(shopInfo)
+	_ = json.NewEncoder(w).Encode(shopInfo)
 	return
 }
 
 func GetShopByOwnerID(w http.ResponseWriter, r *http.Request) {
 	param := mux.Vars(r)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -87,28 +87,24 @@ func GetShopByOwnerID(w http.ResponseWriter, r *http.Request) {
 	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	shopInfo, err := shop.GetShopByOwnerID(param["owner_id"])
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(shopInfo)
+	_ = json.NewEncoder(w).Encode(shopInfo)
 	return
 }
 
 func GetShops(w http.ResponseWriter, r *http.Request) {
-	result, _ := ioutil.ReadAll(r.Body)
-	request := make(map[string]string)
-	_ = json.Unmarshal(result, &request)
-
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -120,25 +116,25 @@ func GetShops(w http.ResponseWriter, r *http.Request) {
 	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	shopsInfo, err := shop.GetShops()
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(shopsInfo)
+	_ = json.NewEncoder(w).Encode(shopsInfo)
 	return
 }
 
 func DeleteShop(w http.ResponseWriter, r *http.Request) {
 	param := mux.Vars(r)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -150,14 +146,14 @@ func DeleteShop(w http.ResponseWriter, r *http.Request) {
 	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	err = shop.DeleteShop(param["shop_id"])
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
@@ -169,7 +165,7 @@ func UpdateShop(w http.ResponseWriter, r *http.Request) {
 	result, _ := ioutil.ReadAll(r.Body)
 	request := make(map[string]string)
 	_ = json.Unmarshal(result, &request)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -181,7 +177,7 @@ func UpdateShop(w http.ResponseWriter, r *http.Request) {
 	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -190,13 +186,13 @@ func UpdateShop(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(shopInfo)
+	_ = json.NewEncoder(w).Encode(shopInfo)
 	return
 }
 
@@ -281,8 +277,7 @@ func GetCategoryByCatName(w http.ResponseWriter, r *http.Request) {
 		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
-	catModel := categoryMapToMapParamToModel(param)
-	catInfo, err := category.GetCategoryByCatName(catModel)
+	catInfo, err := category.GetCategoryByCatName(param["cat_name"])
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
 		_, _ = w.Write([]byte(err.Error()))

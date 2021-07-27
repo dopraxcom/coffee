@@ -1,6 +1,7 @@
 package shop
 
 import (
+	"fmt"
 	"github.com/khorasany/coffee/api/backend/database"
 	"github.com/khorasany/coffee/api/backend/models"
 )
@@ -25,12 +26,10 @@ func GetShopByOwnerID(ownerID string) ([]*models.Shop, error) {
 func GetShopByShopID(shopID string) (*models.Shop, error) {
 	var shop models.Shop
 	db := database.CreateCon()
-	err := db.QueryRow("select * from ico_shop where id="+shopID+";").Scan(&shop.ID, &shop.OwnerID, &shop.CatID, &shop.ShopName, &shop.Slug, &shop.Status)
-
+	err := db.QueryRow(fmt.Sprintf("select * from ico_shop where id=%v;", shopID)).Scan(&shop.ID, &shop.OwnerID, &shop.CatID, &shop.ShopName, &shop.Slug, &shop.Status)
 	if err != nil {
 		return &shop, nil
 	}
-
 	return &shop, nil
 }
 
@@ -47,6 +46,5 @@ func GetShops() ([]*models.Shop, error) {
 		_ = shopsResult.Scan(&shop.ID, &shop.OwnerID, &shop.CatID, &shop.ShopName, &shop.Slug, &shop.Status)
 		shops = append(shops, &shop)
 	}
-
 	return shops, nil
 }

@@ -68,13 +68,14 @@ type JwtToken struct {
 }
 
 type Shop struct {
-	ID       int64  `json:"id,omitempty"`
-	ShopName string `json:"shop_name,omitempty"`
-	OwnerID  int64  `json:"owner_id,omitempty"`
-	CatID    int64  `json:"cat_id,omitempty"`
-	Slug     string `json:"slug,omitempty"`
-	Status   int64  `json:"status,omitempty"`
-	Meta     ShopMeta
+	ID           int64  `json:"id,omitempty"`
+	ShopName     string `json:"shop_name,omitempty"`
+	OwnerID      int64  `json:"owner_id,omitempty"`
+	CatID        int64  `json:"cat_id,omitempty"`
+	Slug         string `json:"slug,omitempty"`
+	Status       int64  `json:"status,omitempty"`
+	CategoryName string `json:"cat_name,omitempty"`
+	Meta         ShopMeta
 }
 
 type ShopMeta struct {

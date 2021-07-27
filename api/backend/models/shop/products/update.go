@@ -1,6 +1,7 @@
 package products
 
 import (
+	"fmt"
 	"github.com/gosimple/slug"
 	"github.com/khorasany/coffee/api/backend/database"
 	"github.com/khorasany/coffee/api/backend/models"
@@ -10,8 +11,9 @@ import (
 func UpdateProduct(product models.Product) (*models.Product, error) {
 	status := strconv.Itoa(int(product.Status))
 	product.Slug = slug.Make(product.ProductName)
+	productID := strconv.Itoa(int(product.ID))
 	db := database.CreateCon()
-	_, err := db.Exec("update ico_product set product_name='" + product.ProductName + "',slug='" + product.Slug + "',status=" + status + ";")
+	_, err := db.Exec(fmt.Sprintf("update ico_product set product_name='%v',slug='%v',status=%v where id=%v;", product.ProductName, product.Slug, status, productID))
 	if err != nil {
 		return nil, err
 	}

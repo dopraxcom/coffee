@@ -14,23 +14,19 @@ func RegisterProduct(w http.ResponseWriter, r *http.Request) {
 	request := make(map[string]string)
 	_ = json.Unmarshal(result, &request)
 
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
-
 			return
 		}
 		w.WriteHeader(http.StatusBadRequest)
-
 		return
 	}
-
 	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
@@ -40,36 +36,30 @@ func RegisterProduct(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	_ = json.NewEncoder(w).Encode(productInfo)
-
 	return
 }
 
 func GetProductByProductID(w http.ResponseWriter, r *http.Request) {
 	param := mux.Vars(r)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
-
 			return
 		}
 		w.WriteHeader(http.StatusBadRequest)
-
 		return
 	}
-
 	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
@@ -78,7 +68,6 @@ func GetProductByProductID(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
@@ -91,15 +80,13 @@ func GetProductByProductID(w http.ResponseWriter, r *http.Request) {
 
 func GetProductsByOwnerID(w http.ResponseWriter, r *http.Request) {
 	param := mux.Vars(r)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
-
 			return
 		}
 		w.WriteHeader(http.StatusBadRequest)
-
 		return
 	}
 
@@ -107,7 +94,6 @@ func GetProductsByOwnerID(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
@@ -116,14 +102,12 @@ func GetProductsByOwnerID(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	_ = json.NewEncoder(w).Encode(productsInfo)
-
 	return
 }
 
@@ -132,15 +116,13 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	request := make(map[string]string)
 	_ = json.Unmarshal(result, &request)
 
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
-
 			return
 		}
 		w.WriteHeader(http.StatusBadRequest)
-
 		return
 	}
 
@@ -148,7 +130,6 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
@@ -158,7 +139,6 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
@@ -171,15 +151,13 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 
 func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	param := mux.Vars(r)
-	token, err := r.Cookie("token")
+	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
-
 			return
 		}
 		w.WriteHeader(http.StatusBadRequest)
-
 		return
 	}
 
@@ -187,7 +165,6 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
@@ -196,12 +173,10 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte(err.Error()))
-
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-
 	return
 }

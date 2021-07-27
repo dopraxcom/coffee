@@ -258,5 +258,66 @@ func GetCategoryByID(w http.ResponseWriter, r *http.Request) {
 		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
+	w.WriteHeader(http.StatusOK)
+	_ = json.NewEncoder(w).Encode(catInfo)
+	return
+}
 
+func GetCategoryByCatName(w http.ResponseWriter, r *http.Request) {
+	param := mux.Vars(r)
+	w.Header().Set("Content-Type", "application/json")
+	token, err := r.Cookie("AuthenticationToken")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+	catModel := categoryMapToMapParamToModel(param)
+	catInfo, err := category.GetCategoryByCatName(catModel)
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	_ = json.NewEncoder(w).Encode(catInfo)
+	return
+}
+
+func DeleteCategory(w http.ResponseWriter, r *http.Request) {
+	param := mux.Vars(r)
+	w.Header().Set("Content-Type", "application/json")
+	token, err := r.Cookie("AuthenticationToken")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+	err = category.DeleteCategory(param["cat_id"])
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte("record has been deleted"))
+	return
 }

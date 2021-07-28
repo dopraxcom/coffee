@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"github.com/gorilla/handlers"
 	"log"
 	"net/http"
 
@@ -62,5 +63,5 @@ func Router() {
 	r.HandleFunc("/admin/{order_id}", shop.GetCustomersOrder).Methods("POST")
 	r.HandleFunc("/admin/{customer_id}", shop.GetCustomersOrders).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":9006", r))
+	log.Fatal(http.ListenAndServe(":9006", handlers.CORS()(r)))
 }

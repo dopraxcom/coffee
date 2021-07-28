@@ -86,12 +86,15 @@ const Login = () => {
 
     const login = async (username: string | number, password?:string | number) => {
       const json = JSON.stringify({username: username, password: password})
-      const headers = {
-        crossDomain: true
-      }
+      const headers = {"Access-Control-Allow-Origin": "*"}
+      const httpProxy = require('http-proxy');
+      const proxy = httpProxy.createProxyServer({});
         const response = await axios.post('http://localhost:9006/super-admin/login',
         json, {
-          headers: headers
+          proxy: {
+            host: 'localhost',
+            port: 3000
+          }
         })
         .then ( response => {
           console.log(response)

@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import fetchData from "./fetchData";
+import { reducer as formReducer } from 'redux-form';
 
 const reducers = combineReducers({
-    orders : fetchData
+    orders : fetchData,
+    form   : formReducer   
 })
 
 export default reducers;

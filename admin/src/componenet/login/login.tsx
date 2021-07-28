@@ -91,10 +91,7 @@ const Login = () => {
       const proxy = httpProxy.createProxyServer({});
         const response = await axios.post('http://localhost:9006/super-admin/login',
         json, {
-          proxy: {
-            host: 'localhost',
-            port: 3000
-          }
+          headers: headers
         })
         .then ( response => {
           console.log(response)

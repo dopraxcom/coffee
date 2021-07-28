@@ -15,9 +15,9 @@ import (
 func Router() {
 	r := services.RunnerICoffeeService()
 
-	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With"})
+	headersOk := handlers.AllowedHeaders([]string{"*"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
-	methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"})
+	methodsOk := handlers.AllowedMethods([]string{http.MethodGet, http.MethodHead, http.MethodPost, http.MethodPut, http.MethodOptions, http.MethodDelete, http.MethodPatch})
 
 	// Super user admin section
 	r.HandleFunc("/super-admin/admins", users.GetAllAdminUsers).Methods("GET")           // checked

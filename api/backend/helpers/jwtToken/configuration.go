@@ -16,13 +16,10 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-var (
-	jwtKey         = []byte("iCoffeeProject")
-	ExpirationTime = time.Now().Add(1 * time.Hour)
-)
+var jwtKey = []byte("iCoffeeProject")
 
-func CreateJwtToken(claims Claims) (string, error) {
-	claims.ExpiresAt = ExpirationTime.Unix()
+func CreateJwtToken(claims *Claims) (string, error) {
+	claims.ExpiresAt = time.Now().Add(1 * time.Hour).Unix()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtKey)
 	return tokenString, err

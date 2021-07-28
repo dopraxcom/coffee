@@ -21,7 +21,7 @@ func LoginAdmin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	claims := mapToMapAdminToJwtToken(admin)
-	cookie, err := services.SetToken(claims)
+	cookie, err := services.SetToken(&claims)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
@@ -48,7 +48,7 @@ func LoginSuperUserAdmin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	claims := mapToMapAdminToJwtToken(superAdmin)
-	cookie, err := services.SetToken(claims)
+	cookie, err := services.SetToken(&claims)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
@@ -56,8 +56,8 @@ func LoginSuperUserAdmin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	http.SetCookie(w, cookie)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusAccepted)
-	http.SetCookie(w, cookie)
 	return
 }

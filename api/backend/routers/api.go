@@ -2,19 +2,22 @@ package routers
 
 import (
 	"github.com/gorilla/handlers"
-	"log"
-	"net/http"
-
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/login"
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/permissions"
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/register"
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/users"
 	"github.com/khorasany/coffee/api/backend/controllers/shop"
 	"github.com/khorasany/coffee/api/backend/services"
+	"log"
+	"net/http"
 )
 
 func Router() {
 	r := services.RunnerICoffeeService()
+
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With"})
+	originsOk := handlers.AllowedOrigins([]string{"*"})
+	methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"})
 
 	// Super user admin section
 	r.HandleFunc("/super-admin/admins", users.GetAllAdminUsers).Methods("GET")           // checked
@@ -63,5 +66,5 @@ func Router() {
 	r.HandleFunc("/admin/{order_id}", shop.GetCustomersOrder).Methods("POST")
 	r.HandleFunc("/admin/{customer_id}", shop.GetCustomersOrders).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":9006", handlers.CORS()(r)))
+	log.Fatal(http.ListenAndServe(":9006", handlers.CORS(originsOk, headersOk, methodsOk)(r)))
 }

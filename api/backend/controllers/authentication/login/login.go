@@ -40,8 +40,6 @@ func LoginSuperUserAdmin(w http.ResponseWriter, r *http.Request) {
 	request := make(map[string]string)
 	_ = json.Unmarshal(result, &request)
 
-	//w.Header().Set("Access-Control-Allow-Origin", "*")
-	//w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	superAdminModel := users.UserAdminParamToModel(request)
 	authenticate, superAdmin := user.LoginSuperUserAdmin(superAdminModel)
 	if authenticate == false {
@@ -58,8 +56,8 @@ func LoginSuperUserAdmin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	http.SetCookie(w, cookie)
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusAccepted)
 	return
 }

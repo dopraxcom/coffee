@@ -22,24 +22,24 @@ func Router() {
 	r.HandleFunc("/super-admin/{id}", users.GetAdminInfo).Methods("GET")                 // checked
 	r.HandleFunc("/super-admin/register", register.CreateSuperAdminUser).Methods("POST") // checked
 
-	r.HandleFunc("/super-admin/role/register", permissions.SetRole).Methods("POST")   // checked
-	r.HandleFunc("/super-admin/role/{role_name}", permissions.GetRole).Methods("GET") // checked
-	r.HandleFunc("/super-admin/roles", permissions.GetRoles).Methods("POST")          // checked
+	r.HandleFunc("/super-admin/role/register", permissions.SetRole).Methods("POST") // checked
+	r.HandleFunc("/super-admin/role", permissions.GetRole).Methods("POST")          // checked
+	r.HandleFunc("/super-admin/roles", permissions.GetRoles).Methods("POST")        // checked
 
 	r.HandleFunc("/super-admin/{shop_id}", shop.GetAllOrdersOfSpecificShop).Methods("POST")
 	r.HandleFunc("/super-admin/{owner_id}", shop.GetAllOrdersOfOwnerShops).Methods("POST")
 	r.HandleFunc("/super-admin/orders/{shop_id}", shop.GetOrdersShop).Methods("POST")
 
 	// category
-	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")            // checked
-	r.HandleFunc("/super-admin/category/id/{cat_id}", shop.GetCategoryByID).Methods("POST")          // checked
-	r.HandleFunc("/super-admin/category/name/{cat_name}", shop.GetCategoryByCatName).Methods("POST") //checked
-	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("POST")       // checked
+	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")     // checked
+	r.HandleFunc("/super-admin/category/id/{cat_id}", shop.GetCategoryByID).Methods("GET")    // checked
+	r.HandleFunc("/super-admin/category/name", shop.GetCategoryByCatName).Methods("POST")     // checked
+	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("GET") // checked
 
 	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")
-	r.HandleFunc("/super-admin/shop/owner/{owner_id}", shop.GetShopByOwnerID).Methods("POST")
-	r.HandleFunc("/super-admin/shop/{shop_id}", shop.GetShopByShopID).Methods("POST")
-	r.HandleFunc("/super-admin/shops", shop.GetShops).Methods("GET")
+	r.HandleFunc("/super-admin/shop/owner/{owner_id}", shop.GetShopByOwnerID).Methods("GET")
+	r.HandleFunc("/super-admin/shop/{shop_id}", shop.GetShopByShopID).Methods("GET")
+	r.HandleFunc("/super-admin/shop/select", shop.GetShops).Methods("GET")
 	r.HandleFunc("/super-admin/shop/delete/{shop_id}", shop.DeleteShop).Methods("DELETE")
 	r.HandleFunc("/super-admin/shop/update", shop.UpdateShop).Methods("PATCH")
 

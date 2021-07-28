@@ -16,10 +16,9 @@ func getAllUsers() {
 func GetAdminInfo(adminID int64) (*models.Admin, error) {
 	db := database.CreateCon()
 	var admin models.Admin
-	err := db.QueryRow("select id,firstname,lastname,username,email,role_id,created_at,status from ico_user_admin where id="+strconv.Itoa(int(adminID))+";").
-		Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Email, &admin.Role.ID, &admin.CreatedAt, &admin.Status)
+	err := db.QueryRow(fmt.Sprintf("select id,firstname,lastname,username,email,role_id,created_at,status from ico_user_admin where id=%v;", strconv.Itoa(int(adminID)))).Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Email, &admin.Role.ID, &admin.CreatedAt, &admin.Status)
 	strAdminID := strconv.Itoa(int(adminID))
-	res, _ := db.Query("select meta_key,meta_value from `ico_admin_meta` where meta_key in ('address','avatar','birth_date','phone','mobile') and admin_id=" + strAdminID + ";")
+	res, _ := db.Query(fmt.Sprintf("select meta_key,meta_value from `ico_admin_meta` where meta_key in ('address','avatar','birth_date','phone','mobile') and admin_id=%v;", strAdminID))
 	if err != nil {
 		return nil, err
 	}
@@ -59,9 +58,7 @@ func LoginAdmin(admin models.Admin) (bool, *models.Admin) {
 	hashPassword := sha1.Sum(stringToHash)
 
 	db := database.CreateCon()
-	err := db.QueryRow("select id,firstname,lastname,username,email,role_id,created_at,status from ico_user_admin where username='"+
-		admin.UserName+"' and password='"+hex.EncodeToString(hashPassword[:])+"';").
-		Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Email, &admin.Role.ID, &admin.CreatedAt, &admin.Status)
+	err := db.QueryRow(fmt.Sprintf("select id,firstname,lastname,username,email,role_id,created_at,status from ico_user_admin where role_id=1 and username='%v' and password='%v';", admin.UserName, hex.EncodeToString(hashPassword[:]))).Scan(&admin.ID, &admin.FirstName, &admin.LastName, &admin.UserName, &admin.Email, &admin.Role.ID, &admin.CreatedAt, &admin.Status)
 	if err != nil {
 		return false, nil
 	}
@@ -79,7 +76,7 @@ func getRoleByID(roleID int64) models.Role {
 	var role models.Role
 	db := database.CreateCon()
 	strRoleID := strconv.Itoa(int(roleID))
-	_ = db.QueryRow("select role_name,status from `ico_roles` where id="+strRoleID+";").Scan(&role.RoleName, &role.Status)
+	_ = db.QueryRow(fmt.Sprintf("select role_name,status from `ico_roles` where id=%v;", strRoleID)).Scan(&role.RoleName, &role.Status)
 	role.ID = roleID
 	return role
 }

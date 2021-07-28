@@ -37,6 +37,7 @@ func RegisterShop(w http.ResponseWriter, r *http.Request) {
 		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
+
 	w.WriteHeader(http.StatusCreated)
 	_ = json.NewEncoder(w).Encode(shopInfo)
 	return
@@ -104,6 +105,7 @@ func GetShopByOwnerID(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetShops(w http.ResponseWriter, r *http.Request) {
+	_ = mux.Vars(r)
 	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
@@ -260,7 +262,9 @@ func GetCategoryByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetCategoryByCatName(w http.ResponseWriter, r *http.Request) {
-	param := mux.Vars(r)
+	param, _ := ioutil.ReadAll(r.Body)
+	request := make(map[string]string)
+	_ = json.Unmarshal(param, &request)
 	w.Header().Set("Content-Type", "application/json")
 	token, err := r.Cookie("AuthenticationToken")
 	if err != nil {
@@ -277,7 +281,7 @@ func GetCategoryByCatName(w http.ResponseWriter, r *http.Request) {
 		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
-	catInfo, err := category.GetCategoryByCatName(param["cat_name"])
+	catInfo, err := category.GetCategoryByCatName(request["cat_name"])
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
 		_, _ = w.Write([]byte(err.Error()))

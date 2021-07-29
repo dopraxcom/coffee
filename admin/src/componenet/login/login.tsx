@@ -85,20 +85,29 @@ const Login = () => {
     const classes = useStyle()
 
     const login = async (username: string | number, password?:string | number) => {
-      const json = JSON.stringify({username: username, password: password})
-      const headers = {"Access-Control-Allow-Origin": "*"}
-      const httpProxy = require('http-proxy');
-      const proxy = httpProxy.createProxyServer({});
-        const response = await axios.post('http://localhost:9006/super-admin/login',
-        json, {
-          headers: headers
-        })
-        .then ( response => {
-          console.log(response)
-        })
-        .catch(err => {
-          console.log('Error: ',err)
-        })
+
+      const json = JSON.stringify({"username": username, "password": password})
+      // const headers = { "Access-Control-Allow-Origin": "*",
+      //                   "Access-Control-Allow-Headers": "Content-Type",
+      //                   'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      //                   'Access-Control-Allow-Credentials':true}
+
+      // const httpProxy = require('http-proxy');
+      // const proxy = httpProxy.createProxyServer({});
+      //   const response = await axios.post("http://localhost:9006/super-admin/login",
+      //   json, { headers }
+      //   ).then ( response => {
+      //     console.log(response)
+      //   })
+      //   .catch(err => {
+      //     console.log(json)
+      //     console.log('Error: ',err)
+      //   })
+
+      var xhttp = new XMLHttpRequest();      
+      xhttp.open("POST", "http://localhost:9006/super-admin/login");
+      xhttp.send(json);
+      console.log(xhttp.response)
       }
 
     return(

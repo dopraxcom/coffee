@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2021 at 04:14 PM
+-- Generation Time: Jul 30, 2021 at 10:43 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -79,6 +79,14 @@ CREATE TABLE `ico_category` (
   `status` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `ico_category`
+--
+
+INSERT INTO `ico_category` (`id`, `type`, `category_name`, `slug`, `parent`, `status`) VALUES
+(4, 'food-industry', 'coffee shop', 'coffee-shop', 0, 0),
+(5, 'food-industry', 'restaurant', 'restaurant', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -95,33 +103,30 @@ CREATE TABLE `ico_jwt_token` (
 --
 
 INSERT INTO `ico_jwt_token` (`id`, `token`) VALUES
-(1, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwidXNlcm5hbWUiOiIiLCJmaXJzdG5hbWUiOiIiLCJsYXN0bmFtZSI6IiIsImJpcnRoZGF0ZSI6IiIsInJvbGUiOjAsImV4cCI6MTYyNzI0NDQ5NH0.Gs8FuntkAFLWHqwEtCLEgx7sqEY4z1q83wOTipBG1ro'),
-(2, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NDc4MH0.a0BCoqc3j4NVjT_6pireTP5WCxcMfSnsvQvO6c1_GQ0'),
-(3, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NDc4MH0.a0BCoqc3j4NVjT_6pireTP5WCxcMfSnsvQvO6c1_GQ0'),
-(4, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NDc4MH0.a0BCoqc3j4NVjT_6pireTP5WCxcMfSnsvQvO6c1_GQ0'),
-(5, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NTIxMH0.T7Q-v13T012oWKpdweOD8FaTikFaM_Kfyy8t3MPDy5E'),
-(6, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NTMwMH0.onVG3IA0W3Wi_qkGsb-V9_epOEzJms7htXyZRsfAy7E'),
-(7, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NTQxNX0.yazIPYM3gNwBFT23Fzyfn7OS9fvEgmHpqHYdYqQiQyY'),
-(8, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NTQ5OH0.vN3xkspHxnc6HA185dd7W5RB-1ldJBkXDiTp7GOuMdc'),
-(9, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NTcyOX0.-vrdWISffSclAdkjkL_AwQZETCrXp9iwgeWVW--twg4'),
-(10, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NTc4Nn0.tREB-NKYF6N7S1eAUPZWpoCxKzhPBvxUFCtgFzCYAAc'),
-(11, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NTg3OX0.jCVllFUsJnyNVlCAGzU5nNXWVK2rFMAGzzmtvC0-oso'),
-(12, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NTk1M30.M9jrlMNFvmmCg02gzcNomenmxpGaA6FIfzSsjcqMwDw'),
-(13, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NjAyOH0.y4bpPWduIvV2ojBLftxaeXbM7s2BSwuba_K1Ra--wk8'),
-(14, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NjIxNX0.VbY23vm7l_w_q1DyHcOOYjdngMPup9vdCzQ_7MTm8d4'),
-(15, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NjI1Nn0.vOkpBqUlqgh9oLBIgszcSdvrvcB3XTN1dvl4K7dPx_g'),
-(16, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzI0NjM5N30.o64BfrxEa1zGGaYnLj-vzsYiJMZuqZ00ciHhHuLza-g'),
-(17, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwMDkwOX0.sdVJE4rN_He9uuDHfoFuJ_g7R0ojaeHzY8jo5QOiR-8'),
-(18, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwMTA0OX0.hfDSibDX8M7e66wyakSohRNN_ltqcGjH4ImI8WIshZQ'),
-(19, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwMTQzOH0.JzU722GTLOWhS_r4sKDRdDMuVEvwm5SiRy_ndw_nkE0'),
-(20, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwMjA2MH0.oftHAvedXlsTQRMxwAMYTrVY0seXfC6Ql1kDbS_SkpE'),
-(21, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwMzIzNX0.4N_0NuxYt3lm6K1FVGa5LgbmpSWlP2mED1ntNJM4us4'),
-(22, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwNDU3MX0.ssELA2uHEJEGHb94N1fUtY7JpdxeiGk6CA9ehPaCU5c'),
-(23, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwNDc3M30.Oq1MIm5ruHAc-aPOvCAq3voMEdzA3F_PY1TPHe6J66Q'),
-(24, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwNTgwOX0.xttGnV7Povc-tUm3bCcnItiF-vbtB_9M7EQVXn7amcw'),
-(25, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwNTk3NX0.6QPcWA7awE8W_zrTCqZgmA_CdPh5_iqGJmBGkHBqEMA'),
-(26, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwNzA3M30.yJZhwrBYSdhJc7mNOdJTTVXemBl69XmgYlFgCaPRMVw'),
-(27, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzMwNzg0OX0.8u6kQXP9N8-aSoGXB0kUYUFHC-zIYqUsmGQSEGhFERE');
+(22, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzQ3NDc2Nn0.omCvPorI_TDc-xhrxGvT6NGRAl-geVH8EoguLeztFb8'),
+(23, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzQ3NjU4Mn0.x6Qyae3Vvj1KatdJUCgZ5rKC_OH28Nj9KjXRhgH9qOo'),
+(24, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzQ3NzE0N30.OFJLpisOJJXF7rCvPIMIh-eBmYE8ckpuCDCscAeh64o'),
+(25, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzQ3NzMxM30.NApuJeSPehjX7RFFZ2_RJiLBrIYHxyt3col-gK5m2U8'),
+(26, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzQ5MTE4MX0.dbCTmWC5akssvQ4L0WUVy8PJlFrM7qH6ViEaiNXBjHE'),
+(27, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzQ5MjEyN30.TQ_lsCmzEZD9Dlgfv0SlYxVre4EXILXcoFxGnC-v6FM'),
+(28, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzQ5NTg0NH0.x68_qf7S4_znEtMBvyWPQJVuS8E5fKwYj-17mNfpWcg'),
+(29, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzQ5NjU0OH0.aKLo70x70PPvoFtG9iAvT9hF1Rwf38cT5D2uRZfVook'),
+(30, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzQ5NzYxMn0.3J3-VCkxrN-LE-LDAq2_iu614VKtCMvsNFECQSotlVc'),
+(31, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUwNTgxM30.wsCAvgrIC94ToJkVLLX-vZrFPywQiPmmRug4vUGXnRI'),
+(32, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUwNjA1N30.LThcz5JCkdYnF9j-d-Zrn3qZXdbDYDpAVwUhCZwWaSU'),
+(33, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUwNzM5OX0.uMYBwnHcJuTguZRDUzjrkrWCUpULdsjZUn9zDzcVQ3Q'),
+(34, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUwOTg2NH0.aPkX-Is99AkGRxyw_HNY_HZUbYeyy-C4i3a474bXNAw'),
+(35, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUxMTI5N30.gRFeCPlc9tJmLJzr1YoUBhtxEM-vsNdBkXEhTrAcBWI'),
+(36, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUxMTY2MX0.vjEvrCkLfy1tW8xIdb6JKOsr96S4tsNWMxAVc_rnblg'),
+(37, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUxMTkzNH0.wcvOp4NaTS-HWbpBfnAVH3d6MLpr6_bu9s0kYwAE9VE'),
+(38, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUxMjQ1MX0.iNGSu1Pilf7-yvhiNZQ029G2TO1BlCiNENjTBrAGi50'),
+(39, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUxMzcxMn0.7YSsOnXwDAXT5NcgNEbPMEiC8-ps3LPZjps85EXwoNg'),
+(40, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzUxOTc3OX0.E7M040ycCMcVyFHTYsUipZtccrmJrFMfaf83_YxSYTQ'),
+(41, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzU3NjA3OX0.llTisU5hxwJBodI2hF5aCei0cSf2AiOhobZie2zT74E'),
+(42, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzU4NTI4M30.ZiRTqVPTqI8RwLH7_QnvfiDjGVNWblVGLPdjIX0gTBE'),
+(43, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzU5MDA4NX0.yORk3v19n-nmDN4tlHMIDkg10LJ7nKK0fzCzLW_vWaY'),
+(44, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzYzNTUwNn0.UYTnc7osh7FWm1kOnNOpoYd1JQaoK4H-7j4E20fZcVc'),
+(45, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoia2Fuc2FpIiwiZmlyc3RuYW1lIjoiYWxpcmV6YSIsImxhc3RuYW1lIjoic2FmZmFyIiwiYmlydGhkYXRlIjoiMTM3MC8wOC8yMyIsInJvbGUiOjIsImV4cCI6MTYyNzYzNTk0NH0.7VnWSmfRhrDJ4oXPgGkm1JCsJo4mGjMKtLugpTWU4ng');
 
 -- --------------------------------------------------------
 
@@ -160,6 +165,14 @@ CREATE TABLE `ico_product` (
   `status` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `ico_product`
+--
+
+INSERT INTO `ico_product` (`id`, `product_name`, `slug`, `status`) VALUES
+(1, 'میلک شیک شکلات', 'mylkh-shykh-shkhlt', 0),
+(5, 'test product', 'test-product', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -172,6 +185,13 @@ CREATE TABLE `ico_product_meta` (
   `meta_key` varchar(255) NOT NULL,
   `meta_value` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ico_product_meta`
+--
+
+INSERT INTO `ico_product_meta` (`id`, `product_id`, `meta_key`, `meta_value`) VALUES
+(3, 5, 'avatar', 'https://example.test/image-url.jpg');
 
 -- --------------------------------------------------------
 
@@ -209,6 +229,13 @@ CREATE TABLE `ico_shop` (
   `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `ico_shop`
+--
+
+INSERT INTO `ico_shop` (`id`, `owner_id`, `cat_id`, `shop_name`, `slug`, `status`) VALUES
+(7, 27, 4, 'کافه وال', 'khfh-wl', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -245,6 +272,14 @@ CREATE TABLE `ico_taxonomy_products_shop` (
   `shop_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ico_taxonomy_products_shop`
+--
+
+INSERT INTO `ico_taxonomy_products_shop` (`id`, `shop_id`, `product_id`) VALUES
+(1, 7, 1),
+(5, 7, 5);
 
 -- --------------------------------------------------------
 
@@ -429,13 +464,13 @@ ALTER TABLE `ico_card`
 -- AUTO_INCREMENT for table `ico_category`
 --
 ALTER TABLE `ico_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ico_jwt_token`
 --
 ALTER TABLE `ico_jwt_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `ico_order`
@@ -447,13 +482,13 @@ ALTER TABLE `ico_order`
 -- AUTO_INCREMENT for table `ico_product`
 --
 ALTER TABLE `ico_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ico_product_meta`
 --
 ALTER TABLE `ico_product_meta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ico_roles`
@@ -465,7 +500,7 @@ ALTER TABLE `ico_roles`
 -- AUTO_INCREMENT for table `ico_shop`
 --
 ALTER TABLE `ico_shop`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `ico_shop_meta`
@@ -483,7 +518,7 @@ ALTER TABLE `ico_taxonomy_products_cat`
 -- AUTO_INCREMENT for table `ico_taxonomy_products_shop`
 --
 ALTER TABLE `ico_taxonomy_products_shop`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ico_usermeta`
@@ -535,8 +570,7 @@ ALTER TABLE `ico_product_meta`
 -- Constraints for table `ico_shop`
 --
 ALTER TABLE `ico_shop`
-  ADD CONSTRAINT `ico_shop_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `ico_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ico_shop_ibfk_2` FOREIGN KEY (`owner_id`) REFERENCES `ico_user_admin` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ico_shop_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `ico_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ico_shop_meta`

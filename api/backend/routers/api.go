@@ -17,7 +17,7 @@ func Router() {
 
 	headersOk := handlers.AllowedHeaders([]string{"*"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
-	methodsOk := handlers.AllowedMethods([]string{http.MethodGet, http.MethodHead, http.MethodPost, http.MethodPut, http.MethodOptions, http.MethodDelete, http.MethodPatch})
+	methodsOk := handlers.AllowedMethods([]string{http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodPatch})
 
 	// Super user admin section
 	r.HandleFunc("/super-admin/admins", users.GetAllAdminUsers).Methods("GET")           // checked
@@ -35,10 +35,10 @@ func Router() {
 	r.HandleFunc("/super-admin/orders/{shop_id}", shop.GetOrdersShop).Methods("POST")
 
 	// category
-	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")     // checked
-	r.HandleFunc("/super-admin/category/id/{cat_id}", shop.GetCategoryByID).Methods("GET")    // checked
-	r.HandleFunc("/super-admin/category/name", shop.GetCategoryByCatName).Methods("POST")     // checked
-	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("GET") // checked
+	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")        // checked
+	r.HandleFunc("/super-admin/category/id/{cat_id}", shop.GetCategoryByID).Methods("GET")       // checked
+	r.HandleFunc("/super-admin/category/name", shop.GetCategoryByCatName).Methods("POST")        // checked
+	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("DELETE") // checked
 
 	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")            // checked
 	r.HandleFunc("/super-admin/shop/owner/{owner_id}", shop.GetShopByOwnerID).Methods("GET") // checked
@@ -52,7 +52,7 @@ func Router() {
 	r.HandleFunc("/super-admin/product/{product_id}", shop.GetProductByProductID).Methods("GET")    //checked
 	r.HandleFunc("/super-admin/product/owner/{owner_id}", shop.GetProductsByOwnerID).Methods("GET") // checked
 	r.HandleFunc("/super-admin/product/update", shop.UpdateProduct).Methods("PATCH")                // checked
-	r.HandleFunc("/super-admin/product/delete/{product_id}", shop.DeleteProduct).Methods("DELETE")
+	r.HandleFunc("/super-admin/product/delete/{product_id}", shop.DeleteProduct).Methods("DELETE")  // checked
 
 	// Admin section
 	r.HandleFunc("/admin/login", login.LoginAdmin).Methods("POST")

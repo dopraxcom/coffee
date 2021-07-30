@@ -2,11 +2,13 @@ package shop
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/khorasany/coffee/api/backend/helpers/jwtToken"
 	"github.com/khorasany/coffee/api/backend/models/shop/products"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 func RegisterProduct(w http.ResponseWriter, r *http.Request) {
@@ -178,5 +180,49 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
+	return
+}
+
+func UploadProductImage(w http.ResponseWriter, r *http.Request) {
+	_ = r.ParseMultipartForm(10 << 20)
+
+	w.Header().Set("Content-Type", "application/json")
+	file, handler, err := r.FormFile("product-image")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte("Error Retrieving the File"))
+		return
+	}
+
+	defer file.Close()
+	_, _ = w.Write([]byte(fmt.Sprintf("Uploaded File: %+v\n", handler.Filename)))
+	_, _ = w.Write([]byte(fmt.Sprintf("File Size: %+v\n", handler.Size)))
+	_, _ = w.Write([]byte(fmt.Sprintf("MIME Header: %+v\n", handler.Header)))
+
+	tempFile, err := ioutil.TempFile("temp", "upload-product-*.png")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+	defer tempFile.Close()
+
+	fileBytes, err := ioutil.ReadAll(file)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+	_, _ = tempFile.Write(fileBytes)
+	newPath := fmt.Sprintf("img/product/%v", handler.Filename)
+	err = os.Rename(tempFile.Name(), newPath)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte("upload file has been stopped,please try again at the moment!"))
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	_ = json.NewEncoder(w).Encode(newPath)
 	return
 }

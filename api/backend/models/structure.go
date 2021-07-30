@@ -95,7 +95,9 @@ type Product struct {
 	Meta        ProductMeta
 }
 
-type ProductMeta struct{}
+type ProductMeta struct {
+	Avatar string `json:"avatar,omitempty"`
+}
 
 type Order struct {
 	ID              int64     `json:"order_id"`

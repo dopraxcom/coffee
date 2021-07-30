@@ -30,8 +30,8 @@ func Router() {
 	r.HandleFunc("/super-admin/role", permissions.GetRole).Methods("POST")          // checked
 	r.HandleFunc("/super-admin/roles", permissions.GetRoles).Methods("POST")        // checked
 
-	r.HandleFunc("/super-admin/{shop_id}", shop.GetAllOrdersOfSpecificShop).Methods("POST")
-	r.HandleFunc("/super-admin/{owner_id}", shop.GetAllOrdersOfOwnerShops).Methods("POST")
+	r.HandleFunc("/super-admin/orders/shop/{shop_id}", shop.GetAllOrdersOfSpecificShop).Methods("POST")
+	r.HandleFunc("/super-admin/orders/owner/{owner_id}", shop.GetAllOrdersOfOwnerShops).Methods("POST")
 	r.HandleFunc("/super-admin/orders/{shop_id}", shop.GetOrdersShop).Methods("POST")
 
 	// category
@@ -40,17 +40,18 @@ func Router() {
 	r.HandleFunc("/super-admin/category/name", shop.GetCategoryByCatName).Methods("POST")     // checked
 	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("GET") // checked
 
-	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")
-	r.HandleFunc("/super-admin/shop/owner/{owner_id}", shop.GetShopByOwnerID).Methods("GET")
-	r.HandleFunc("/super-admin/shop/{shop_id}", shop.GetShopByShopID).Methods("GET")
-	r.HandleFunc("/super-admin/shop/select", shop.GetShops).Methods("GET")
-	r.HandleFunc("/super-admin/shop/delete/{shop_id}", shop.DeleteShop).Methods("DELETE")
-	r.HandleFunc("/super-admin/shop/update", shop.UpdateShop).Methods("PATCH")
+	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")            // checked
+	r.HandleFunc("/super-admin/shop/owner/{owner_id}", shop.GetShopByOwnerID).Methods("GET") // checked
+	r.HandleFunc("/super-admin/shop/{shop_id}", shop.GetShopByShopID).Methods("GET")         // checked
+	r.HandleFunc("/super-admin/shops/select", shop.GetShops).Methods("GET")                  // checked
+	r.HandleFunc("/super-admin/shop/delete/{shop_id}", shop.DeleteShop).Methods("DELETE")    // checked
+	r.HandleFunc("/super-admin/shop/update", shop.UpdateShop).Methods("PATCH")               // checked
 
-	r.HandleFunc("/super-admin/product/register", shop.RegisterProduct).Methods("POST")
-	r.HandleFunc("/super-admin/product/{product_id}", shop.GetProductByProductID).Methods("GET")
-	r.HandleFunc("/super-admin/product/products/{owner_id}", shop.GetProductsByOwnerID).Methods("GET")
-	r.HandleFunc("/super-admin/product/update", shop.UpdateProduct).Methods("PATCH")
+	r.HandleFunc("/super-admin/product/register", shop.RegisterProduct).Methods("POST")             // checked
+	r.HandleFunc("/super-admin/product/upload/avatar", shop.UploadProductImage).Methods("POST")     // checked
+	r.HandleFunc("/super-admin/product/{product_id}", shop.GetProductByProductID).Methods("GET")    //checked
+	r.HandleFunc("/super-admin/product/owner/{owner_id}", shop.GetProductsByOwnerID).Methods("GET") // checked
+	r.HandleFunc("/super-admin/product/update", shop.UpdateProduct).Methods("PATCH")                // checked
 	r.HandleFunc("/super-admin/product/delete/{product_id}", shop.DeleteProduct).Methods("DELETE")
 
 	// Admin section

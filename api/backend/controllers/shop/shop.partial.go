@@ -39,7 +39,9 @@ func productMapToMapParamToModel(param map[string]string) models.Product {
 		ProductName: param["product_name"],
 		ShopID:      int64(shopID),
 		Status:      int64(status),
-		Meta:        models.ProductMeta{},
+		Meta: models.ProductMeta{
+			Avatar: param["avatar"],
+		},
 	}
 }
 

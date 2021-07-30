@@ -67,5 +67,5 @@ func Router() {
 	r.HandleFunc("/admin/{order_id}", shop.GetCustomersOrder).Methods("POST")
 	r.HandleFunc("/admin/{customer_id}", shop.GetCustomersOrders).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":9006", handlers.CORS(originsOk, headersOk, methodsOk)(r)))
+	log.Fatal(http.ListenAndServe("akhorasany6sevebrzmv:9006", handlers.CORS(originsOk, headersOk, methodsOk)(r)))
 }

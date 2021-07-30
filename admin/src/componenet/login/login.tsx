@@ -4,6 +4,7 @@ import { TextField, InputLabel, Input, InputAdornment, IconButton, Button, Theme
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import axios from 'axios'
+import { Redirect } from 'react-router';
 
 const useStyle = makeStyles((theme: Theme) => 
     createStyles({
@@ -51,9 +52,9 @@ interface State {
 }
 
 interface User {
-  username : string | number
+  username : string | number,
+  password : String | number | undefined
 }
-
 
 const Login = () => {
 
@@ -86,7 +87,7 @@ const Login = () => {
 
     const login = async (username: string | number, password?:string | number) => {
 
-      const json = JSON.stringify({"username": username, "password": password})
+      const json =  ({"username": username, "password": password});
       // const headers = { "Access-Control-Allow-Origin": "*",
       //                   "Access-Control-Allow-Headers": "Content-Type",
       //                   'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
@@ -104,12 +105,40 @@ const Login = () => {
       //     console.log('Error: ',err)
       //   })
 
-      var xhttp = new XMLHttpRequest();      
-      xhttp.open("POST", "http://localhost:9006/super-admin/login");
-      xhttp.send(json);
-      console.log(xhttp.response)
+      // let xhttp = new XMLHttpRequest();
+      // xhttp.open("POST", "http://localhost:9006/super-admin/login");
+      // const response = await xhttp.send(json);
+      // console.log(xhttp.status)
+      try {
+        const response = await checkLogin(json).then( value => {
+          if(value === 202 ){
+            setLoggedIn(true)
+          }else {
+            setLoggedIn(false)
+          }
+        })
       }
-
+      catch(err) {
+        console.log(err)
+      }
+      
+      }
+      const [loggedIn , setLoggedIn ] = React.useState<boolean>(false)
+      const checkLogin = (json:User) => {
+        let js = JSON.stringify(json);
+        return new Promise((res, rej) => {
+          let xhttp = new XMLHttpRequest();
+          xhttp.open("POST", "http://localhost:9006/super-admin/login");
+          xhttp.send(js);
+          xhttp.onreadystatechange = () => {
+            res(xhttp.status)
+          }
+        })
+      }
+      console.log(loggedIn)
+      if (loggedIn) {
+        return <Redirect to='/home'/>;
+      }
     return(
             <div className={classes.root}>
                 <TextField 

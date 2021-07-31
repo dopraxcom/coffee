@@ -44,7 +44,6 @@ const { id } = useParams<Quiz>();
         })
     },[])
 function renderOrder(){
-    // console.log(orders)
     if(orders) {
         return orders.map((item:OrdersDetailss) => {
             return(

@@ -10,6 +10,8 @@ import {
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {AppBar, Toolbar, Typography, Button, IconButton  } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useDispatch , useSelector } from 'react-redux';
+import { actionCreator, State } from '../src/state';
 
 import {  
   List, 
@@ -55,7 +57,26 @@ const useStyle = makeStyles((theme: Theme) =>
 
 function App() {
   const classes = useStyle();
+  const state = useSelector((state: State) => state.loggedIn);
   const [open, setOpen] = useState<boolean>(false);
+
+function routeRender (state: boolean = false) {
+  if(state){
+    return(
+      <>
+      <Route path="/store"        component = {Store}       />
+      <Route path="/orders" exact component = {Orders}      />
+      <Route path="/orders/:id"   component = {SingleOrder} />
+      <Route path="/home"         component = {Home}        />
+      </>
+    );
+    
+  }else {
+    return (
+      <Route path="/"             component = {Login}       />
+    )
+  }
+}
 
   return (
     <Router>
@@ -103,11 +124,7 @@ function App() {
       </AppBar>
     <div className={classes.main}>
       <Switch>
-        <Route path="/store"        component = {Store}       />
-        <Route path="/orders" exact component = {Orders}      />
-        <Route path="/orders/:id"   component = {SingleOrder} />
-        <Route path="/home"         component = {Home}        />
-        <Route path="/"             component = {Login}       />
+        {routeRender(state)}
       </Switch>
     </div>
   </Router>

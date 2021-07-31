@@ -29,3 +29,11 @@ export const orderDetails = (data:Array<any> ,id:string) => {
         payload:details 
     })
 }
+
+
+export const checkLoginAdmin = (loggedIn: boolean) => {
+    return({
+        type: ActionTypes.CHECK_LOGIN,
+        payload: loggedIn
+    })
+}

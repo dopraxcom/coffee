@@ -20,4 +20,9 @@ interface checkLogin {
     payload: boolean 
 }
 
+interface fetchCategories {
+    type   : ActionTypes.FETCH_CATEGORIES,
+    payload: Array<object>
+}
+
 export type Action = fetchDataAction | deleteOderAction | orderDetails | checkLogin;

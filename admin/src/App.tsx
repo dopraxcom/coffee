@@ -27,6 +27,7 @@ import Home   from './componenet/home/Home';
 import Store  from './componenet/store/Store';
 import Orders from './componenet/orders/Orders';
 import SingleOrder from './componenet/orders/SingleOrder';
+import AddProducts from './componenet/store/addProducts';
 
 const useStyle = makeStyles((theme: Theme) => 
   createStyles({
@@ -64,10 +65,11 @@ function routeRender (state: boolean = false) {
   if(state){
     return(
       <>
-      <Route path="/store"        component = {Store}       />
-      <Route path="/orders" exact component = {Orders}      />
-      <Route path="/orders/:id"   component = {SingleOrder} />
-      <Route path="/home"         component = {Home}        />
+      <Route path="/store" exact    component = {Store}       />
+      <Route path="/store/:catname" component = {AddProducts} />
+      <Route path="/orders" exact   component = {Orders}      />
+      <Route path="/orders/:id"     component = {SingleOrder} />
+      <Route path="/home"           component = {Home}        />
       </>
     );
     

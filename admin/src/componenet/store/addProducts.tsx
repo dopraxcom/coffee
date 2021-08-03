@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { createStyles , makeStyles } from '@material-ui/core/styles'
 import form from '../../state/reducers';
+import {Field, reduxForm } from 'redux-form';
 
 const useStyle = makeStyles(()=> 
     createStyles({
@@ -26,4 +27,4 @@ console.log(useParams())
     )
 }
 
-export default AddProducts;
+export default reduxForm({})(AddProducts);

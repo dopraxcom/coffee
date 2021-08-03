@@ -3,7 +3,11 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { TextField, InputLabel, Input, InputAdornment, IconButton, Button, ThemeProvider, useMediaQuery  } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import axios from 'axios'
+import { Redirect } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreator, State } from '../../state';
+
 
 const useStyle = makeStyles((theme: Theme) => 
     createStyles({
@@ -42,7 +46,7 @@ const useStyle = makeStyles((theme: Theme) =>
     })
 )
 
-interface State {
+interface States {
   amount: string;
   password: string;
   weight: string;
@@ -51,13 +55,16 @@ interface State {
 }
 
 interface User {
-  username : string | number
+  username : string | number,
+  password : String | number | undefined
 }
-
 
 const Login = () => {
 
-    const [values, setValues] = React.useState<State>({
+
+  const dispatch = useDispatch();
+  const { checkLoginAdmin }  = bindActionCreators(actionCreator, dispatch);
+    const [values, setValues] = React.useState<States>({
         amount: '',
         password: '',
         weight: '',
@@ -68,7 +75,7 @@ const Login = () => {
     const [user , setUser ] = React.useState('');
 
 
-      const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const handleChange = (prop: keyof States) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [prop]: event.target.value });
       };
       const handleClickShowPassword = () => {
@@ -86,28 +93,37 @@ const Login = () => {
 
     const login = async (username: string | number, password?:string | number) => {
 
-      const json = JSON.stringify({"username": username, "password": password})
-      // const headers = { "Access-Control-Allow-Origin": "*",
-      //                   "Access-Control-Allow-Headers": "Content-Type",
-      //                   'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      //                   'Access-Control-Allow-Credentials':true}
-
-      // const httpProxy = require('http-proxy');
-      // const proxy = httpProxy.createProxyServer({});
-      //   const response = await axios.post("http://localhost:9006/super-admin/login",
-      //   json, { headers }
-      //   ).then ( response => {
-      //     console.log(response)
-      //   })
-      //   .catch(err => {
-      //     console.log(json)
-      //     console.log('Error: ',err)
-      //   })
-
-      var xhttp = new XMLHttpRequest();      
-      xhttp.open("POST", "http://localhost:9006/super-admin/login");
-      xhttp.send(json);
-      console.log(xhttp.response)
+      const json =  ({"username": username, "password": password});
+      try {
+        const response = await checkLogin(json).then( value => {
+          if(value === 202 ){
+            setLoggedIn(true);
+            checkLoginAdmin(true)
+          }else {
+            setLoggedIn(false)
+            checkLoginAdmin(false)
+          }
+        })
+      }
+      catch(err) {
+        console.log(err)
+      }
+      
+      }
+      const [loggedIn , setLoggedIn ] = React.useState<boolean>(false)
+      const checkLogin = (json:User) => {
+        let js = JSON.stringify(json);
+        return new Promise((res, rej) => {
+          let xhttp = new XMLHttpRequest();
+          xhttp.open("POST", "http://localhost:9006/super-admin/login");
+          xhttp.send(js);
+          xhttp.onreadystatechange = () => {
+            res(xhttp.status)
+          }
+        })
+      }
+      if (loggedIn) {
+        return <Redirect to='/home'/>;
       }
 
     return(

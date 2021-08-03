@@ -2,6 +2,7 @@ import { ActionTypes } from "../action-types"
 import { Dispatch } from "redux"
 import store from '../../api/orders'
 import { Action } from '../action'
+import { fetchCategoriesURL } from '../../api';
  
 
 export const fetchData = () => {
@@ -28,4 +29,21 @@ export const orderDetails = (data:Array<any> ,id:string) => {
         type: ActionTypes.ORDER_DETAILS,
         payload:details 
     })
+}
+
+
+export const checkLoginAdmin = (loggedIn: boolean) => {
+    return({
+        type: ActionTypes.CHECK_LOGIN,
+        payload: loggedIn
+    })
+}
+
+export const fetchCategories = () => {
+    return async (dispatch : Dispatch<Action>) => {
+        try {
+
+        }catch(err) {
+        }
+    }
 }

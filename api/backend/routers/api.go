@@ -1,6 +1,9 @@
 package routers
 
 import (
+	"log"
+	"net/http"
+
 	"github.com/gorilla/handlers"
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/login"
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/permissions"
@@ -8,8 +11,6 @@ import (
 	"github.com/khorasany/coffee/api/backend/controllers/authentication/users"
 	"github.com/khorasany/coffee/api/backend/controllers/shop"
 	"github.com/khorasany/coffee/api/backend/services"
-	"log"
-	"net/http"
 )
 
 func Router() {

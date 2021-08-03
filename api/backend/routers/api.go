@@ -35,10 +35,11 @@ func Router() {
 	r.HandleFunc("/super-admin/orders/{shop_id}", shop.GetOrdersShop).Methods("POST")
 
 	// category
-	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")        // checked
-	r.HandleFunc("/super-admin/category/id/{cat_id}", shop.GetCategoryByID).Methods("GET")       // checked
-	r.HandleFunc("/super-admin/category/name", shop.GetCategoryByCatName).Methods("POST")        // checked
-	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("DELETE") // checked
+	r.HandleFunc("/super-admin/category/register", shop.RegisterCategory).Methods("POST")             // checked
+	r.HandleFunc("/super-admin/category/id/{cat_id}", shop.GetCategoryByID).Methods("GET")            // checked
+	r.HandleFunc("/super-admin/category/name", shop.GetCategoryByCatName).Methods("POST")             // checked
+	r.HandleFunc("/super-admin/category/delete/{cat_id}", shop.DeleteCategory).Methods("DELETE")      // checked
+	r.HandleFunc("/super-admin/categories/select/{type}", shop.GetAllCategoriesByType).Methods("GET") // checked
 
 	r.HandleFunc("/super-admin/shop/register", shop.RegisterShop).Methods("POST")            // checked
 	r.HandleFunc("/super-admin/shop/owner/{owner_id}", shop.GetShopByOwnerID).Methods("GET") // checked

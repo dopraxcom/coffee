@@ -28,3 +28,18 @@ func GetCategoryByCatName(catName string) (*models.Category, error) {
 	}
 	return &cat, nil
 }
+
+func GetAllCategoriesByType(typeCat string) ([]*models.Category, error) {
+	db := database.CreateCon()
+	categoriesRes, err := db.Query(fmt.Sprintf("select * from ico_category where type='%v'", typeCat))
+	if err != nil {
+		return nil, err
+	}
+	categories := []*models.Category{}
+	for categoriesRes.Next() {
+		var category models.Category
+		_ = categoriesRes.Scan(&category.CatID, &category.Type, &category.CatName, &category.Slug, &category.Status)
+		categories = append(categories, &category)
+	}
+	return categories, nil
+}

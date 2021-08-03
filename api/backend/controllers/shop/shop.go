@@ -320,3 +320,33 @@ func DeleteCategory(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte("record has been deleted"))
 	return
 }
+
+func GetAllCategoriesByType(w http.ResponseWriter, r *http.Request) {
+	param := mux.Vars(r)
+	w.Header().Set("Content-Type", "application/json")
+	token, err := r.Cookie("AuthenticationToken")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			_, _ = w.Write([]byte(err.Error()))
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+	_, _, _, err = jwtToken.AuthenticationJwtToken(token.Value)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+
+	categories, err := category.GetAllCategoriesByType(param["type"])
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+	_ = json.NewEncoder(w).Encode(categories)
+}

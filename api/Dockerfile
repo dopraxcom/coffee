@@ -1,11 +1,15 @@
-FROM golang:1.16-alpine
+FROM golang:latest
+
+LABEL maintainer="Alireza Saffar <a.khorasany@gmail.com>"
 
 RUN mkdir /app
-WORKDIR /app/backend
-COPY ./backend /app/backend
-
+WORKDIR /app
+COPY ./backend/go.mod .
+COPY ./backend/go.sum .
 RUN go mod download
-RUN go build -o /icoffee
-EXPOSE 9006
+COPY ./backend .
 
-CMD ["/icoffee"]
+EXPOSE 9006
+RUN go build
+
+CMD ["./backend"]
